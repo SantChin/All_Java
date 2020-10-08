@@ -1,0 +1,149 @@
+Basic Authentication and Spring Security
+
+REST services can be hit through any browser and get the data from server, So we need to secure the REST services
+
+spring-boot-starter-security -> Adds security to the REST services
+
+By Deafault Form Based Authentication is added to the application
+
+Default password will be printed in logs.
+For setting username & password  update below fields in property file.
+spring.security.user.name=pradeep
+spring.security.user.password=dummy
+
+2 types of Authentication
+- Basic Authentication 
+  - We send Basic Authorization Header which represents Username and Password
+  - Username and passoword is encoded and sent
+  - We send this header as part of every request
+  - No expiration time. Hence not secure.
+- Form Based Authentication 
+  - Based on session on the browser 
+  - Needs an additional session at server
+  
+  Code snip for sending Basic Authentication Header in Angular
+  
+  let basicAuthHeadStr = 'Basic ' + window.btoa(username +':'+ password) 
+  Note: there is a space after Basic.
+  
+  window.btoa -> Encodes a string to Base64 format.
+  - Creating header
+  let headers = new HttpHeaders({ 
+      Authorization:basicAuthHeadStr
+      })
+      
+  Each and every REST call should have Basic Authentication added
+  
+  When Authorization Header is added to the request header, A pre-flight request would be triggered prior to the actual request with Method:OPTIONS to check if we have right permissions
+  
+  WebSecurityConfigurerAdapter - Class containing default Security Configuration for Spring
+  We need to override the methods to change the configuration
+  
+  CSRF - Will force POST and PUT request to have CSRF token 
+  By Default Spring Security would enable CSRF Token hence we need to disable it externally for using JWT Tokens.
+  
+  Overriding Configure Method
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+		System.out.println("Overridng Spring Security Con figuration!!");
+		http
+			.csrf().disable() // Disable CSRF token
+			.authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() //Any OPTIONS request that comes to any URL permit everybody
+				.anyRequest().authenticated() //Rest of the request authorise
+				.and()
+				// .formLogin().and()
+				.httpBasic();
+	}
+  
+  HttpIntercepter - For adding Header to all the request, Acts like a filter
+  
+  Intercept the request
+  Add the Basic Auth Header
+  Send the request to next HttpHandler
+  
+  Provide implementation for configure method: 
+  intercept(request: HttpRequest<any>, next: HttpHandler){
+    let basicAuthHeadStr = 'Basic ' + window.btoa(username +':'+ password)
+    request = request.clone({
+      setHeaders : { Authorization:basicAuthHeadStr }
+    });
+    return next.handle(request)
+  }
+  
+Disadvantages of Basic Authentication
+  - No expiration time
+  - No user details
+
+Custome Token System - Had some flaws. JWT evolved.
+JWT - JSON Web Token - Open Industry Standard RFC7519 method for representing claims securely between 2 parties 
+WebSite of JWT - https://jwt.io
+JWT Token has
+	- Header - Algorithm names and type Ex: HS512
+	- Payload - Few pre-defined elements like role of the user, creation time of user etc
+	- Signature - Base64 Header and Payload and in addition to that a secret string.
+
+Getting JWT Token 
+	- POST Request to http://localhost:8080/authenticate 
+	- Request Body : { "username": "in28minutes", "password": "dummy" }
+	- Response : {token : token_value}
+	
+Refreshing a JWT Token - Increasing the expiration time
+	- GET Request to http://localhost:8080/refresh
+	- With Authorization Header : {Authorization: "Bearer token_value"}
+
+Authorizing the request
+	- We need to create a filer by implementing OncePerRequestFilter Interface 
+	- It checks if token is present in the request
+	- If token is present it validates the token - Checks the expiration time and gets the username from the token
+	- If token is valid, it would load the user details and it would set it security context holder
+	- SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken)
+	- This is used while processing the resource by all the servlets
+
+Get the user details
+	- User details can be stored in DB, LDAP or In-Memory
+	- Spring security provides an interface - UserDetailsService for providing user details
+
+AuthenticationEntryPoint
+	- Implement AuthenticationEntryPoint for handling un-authorized requests
+	
+WebSecurityConfigurerAdapter
+	- Implement WebSecurityConfigurerAdapter Interface and configure th security
+	- Provide the newly created AuthenticationEntryPoint
+	- Provide Once Per Request Filter as well
+
+Not REST Service call
+	- Should be made by adding Authorization Header in the request headers
+
+Statefull Authentication
+  - Browser sends a POST request, with username and password
+  - User data would be stored at server side
+  - Server responds with a cookie that includes session ID to identify the user
+  - Cookie is set on the browser
+  - On every request server validates the session ID to authenticate the request
+
+Disadvantages
+  - Hard to scale: The server needs to create a session for a user and persist it somewhere on the server. 
+    If we have a distributed system, we have to make sure that session is shared between multiple nodes.
+
+  - Cross-origin resource sharing (CORS): When using AJAX calls to fetch a resource from another domain (cross-origin) 
+    we could run into problems with forbidden requests because, by default, HTTP requests don’t include cookies on cross-origin requests.
+
+  - Coupling with the web framework: When using server-based authentication we are tied to our framework’s authentication scheme. 
+    It is really hard, or even impossible, to share session data between different web frameworks written in different programming languages.
+ 
+Stateless Authentication using JWT
+  - Browser makes a request to the authentication server with user login information
+  - Authentication server generates JWT token and sends it to client
+  - Client stores the token sends it as part of every request as part of Authorization header
+  - Server validates the token and returns secure resource to client
+  
+Advantages
+  - Stateless, easier to scale: The token contains all the information to identify the user, eliminating the need for the session state.
+    If we use a load balancer, we can pass the user to any server, instead of being bound to the same server we logged in on.
+
+  - Reusability: We can have many separate servers, running on multiple platforms and domains, reusing the same token for 
+    authenticating the user. It is easy to build an application that shares permissions with another application.
+
+  - Performance: There is no server side lookup to find and deserialize the session on each request. The only thing we have to do is 
+    validate the token and parse its content.

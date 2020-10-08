@@ -1,0 +1,69 @@
+GIT Bash
+
+Command for Setting up http-proxy for GIT Hub in Git Bash
+Syntax : git config --global http.proxy http[s]://userName:password@proxyaddress:port
+Sample: git config --global http.proxy http://pradeep-kodavoor:Sept@2018@proxy.cognizant.com:6050
+
+Commiting new project to GIT
+  - Create a local Repo -> git init
+  - Commit files to local Repo -> git commit -m"Your comment"
+  - Map remote repo to local repo -> git remote add origin <Link to GitHub Repo> 
+  - Verify the link to remote repo -> git remote -v
+  - Push the committed changes to remote repo -> git push -u origin master
+
+Cloning a specific branch from GIT
+Command to clone 'dev' branch
+  git clone -b dev https://github.com/pradeep-kodavoor/Git-Practice.git
+Command to push changes to 'dev' branch
+  git push origin dev
+  
+Commiting changes to GIT using GIT Bash
+  - git status -> Displays all the files that are modified or added.
+  - git add <fully qualified filename> Mention all the file names to be added or modified separated by space
+  - git status -> Check the status of added files - If successfully added file names would be displayed in green color
+  - git commit - m "Added changes"
+  - git push origin master
+
+Pulling a project updates from GIT using GIT Bash
+  - git pull origin master
+
+Uploading eclipse project to GitHub
+
+Create a Local Repo for the project,
+Team -> Share Project -> Create Repository
+Commit the project to GitHub
+Team -> Commit
+Move all Unstaged changes to Staged section, Add comment
+Hit Commit and Push, Enter the Repository URL, Username and Password
+
+URL Reference:
+https://stackoverflow.com/questions/20654719/push-eclipse-project-to-github-with-egit
+
+Uploading IntelliJ IDEA Project to GitHub
+
+Steps: 
+In IntelliJ IDEA menu: VCS -> Import into Version Control -> Create Git Repository
+In pop up window select your project and click ok.
+Commit all necessary files to you local branch master
+Open Git Bash and navigate to project folder e.g cd "D:\projects\TestProject"
+In Git Bash: git remote add origin http//IP/path/to/repository
+In Git Bash: git push origin master
+In IntelliJ IDEA right-click on project select Synchronize 'TestProject'
+In IntelliJ IDEA right-click on project select Git -> Repository -> Branches -> origin/master -> Checkout as new local branch
+
+URL Reference
+https://coderwall.com/p/gkyqmg/intellij-idea-how-to-upload-project-to-remote-branch
+
+
+Steps for uploading Visual Studio Code Project to GitHub
+
+Execute below comands in the terminal
+Create a local Repo -> git init
+Commit files to local Repo -> git commit -m"Your comment"
+Map remote repo to local repo -> git remote add origin <Link to GitHub Repo> 
+Verify the link to remote repo -> git remote -v
+Push the committed changes to remote repo -> git push -u origin master
+Prompts for password, while pushing for the first time. Enter GitHub Cr3d3ntials
+
+URL Reference:
+https://stackoverflow.com/questions/46877667/how-to-push-a-new-initial-project-to-github-using-vs-code

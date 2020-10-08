@@ -1,0 +1,16 @@
+@SpringBootApplication 
+ - Indicates as Spring Context
+ - Enables Auto Configuration
+ - Enables Component Scan
+ 
+SpringApplication.run() -> Used to run SpringContext, Returns Application Context
+
+Spring Boot Auto Configuration
+
+Spring Boot Framework checks for Jars present in the class path, based on the jar configurations are done.
+Ex: If Spring Web MVC is present, then it configures Dispatcher Servlet, View Resolver etc.
+
+
+
+
+ 

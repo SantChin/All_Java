@@ -1,0 +1,54 @@
+Selenium:
+
+U can not install selenium
+
+(Mercury)QTP support only VB Script. limited to windows only. And licensed.
+Competeitor of selenium are QTP  now UFT 
+
+What is selenium?
+Its an opensource Automation testing tool /framework /Set of libraries / Project/ API for web based application testing only.
+support multi browsers. IE,Chrome,Safari...
+support multi language. Java -jar,Python,C# -dll,PHP,JS....
+
+selenium - 2004 , Jason Huggins at ThoughtWorks
+Mercury antidone is selenium... 
+
+selenium 1.0 - IDE - Record and play Plugin fro firfox and Chrome. not in use. Added as extension to browser +RC
+selenium 2.0 WebDriver+RC - last version 2.53.1
+selenium 3.0 WebDriver + W3C Spec + Grid3  - 25%
+
+Core Java /
+Maven / ANT / Gradle - Builder Tools
+CI - Jenkins
+JUnit / TestNG - java frameworks
+Excel - Apache POI third party open source we can excel reading and riting
+Log4j - For logging all the data flow.
+JDBC - mysql,oracle..
+JavaMail API -- For Sending Mail
+Jenkins - Continuous Integration(CI)
+SVN / GITHUB
+
+Life Projects : Data Driven,Hybrid,	Kyword Driven,Page Object Model,Cucumber BDD, Page Factories
+
+
+RC - Remote Control
+
+Selenium RC Server - JavaScript Engine
+
+There is Defualt class
+DefaultSelenium
+
+
+
+
+
+
+What is an API?
+set of routines, protocols, and tools for building software applications.
+
+WebDriver - Simon Stewards.
+
+
+
+
+

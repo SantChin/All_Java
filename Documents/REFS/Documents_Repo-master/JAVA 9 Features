@@ -1,0 +1,5 @@
+Module System
+
+Module groups related codes together. It is self-contained. It will have all the dependencies within it.
+
+Jar files can have dependency on other jar files. But Module cannot have dependency outside the module.

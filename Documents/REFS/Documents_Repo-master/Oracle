@@ -1,0 +1,24 @@
+VARCHAR vs VARCHAR2
+
+Both VARCHAR & VARCHAR2 are Oracle data types that are used to store character strings of variable length.
+
+VARCHAR can store characters up to 2000 bytes while 
+VARCHAR2 can store up to 4000 bytes.
+
+VARCHAR will hold the space for characters defined during declaration even if all of them are not used whereas 
+VARCHAR2 will release the unused space.
+
+TRUNCATE vs DELETE
+
+TRUNCATE is a DDL operation while 
+DELETE is a DML operation.
+
+TRANSLATE command translates characters one by one in the provided string with the substitution character. 
+REPLACE will replace a character or a set of characters with a complete substitution string.
+Ex: TRANSLATE (‘Missisippi’,’is’,’15) => M155151pp1 REPLACE (‘Missisippi’,’is’,’15) =>  M15s15ippi
+
+Character Matching for LIKE Operator:
+_(Underscore) -> Matched any single character. 
+Ex: Select * from EMPLOYEE where FIRST_NAME like 'J___' -> first name starts with 'J' and name contains 4 letters
+% -> Any number of characters
+Ex: Select * from EMPLOYEE where FIRST_NAME like 'J%' -> first name starts with 'J'

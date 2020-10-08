@@ -1,0 +1,148 @@
+Angular
+
+EcmaScript is a Standard for JavaScript
+
+TypeScript - JavaScript + Strong typing
+
+Declaring variable types and method types.
+
+Command to update Node Version (g - for global update)
+npm i npm -g
+
+npm - Node Package Manager similar to Maven
+Downloads all the dependencies required for the project
+
+npm install 
+- downloads all the dependencies specified in package.json file and places it in node_modules folder
+- Will be executed internally when ng new is executed
+
+Command for installing Angular CLI
+install -g @angular/cli@7.0.3
+
+Few ng options
+
+Checking installed Angular CLI version
+ng version
+
+Creating new Angular Project with basic structure
+ng new Angular-Front-End
+
+Compile, Build and serve the app
+ng serve 
+
+List all the ng options
+ng help
+
+Check if newly written code meets the standard
+ng lint
+tslint.json - File with all the standards, we can modify it as per our requirements if required!
+
+ng build
+Creates dist folder with Runtime Files which can be deployed in a web server
+
+ng test
+For executing unit tests
+Unit tests are written using Framework - Jasmine
+We will be running it using - Karma
+
+ng e2e
+For performing E2E test
+Protractor - Layer of Selenium Framework is used for testing E2E.
+
+src Folder
+app - All angular codes. Ex:  Project components and modules
+assets - Contents that has to be rendered as it is ex: images
+environments - Deployment environment related configurations
+
+polyfills.ts - Makes sure app is compatible across all the browsers
+styles.css - Global Style Sheet
+test.ts - Starting point for Unit Test
+tsconfig.json - Specifies how TypeScript code has to be converted to JavaScript code
+
+Front End Application 
+Traditional Approach
+  - Write HTML
+  - Write JavaScript
+  - Embed JavaScript into HTML
+  - When HTML loads JavaScript also loads
+  - JavaScript can modify the DOMs
+
+Component based Approach
+  - Create a component
+  - Create a selector for that component Ex: header-section
+  - Use the selector to render the component Ex: <header-section></header-section>
+  - Components can have sub-components
+  - Root component of Angular application - app-root - <app-root></app-root>
+  - Component is split into 3 files, 
+    + HTML - defines view logic
+    + CSS
+    + TypeScript - backend logic
+  - Starting point of Angular App - Index.html - Root element will be added here
+  - Every angular component is a TypeScript file, HTML and CSS are attachments
+  - TypeScript class is instantiated when selector is added in app.component.html
+  - Properties of component
+    + selector - Tells when to instantiate the component
+    + templateUrl/template - Specifies the behavior of the component
+    + styleUrls - Specifies Style Sheets used by the component
+
+Entire page is divided into components. Ex: Menu component, Header Component, Footer Component
+Each Component has
+  Template test.component.html - How elements should be displayed
+  Style test.component.css - How elements should be styled
+  Code test.component.ts - How actions has to be handled
+
+Component is identified by decorator - similar to annotation in Java 
+We are passing an object with values of member variables as input.
+@Component({
+  selector: 'app-root',   -- HTML tag that represents the component
+  templateUrl: './app.component.html', --HTML file to be displayed
+  styleUrls: ['./app.component.css']
+})
+
+
+Creating a new component
+  - ng generate component hello-world
+  - Create HTML,CSS,TypeScript and Spec files
+  - Update app.module.ts file
+
+Class in TypeScript
+
+All classes in a file in whole is termed as module
+
+Definition: export class classname
+export - similar to public keyword, If we need to use a class outside the module
+
+constructor() {} - similar to public A() of Java. Constructor name is always constructor().
+
+ngOnInit : void {} - Method declaration, void - return type (optional), ngOnInit - method name
+
+Angular bootstrap process consists of the two major stages:
+
+  - constructing components tree
+  - running change detection
+
+The constructor of the component is called when Angular constructs components tree. All lifecycle hooks are called 
+as part of running change detection.
+
+Difference between ngOnInit() and constructor()
+  - constructor() is the first method called once the class is instantiated.
+  - constructor() should be used only to set dependency injection.
+  - ngOnInit() is called after constructor executes
+
+message : string = 'Hello World!' - Variable declaration, string - variable type (optional), message - variable name
+Based on the value assigned, type is determined if it is not specified.
+
+ng generate component login - Creates Login Component with HTML , CSS and TypeScript files
+
+Data binding
+
+Declare member variable in the component.ts and define it in the input tag 
+Interpolation: Binding member variable to tag - Data is fetched from component
+<input type="text" name="username" value= {{username}}>
+{{}} - evaluates a expression.
+Ex: {{2+3}} displays 5 in HTML 
+Even function calls can be defined inside this braces Ex: {{sum(2,3)}} //calls the function and prints the output
+
+Angular Directives
+*ngFor -> Similar to forEach loop, Used for iterating through the list of objects
+Ex: <tr *ngFor="let todo of todos"> -> Here 'let' and 'of' are keywords

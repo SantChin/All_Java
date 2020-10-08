@@ -1,0 +1,39 @@
+Servlet - A very simple JAVA class which can take a request in and gives response back.
+
+Web Application Request Flow
+  - Browser sends HTTP Request to web server
+  - Web server responds with HTTP Response to the browser
+  - Code in Web Server => Input: HttpRequest , Output: HttpResonse
+  
+Actions in CDI (Context Dependency Injection)
+  - When we package and Deploy Components CDI Run Time Environment(Bean Manager) is triggered
+  - Bean Manager discovers the Beans
+  - Spot the dependencies
+  - Inject the dependencies
+  - All the Beans would be connected
+  
+  Bean Mananger
+    - Manages Beans
+    - Bean Discovery
+    - Detect errors in Bean Definitions and deployment problems
+    - If errors are found. deployment is cancelled
+    - If no errors, Provide service - Injection
+    
+  CDI Bean
+    - Any Java class with default constructor
+  
+  Lifecycle:
+    - Container creates new CDI Bean Instance
+    - It exists in memory, But we cannot use it
+    - If newly created Bean uses Dependency Injection, container injects all the dependencies
+    - Method Annotated with @PostConstruct is invoked for initialising
+    - Finally Bean instance processes Method Invocation
+    - If container no longer needs that Bean, it invokes method annotated with @PreDestroy and ends life cycle
+    
+   Scopes:
+   
+   @ApplicationScoped: One Instance exists throughout the application
+   @SessionScoped: Instance exists per HTTP Session
+   @RequestScoped: Instance exists per HTTP Request
+   @ConversationScope: Instance exits during conversation between client and server
+    

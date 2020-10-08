@@ -1,0 +1,213 @@
+Collection - Used for representing group of individual objects as a single entity.
+
+Common methods: 
+  - boolean add(Object o) : Adds an element to the collection
+  - boolean addAll(Collection c) : Adds complete collection of elements to the collection
+  - boolean remove(Object o) : Removes an element from the collection
+  - boolean removeAll(Collection c) : Remove set(collection) of elements from the collection
+  - void clear() : 
+  - boolean retainAll(Collection c) : Except these c, all objects are removed from the collection
+  - boolean contains(Object o) : checks if an object exists in collection
+  - boolean contains(Object o) 
+  - boolean isEmpty()
+  - int size()
+  - Object[] toArray()
+  - Iterator iterator()
+
+Collection Interfaces
+  - List
+  - Set 
+  - Queue
+  - Map
+
+List Interface
+  - Cares about which position each object is in
+  - Elements can be added in by specifying position - where should it be added in
+  - If element is added without specifying position - it is added at the end
+  - Allows duplicate elements
+  - Index starts from 0
+  
+List.of - creates a immutable list - We cannot add more elements
+
+List<String> list = List.of("Cat","Bat");
+list.add("Dog") - Throws an exception, since list is immutable when created by List.of().
+
+Vector
+ - All methods are synchronized, Thread Safe
+ - Basic Data Structure : Array
+ - Constant access time
+ArrayList
+ - Not Synchronized, Not Thread Safe
+ - Basic Data Structure : Array
+ - Insertion and Deletion are slower compared to Linked List
+ - Constant access time
+ 
+Array List and Vector class implements RandomAccess Marker Interface. It is present in java.util package
+  - It allows for accessing any random element of an array with constant speed
+  - Ex: 1st element - A - 1 sec, 10th element Z - 1 sec
+
+Linked List
+ - Basic Data Structure : Doubly Linked List
+ - Iteration is slow, Access time is slow
+ - Faster insertion and deletion
+
+Few important methods of List implementation
+
+add(element) -> Adds element to end of list
+add(position, element) -> Adds element at specified position
+addAll(Collection) -> Adds collection of elements to a list
+set(position,newValue) -> Updates the value present at specified position
+remove(position) -> Element at specified position is removed
+remove(element) -> Specified element is removed
+
+Note: while removing an Integer element from list, new Integer object has to be passed.
+
+Ex: List<Integer> numbers = List.of(101,102,103,104);
+List<Integer> numberList = new ArrayList<>(numbers);
+numberList.remove(102) -> Throws ArrayIndexOutOfBoundException, since by default it is considered as index value.
+numberList.remover(Integer.valueOf(102)) -> Correct way to remove an Integer object from the list.
+
+For removing an element from the list Iterator has to be used.
+
+Set Interface
+  - Unique elements, Duplicates are not allowed
+  - Positional access is not allowed, Adding or removing based on Index is not possible.
+
+Hash Table
+  - Hash value is calculated based on the Hashing Function and value is stored in the corresponding bucket.
+  - Effeciency of Hash Table depends on Hashing Function implemented in hashCode method.
+
+HashSet
+  - Elements will not be stored in Insertion Order
+
+Internal Implementation
+
+private transient HashMap<E,Object> map;
+    
+// Dummy value to associate with an Object in the backing Map
+    
+private static final Object PRESENT = new Object();
+
+- HashMap is created internally during creation of HashSet
+public HashSet() {
+        map = new HashMap<>();
+    }
+  
+- When an element is added to HashSet, it is internally added to HashMap as key with dummy object(PRESENT) as value
+public boolean add(E e) {
+        return map.put(e, PRESENT)==null;
+    }
+
+LinkedHashSet
+  - Elements will be stored in Insertion Order
+ 
+TreeSet
+  - Elements will be stored in Sorted Order
+
+TreeSet implements NavigableSet
+  - floor(number) -> returns a number which less than or equal to specified number
+  
+Queue implements Collection
+  - Arranged in the order of processing
+  
+PriorityQueue
+ - Elements are stored in natural order
+ - offer(element) - adds an element to a queue
+ - add(element) - calls offer(element) method to add an element to a queue
+ - addAll(Collection) - adds collection of elements
+ - poll() - removes first element from the queue
+ 
+Internal Implementation of HashMap
+ 
+hashCode() function of Object Class, which returns an integer value is referred as Hash function.
+Hash value is the int value returned by the Hash function
+
+Bucket is used to store Key Value Pairs.
+Default implementation of bukcet is LinkedList, On exceeding limit it turns into RedBlack Tree for enabling faster traversal
+
+Each Node of an HashMap will have
+  - HashCode of Key : Value returned by Object.hashCode(), if method is not overridden by current object, 
+  System.identityHashCode() is called to generate default hashCode of an object.
+  - Key : Key set using put method
+  - Value : Value set using put method
+  - Next : HashMap.Node
+
+Methods of HashMap : 
+Public  V get(Object key) {
+  if (key == null)
+    //some code
+  int hash = hash(key.hashCode()); 
+  //if key is found in Hash Table return value else return null
+ 
+}
+
+Performance of HashMap reduces as Hash Collisions increase and when size of Linked List Increases. O(1) gradually becomes O(n)
+For preventing this, In JAVA 8 a limit is set for the Linked List, when limit is crossed Linked List is converted to a Tree
+Thus achieving a performance of O(logn) instead og O(n)
+TREEIFY_THRESHOLD - Limit for converting Linked List to Tree - Default Value - 8
+UNTREEIFY_THRESHOLD - Limit for converting Tree to Linked List - Default Value - 6
+MIN_TREEIFY_CAPACITY - Limit for converting Tree to Linked List - Default Value - 64
+
+HashMap
+  - Unordered,unsorted
+  - Can have one null key
+
+HashTable
+  - Synchronized, Thread safe
+  - Unordered, unsorted
+  - Cannot have a null key
+
+LinkedHashMap
+  - Maintains insertion order
+  - Iteration is faster
+  - Insertion and Deletion is slower
+
+TreeMap
+  - implements NavigableMap, Map
+  - Elements are sorted and stored
+
+WeakHashMap
+  - Eases the garbage collection
+  - If an object is specified as a key and it doesn't contain any reference, then it would be eligible for garbage collection
+  
+Important common methods of Map 
+
+get(key) -> returns value against the key
+
+Internal Implementation
+  - Calculate the hash code for the key
+  - Calculate index for hash code
+  - Goto the index location and compare first elements key with given key, if equal return the value else check for next element
+
+size() -> returns size of map
+isEmpty() -> checks if map is empty
+containsKey(key) -> checks if key is present in map
+containsValue(value) -> checks if value is present in map
+keySet() -> Returns Set of Keys present in map
+
+put(key,value) -> inserts a key value entry to a map.
+Note: If key is already present, its value will be replaced with new value
+
+While iterating an HashMap 
+  - New (key,value) cannot be inserted - Concurrent Modification Exception would be thrown
+  - Value of an existing key can be modified - Program compiles successfully
+  
+Inserting a value to hashMap
+  - hashCode() returns unique hashCode of an object
+  - return value of hashCode() determines the bucket in which (key,value) should be inserted
+  - equals() compares the keys of an hashMap
+  - if equals() returns true, that means keys are equal, value would be replaced in the hash table
+  - if equals() returns false, that means keys are not equal, new key value pair would be created in the hash table
+
+entrySet() -> returns set of Entries(Key Value Pair) present in the map
+
+HashMap is efficient compared to LinkedHashMap and TreeMap since it doesn't store in any order.
+
+Tips on Collection
+
+Hash - Unordered, unsorted
+Link - Insertion order is maintained
+Tree - Data is stored in a sorted order, Implements NavigableSet or NavigableMap
+
+
+

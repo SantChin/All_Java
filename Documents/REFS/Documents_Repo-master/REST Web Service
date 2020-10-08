@@ -1,0 +1,97 @@
+@RestController - Creates a REST Controller
+
+@RequestMapping(method = RequestMethod.GET,path='/hello) - Creates a RESTfull API with URI http:localhost:8080/hello
+
+@GetMapping - Short form for @RequestMapping(method = RequestMethod.GET)
+@PutMapping - Short form for @RequestMapping(method = RequestMethod.PUT)
+@PostMapping - Short form for @RequestMapping(method = RequestMethod.POST)
+@DeleteMapping - Short form for @RequestMapping(method = RequestMethod.DELETE)
+
+@GetMapping(path = '/hello') - Creates a RESTfull API with URI http:localhost:8080/hello, It should be invoked with GET method.
+
+Difference between PUT and POST
+
+PUT 
+
+- If request URI refers to existing resource update operation will happen, orelse create operation will happen if request URI is valid.
+- Idempotent - Multiple identical requests will have same effect as making a single request.
+
+POST 
+- Not Idempotent - If we retry a create request n times, n resources would be created at n URI locations.
+
+HTTP Methods
+GET -> For Getting the data
+DELETE -> For Deleting the data -> Response should be status of Deletion
+PUT -> For Updating the data
+POST -> For Creating new data -> Response should be Location of created resource
+
+REST Security
+
+
+Difference between SOAP and REST
+
+Response Codes:
+
+1XX - Informational 
+
+2XX - Success Response
+200 - Ok
+201 - Successful resource creation
+204 - No Content - Can be used for delete request, Acknowledge without any content or body
+
+3XX - Redirection 
+302 - Found
+304 - Not Modified
+307 - Temporary Redirect
+
+4XX - Client Error Codes - Client screws up something when sending request
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+404 - Not Found
+415 - Unsupported Media Type
+
+5XX - Server Error - Server screws up something while sending response
+500 - Internal Server Error
+
+Standard Status Codes for CRUD Operations
+
+Operation       URI                     Method    Success/Failure     Status Code
+Get Message     /messages/{messageId}   GET       Success             200
+                                                  Not Found           404
+                                                  Failure             500
+Delete Message  /messages/{messageId}   DELETE    Success             200 or 204
+                                                  Not found           404
+                                                  Failure             500
+Edit Message    /messages/{messageId}   PUT       Success             200
+                                                  Wrong format/data   400 or 415
+                                                  Not Found           404
+                                                  Failure             500
+Create Message  /messages               POST      Success             200
+                                                  Wrong format/data   400 or 415
+                                                  Failure             500
+                                                  
+HATEOAS - HyperMedia As The Engine Of Application State                   
+Concept of having URI in the respone
+
+Richardson Maturity Model - Standard for RESTfull API
+Level 0 - Swamp of POX(Plain Old XML) - Not RESTfull
+- One URI receives all requests from client.
+- Action would be part of method
+- Same HTTP Method is used for request.
+- There is no use HTTP concepts to communicate information between server and client
+
+Level 1 - 
+  - Individial URIs for each resource
+  - Ex:/profile URI performs all operations related to profile
+
+Level 2 
+  - Use standard HTTP Methods for performing different operation
+  - Uses HTTP Status Codes
+
+Level 3 - Fully RESTfull
+  - Response have links that clients can use
+  - HATEOS Implementation
+
+JAX-RS API provided by JAVA for implementing REST Web Service
+Few library which provides implementation RESTEasy, Jersey

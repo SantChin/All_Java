@@ -1,0 +1,23 @@
+Mockito
+
+   - @Mock  : Used for creating mock objects.
+   - static mock() method can also be used for creating mock objects
+   - @InjectMocks : Creates an instance of the class and injects all the mocks into it.
+   - When a class uses service level class to get the inputs for the function, Mockito can be used to mock the inputs.
+   - Mock class acts as a service level class for that class.
+   - Ex: 
+        // Creating mock object of the DataService
+        @Mock
+        DataService dataServiceMock;
+
+        // For Injecting the dependency to the class
+        @InjectMocks
+        SomeBusinessImpl someBusinessImpl;
+
+        @Test
+        public void testFindTheGreatestFromAllData() {
+          when(dataServiceMock.retrieveAllData()).thenReturn(new int[] { 24, 6, 15 });
+          assertEquals(24, someBusinessImpl.findTheGreatestFromAllData());
+        }
+    - When a method is invoked and if expectation is not set mockito provides with default values instead of simply failing the test case.
+    

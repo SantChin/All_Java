@@ -1,0 +1,37 @@
+What is the importance of wait() and notify() methods in Java?
+What is Abstraction and Encapsulation?
+What are SOLID Principles?
+Explain some design patterns?
+What are the differences between Stacks and Queues?
+Program to find a missing element in a array of size 100
+Program to implement Stack in Java
+What are the main features of Grails?
+What are implicit and explicit objects in JSP?
+What are advantages of Spring Boot over Spring?
+What is the difference between HashMap and Concurrent HashMap?
+
+Different types of class loaders?
+
+Why Interpreter is used in JVM?
+What is inside .class Files - Specification?
+Which is faster compilation or interpreter? Why?
+ 
+Why multiple inheritance is not supported in JAVA?
+How to make a method thread safe without using synchronized block and method?
+
+You have 9 boxes with 1 box which weighs more. Find the box with more weight
+
+Why encapsulation in JAVA?
+
+How to connect to save an object in different schemas using same class?
+
+Difference between get() and load() in hibernate?
+
+How to skip test case execution during Maven Build? 
+		<maven.test.skip>true</maven.test.skip>
+  
+Different levels of cache in Hibernate?
+
+What is Bean Validator?
+
+

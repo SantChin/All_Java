@@ -1,0 +1,10 @@
+Installing React JS using npm
+npm install -g create-react-app
+
+Creatign React JS Project
+create-react-app hello-world
+
+Starting React JS Development Server
+npm start
+
+

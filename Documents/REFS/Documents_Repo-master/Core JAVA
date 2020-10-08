@@ -1,0 +1,564 @@
+Java Source File:
+    - A source file can have any number of classes.But it can have max 1 public class.
+    - If there are there more than one public class, Compiler asks us to declare the class in separate file.
+    - If there is no pubic class, Any name can be used as Source File name.
+    - A source file can have any number of main methods. For running any class it is mandatory to have main 
+    method with JVM supported format
+    
+Compiling and Running Java Source Code with package declaration:
+    - Full Directory Path has to be sepecified while compiling
+    - D:\Users\734456\workspace\Core-Java-Practise\src\main\java>javac -d . T.java
+    - Command create folders with package name in the current working directory
+    - Fully Qualified class name has to be specified while running a class.
+    - D:\Users\734456\workspace\Core-Java-Practise\src\main\java>java com.practice.sample.T
+
+Import Statements:
+    - Explicit Import : import java.util.ArrayList;
+    - Implicit Import : import java.util.*;
+    - Explicit import is always recommended since it improves readbility.
+    - Implicit import statement will only import all classes present in the current package. Classes in the sub package are 
+     not imported.
+    - Ex: java.util.regex.Pattern will be imported by using import java.util.regex.*
+    - import java.util.* will not import Patternn class.
+
+Classes and Interfaces present in java.lang imported automatically. Ex: Thread, Exception.
+All classes present in current working directory is available by default. No need of importing it.
+
+Package : 
+    - Encapsulation mechanism to group of related classes and interfaces to a single unit.
+    - In any JAVA Source file atmost one package declaration is allowed.
+    - Package declaration should be first statement in the source file always.
+
+Order for JAVA Source file
+    - package declaration
+    - import statment
+    - ass/interface/enums
+
+Advantages: 
+    - Naming conflicts
+    - Modularity
+    - Maintainability
+    - Security
+
+Class Level Access Modifiers - Provides information about the behavior of the class to JVM
+
+Modifier applicable for top level class
+public - class can be accessed by anywhere.
+default - class can be accessed only within the package.
+
+
+abstract - applicable for classes and methods
+If a class has atleast one abstract method, it has to be declared abstract.
+
+final - 
+strictfp - 
+
+Modifier applicable for inner class in addition to above modifiers
+private -
+protected - 
+static
+
+ Access Modifiers
+   Class  - default: Accessible only inside the package, public: Visible everywhere
+   Methods - public: Accessible everywhere, protected: Can only be used either in same package or sub-class
+             private: Only available inside the class, default: Only available inside the package
+             
+   Protected Access Modifier:
+         Members can be accessed throughout the package.
+         In different package, 
+              members can be accessed directly or by creating object and reference of sub class.
+              members cannot be accessed by creating object and reference of super class.   
+   
+ Non-Access Modifiers
+   final
+      - Class cannot be extended 
+      - Method cannot be overriden 
+      - Variable value cannot be changed once it is assigned
+      - Varibae value can be assigned only once if it is not initialized
+   static
+      - Variable are present at Class level
+      - Single instance is available and shared accross all the objects
+      - Methods cannot access instance variables or methods . But Instance methods can access static variables and methods
+      - Methods can only access Static Methods and variables.
+  
+  Declaring constants : public static final int PI = 3.14;
+    
+JVM Memory Model:
+
+Heap Area : Memory is allocated for Objects and arrays. Created when JVM starts.
+Method Area : Methods and fields are stored. 
+JVM Stacks: Local variable and partial results are stored. Stack frame is created for each thread.
+Native Method Stacks: Supports native methods
+
+Heap Memory : 
+
+Heap Memory - Will store the objects
+Stack Memory - Will store the variables
+
+Primitive variable - will have variable values
+Reference variable - will have reference to the memory location
+
+Comparison of reference variable compares its memory location not the values of instance variables.
+
+String - Immutable
+Once created, value cannot be changed in the memory location.
+
+IntegerCache
+    - Feature introduced in JDK 5 for improving performance.
+    - Integer num1 = Integer.valueOf(20), Integer num2 = Integer.valueOf(20) 
+    - num1 == num2 will be true, Since value is cached and same reference would be used.
+    - Default values that are cached -127 to 127
+    - However it can be changed by altering VM parameter: -XX:AutoBoxCacheMax=1000
+
+Creating Immutable Class in JAVA
+    - Class should be declared as final, so that no other class can extend it.
+    - All variables of the class should be declared private, so that it cannot be accessed outside.
+    - There should not be any setter methods for modifying the variable values.
+    - Perform deep cloning of all reference variables(If class has reference variable do not assign it directly, 
+    instead extract the values of the reference variable and create a new Object).
+    
+Object.hashCode() and System.identityHashCode()
+    - When Object.hashCode() is called first preference is given to the hashCode() method overridden by the class.
+    - If hashCode() is not overridden, System.identityHashCode() is called to generate default hashCode of an object.
+
+Variable Arguments. Takes any number inputs to a method. Introduced in JDK 5
+Syntax : sum (int... marks) 
+Sample method call: sum(2,3) sum(2,3,5)
+
+Variable argument should always be last arugment inside a method.
+Ex: sum(int length,int... num ) - Correct
+Ex: sum(int... num, int length) - Wrong
+
+Arrays:
+int[] intArray = new int[5];
+intArray = {1,2,3};
+int[] newArray = {5,6,7}
+
+Object Oriented Programming
+
+Composition : Has-a relationship. Ex: Person has a Adress, Book has a Review, 
+Inheritance : Is-a relationship. Ex: Student is a Person, Ferrari is a Car. 
+Sub-class inherits all the state and behavior of the parent class.
+
+Method Overriding - Overriding the implementation provided in the super class with new implementation.
+
+super - Keyword to access state and behavior of parent class
+this - keyword to access state and behavior of current class
+
+OOPS Concepts 
+
+	1. Data Hiding : Hiding of data, Outside class cannot access member data directly.
+		Ex: Check for mail in GMAIL , We will not be able to view mails unless we provide credentials.
+		- Implementation of data hiding
+			+ private field mail is declared as Private
+			+ public method is made available which can accept credentials and return the mail details
+		- Advantage of Data Hiding
+			+ Security : Only after providing credentials mail can be accessed
+	
+	2. Abstraction : Hiding the internal implementation, and only highlighting the set the services that we offer
+		Ex: ATM Machine. When we request for withdrawl, we will only get money. But we will not get any information on 
+		the internal implementation of withdrawl method. Bank will not never share such information.
+		Ex: 
+		- Implementation of abstraction
+			+ provide abstract methods using Interface
+			+ provding services only through GUI screens
+		- Advantage
+			+ Security : No one will be aware of internal implmentation
+			+ Easy to enhance : We can keep same GUI and change the back-end technology
+			+ Maintainanility and Modularity of application would be improved
+			
+	3. Encapsulation : 
+
+
+MultiThreading
+
+2 ways of creating thread
+ - Extend Thread class
+ - Implement Runnable Interface and pass the object to Thread class constructor
+ 
+ Important Methods of Thread class : 
+    - start() and run() 
+        + Invoking start() method on thread object, executes run() method as a new thread of execution.
+        + start() method caused OS to initiate another thread from which run() method executes
+        + start() can be called only once on a thread or else IllegalThreadStateException would be thrown
+        + run() can be called directly, in that it would operate like an other method as part of the same thread by which it is called
+    - final isAlive()
+        + returns true is Thread is still running or if Thread is not terminated
+    - final join()
+        + waits until Thread on which it is called is terminated
+        + thread1.join(100) - waits for 1 sec for thread1 to get terminated then continues with normal execution.
+    - yield()
+        + Moves the current thread from Running to Runnable state
+        + However scheduler can bring it back to Running state
+        + Alternate approach as per Joshua Thread.sleep(1)
+    - static currentThread()
+        + Returns a reference to the current thread
+    - void interrupt()
+        + set the interrupt flag
+    - static boolean interrupted()
+        + static method, returns true if interrupted flag is set
+        + clears the flag
+    - boolean isInterrupted()
+        + instance method, just return true if interrupted flag is set
+    - static sleep()
+        + Causes thread to suspend execution for some time
+        + sleep(10) sleeps for 10 milliseconds
+        + sleep(1,10) sleeps for 1 milliseconds and 10 nanoseconds
+ 
+join() and sleep() methods of Thread class throws InterruptedException - Checked Exception.
+It has to be handled whenever these methods are used
+
+wait() method of Object class also throws InterruptedException - Checked Exception.
+
+Executor Service - For creating multiple threads in a simpler ways and manage the size of thread pool
+execute() - For invoking a normal task
+
+Callable Thread - task which returns some value
+submit(Callable task) -> Executes single callable task
+invokeAll(Collection of Callable tasks) -> Executes multiple callable task at a time
+
+Synchronization:
+    - synchronized - Modifier applicable only for methods and blocks, but not for classes and variables.
+    - If multiple threads are trying to operate simultaneously on the same Java object then there might be 
+    chances of Data Inconsistency problem.
+    - To overcome Data Inconsistency problem we are supposed to use synchronized keyword
+    - If a method/block declared as synchronized then at a time only one thread is allowed to execute that method/block 
+    on the given object so that data inconsistency problem will be resolved
+Disadvantages:
+    - Increases wait time of thread hence degrades performance
+
+    - Internally synchronization is implement using lock
+    - Object is locked when a thread executes a synchronized method
+    - Acquiring and releasing lock operations are internally taken care by JVM, Programmer is not responsible.
+    - While thread executes sychronized method on a object, remaining threads are not allowed to execute
+    any sychronized method simultaneously on the same object, but the remaining threads are allowed to execute 
+    non-synchronized methods simultaneously
+    - Lock concept is implemented based on object not based on method
+    - Every object in java has synchronized and non-synchronized area
+    - Synchronized area - Can be accessed by only one thread at a time should be used for read operation
+    - Non synchronized area - can be accesses by any number of threads at a time should be used to update operations
+    
+    - If 2 threads operate on same object synchronization is required
+    - If 2 threads operate on 2 different objects synchronization is not required
+    
+ 2 types of Locks in java
+    - Class level lock
+        + For executing static synchronized method thread requires class level lock
+        + Thread releases the lock once it finishes executing
+        + While static synchronized method is being executed by any thread, other threads are not allwoed to any of the other static 
+        synchronized methods of that class simultaneously. But other threads are allowed to execute below methods:
+            - Normal static methods 
+            - Synchronized instance methods
+            - Normal instance methods 
+        
+    - Object level lock
+        + For executing synchronized instance method thread requires object level lock
+     
+Synchronous Block
+    - Performance will be improved using blocks, since we need not synchronize complete method
+    - Only certain lines can be synchronized
+    - If only few lines code requires synchronization, then synchronized block is highly recommended.
+    - It reduces waiting time of thread and improves performance of the system/application.
+    - synchronized(this) - gets lock of current object, Only after getting lock thread can execute the block
+    - synchronized(b) - gets lock of any particular object b
+    - synchronized(Display.class) - get class level lock of Display class
+    - synchronized() - is not applicable for primitives , Compilation error (Unexpected type found)
+    - Lock concept applicable for object types and class types but not for primitives
+    
+What is synchronized keyword? where we can apply?
+    - Modifier applicable for methods and blocks
+Advantages of synchrnized keyword?
+    - Helps to solve data inconsistency problem
+Disadvantages
+    - Increases wait time of thread, thus affecting performance
+What is race condition?
+    - Multiple thread operate simultaneously on same Java object and causing data consistency
+How to resolve race condition?
+    - Use synchronized keyword
+    - If multiple threads are operating simultaneously on same Java object, then there may be chance of data inconsistency problem
+    this is called race condition
+    - We can overcome this problem by using synchronized modifier
+What is object lock? When it is required?
+    - Every object in java has a unique lock called object lock
+    - For executing synchronized instance method object lock is required
+What is class level lock? When it is required?
+    - Every class in java has a unique lock called class level lock
+    - For executing static synchronized instance method class level lock is required
+While a thread is executing synchronized method on the given object, is the remaining threads allowed to execute any
+other synchronized method simultaneously on the same object?
+    - No, since object is locked
+What is synchronized block?
+How to declare the synchronized block to get the lock of current object?
+    - synchronized(this)
+How to declare the synchronized block to get the class level lock?
+    - synchronized(Display.class)
+Advantage of synchronized block over method?
+    - Performance will be improved
+    - Waiting time of thread is decreased
+Can a thread acquire multiple locks simultaneously?
+    - Yes, thread can acquire multiple locks from different objects.
+What is synchronized statement?
+    - Statements present inside synchronized methods and synchronized blocks
+
+Inter Thread Communication - How 2 threads communicate with each other
+    - 2 threads are communicate with each other by calling wait() , notify() and notifyAll() methods
+
+Need for inter thread communication
+    - When thread t1 is expecting an update from thread t2
+    - T1 need to check every 5min for update
+    - Instead t1 and t2 can communicate with each other by calling wait() and notify() method
+    - t1 calls wait() method - thread which is expecting an update
+    - t1 goes on waiting state after executing wait() method
+    - t2 calls notify() method - thread which performs an update
+    - Thread responsible for performing an update, after updating it should call notify() method then waiting thread will get he 
+    notification and continues it execution with those updated items.
+ 
+wait(), notify() and notifyAll() methods are not part of Thread class, It is part of Object class why?
+    - Thread can call these methods on any Java Object
+    - Thread should have the ownership of object for calling wait() method
+    - Thread should have the lock of the object 
+    - Thread should be in synchronized area(either block or method)
+    - If no access or not called from synchronized area, RuntimeException - IllegalMonitorStateException would be thrown
+    - If a thread calls wait() method on any object, it immediately releases the lock of that object and enters to waiting state.
+    - If a thread calls notify() method on any object, it releases the lock but may not be immediately.
+    - Except wait(), notify() and notifyAll() there is no other method where thread releases the lock.
+
+Which of the following is valid?
+    - If a thread calls wait() method, immediately it will enter into waiting state without releasing lock. - Invalid
+    - If a thread calls wait() method, it releases the lock of that object but may not immediately. - Invalid
+    - If a thread calls wait() method on any object, it releases all locks acquired by the thread and immediately 
+    enter into waiting state - Invalid
+    - If a thread calls wait() method on any object, it immediately releases the lock of that particular object and 
+    enter into waiting state - Valid
+    - If a thread calls notify() method on any object, it immediately releases lock of that particular object. - Invalild
+    - If a thread calls notify() method on any object, it releases the lock of that object but may not be immediately - Valid
+    
+Conclusion:
+    - 2 threads can communicate with each other using wait(), notify() and notifyAll()
+    - wait(), notify() and notifyAll() are present in object class
+    - wait(), notify() and notifyAll() should be called from synchronized area only
+    - If thread calls wait() method, thread immediately releases the lock
+    - if thread call notify() method, lock is released but may not be immediately
+    - Except wait(), notify() and notifyAll() there is no other method where thread releases the lock.
+
+Syntax of wait() and notify() methods:
+    - public final native void wait(long var1) throws InterruptedException(Checked Exception); - milli seconds
+    - public final void wait(long var1, int var3) throws InterruptedException {} - milli seconds,nano seconds
+    - public final void wait() throws InterruptedException { this.wait(0L); }
+    - public final native void notify();
+	- public final native void notifyAll();
+
+    - Every wait() method throws InterruptedException which is Checked Exception, Hence wheneve we are using wait() method 
+    exception should be handled by either by try catch or throws keyword, Otherwise we will get compilation error.
+    
+Importance of wait() notify() in Thread lif cycle
+Normal Thread Life Cycle
+    - MyThread myThread = new MyThread(); -> New
+    - myThread.start(); -> Ready/Runnable
+    - If thread scheduler allocates processor -> Running;
+    - If run() method completes execution -> Dead 
+
+Wait() method would be executed when thread is in Running state
+    - When wait() method is executed thread goes to Waiting state
+    - If Waiting thread gets notification it goes to another Waiting state to get the lock in below cases
+        + If Waiting thread gets notification
+        + If time expires
+        + If Waiting thread gets interrupted
+    - Once Waiting thread gets lock it goes to Ready/Runnable state
+  
+Producer Consumer Problem
+    - Producer thread is responsible to produce items to the queue
+    - Consumer thread is responsible to consume items from the queue
+    - If queue is empty then consumer thread will call wait() method and enter into Waiting state
+    - After producing items to the queue, producer thread is responsible to call notify() method then waiting consumer will get that no
+    notification and continue its execution with updated items
+
+Difference between notify() and notifyAll()
+    - We can use notify() method to give notification for only one waiting thread
+    - If multiple threads are waiting, then only one thread will be notified and remaining threads will have to wait for
+    notifications.
+    - We cannot expect any particular thread to be notified, it depends on JVM any random thread would be notified.
+    - We can use notifyAll() for providing notification of all Waiting threads of a particular object.
+    - Eventhough multiple threads gets notified, but execution will be performed one by one because threads require lock, and only one 
+    lock would be available
+    
+- Only synchronized object has to be used inside synchronized block
+    + Ex: Object o1 = new Object(); Object o2 = new Object();
+    + synchronized(o1) { o2.wait(); } // Throws IllegalMonitorStateException
+    
+Java Multithreading is implemented using Green Thread Model and Native OS model
+    - Green Thread: Thread is completely managed by JVM without taking underlying OS Support. Deprecated model. Ex: SUN Solaris OS 
+    - Native OS Model: Thread managed by JVM with the help of underlying OS.Ex: All Windows based OS
+
+How to stop a thread?
+    - If we call stop() method immediately thread enters dead state.
+    - stop() method is deprecated and not recommended to use
+
+Deadlock - Infinte waiting, where 2 threads are waiting for each other forever
+    - synchronized keyword is the only reason for deadlock
+    - While using synchronized keyword, special care has to be taken
+    - There is no resolution for deadlock, but several prevention techniques are available
+    
+Deadlock vs Starvation
+    - Deadlock: Long waiting of a thread where waiting never ends
+    - Starvation: Long waiting of a thread where waiting ends. Ex: Waiting for 100 threads with higher priority
+    
+Exception Handling
+
+Finally block - 
+ - Executes even if exception is raised
+ - Even if return statement is present
+ - Will not be executed if lines inside finally throws exception
+ - If JVM crashes (System.exit(0)) - DO NOT TRY
+
+2 types of Exceptions
+- Sub-classes of Runtime Exceptions
+- Not a Sub-class of Runtime Exceptions (All classes that extends Exceptions and not Runtime Exceptions)
+
+class Error extends Throwable
+
+class Exception extends Throwable
+class InterruptedException extends Exception 
+ - Checked Exception 
+ - Any class that extends Exception 
+ - Should be handled always by throwing or surrounding by try/catch 
+
+class RuntimeException extends Exception
+class NullPointerException extends RuntimeException 
+ - Un-Checked Exception 
+ - Any class that extends Runtime Exception
+ - Not mandatory of handling the exception
+ 
+ Functional Programming
+ 
+ Stream - source of objects 
+ 
+ 2 Operations on stream
+  - Intermediate operation - 
+    Input -> Stream
+    Output -> Stream
+    Ex: filter(), sorted(), distinct() 
+    Stream can have multiple Intermediate Operations
+    
+  - Terminal operation 
+    Input -> Stream  
+    Single output 
+    Ex: min(), max(), forEach(), reduce(), collect()
+    
+ Concurrent Collection
+   Concurrent collections provide Thread safe without significant performance impact in specific scenarios.
+ Concurrent HashMap 
+   Complete HashMap is not locked, instead few regions are locked, thus improved performance and thread safe.
+   
+ CopyOnWriteArrayList
+    Should be used when there more read operation than write.
+   
+Nested Class
+    - Default Nested Class - Requires outer class reference for instantiating. InnerClass innerClass = nestedClassRunner.new InnerClass();
+    - Static Nested Class - Can be instantiated directly. StaticNestedClass staticNestedClass = new StaticNestedClass();
+
+Anonymous class 
+   - Inner class without a name. 
+   - Can be created by implementing an Interface or by extending a Class
+ 
+
+Serialization - Used of for storing the state of object in the disk or transferring over network.
+Class has to implement Serializable Marker Interface for allowing serilization of instances of the class.
+
+serialVersionUID 
+    - JVM generates by default based on the members of the class.
+    - Changes everytime when members are modified.
+    - Used during serialization and de-serialization as unique identifier of the class.
+
+Issues with JVM generated serialVersionUID
+    - Creates issues during De-serialization if there in a modification to the existing members of the class
+    - Throws an InvalidClassException, since SerialVersionUID changes on modification of existing members. 
+      Hence JVM treats it as a different class
+
+Declaring serialVersionUID
+    - If we declare serialVersionUID in our class, same would be used during serialization and de-serialization.
+    - Thus, even if we modify the members of the class serialVersionUID remains same. Hence JVM identifies class as 
+      new version of the existing class
+
+JIT Compiler Internal Implementation
+
+Overloading Overriding
+
+Marker Interface
+
+AutoCloseable Interface
+For Try with Resources implementation, Classes should implement AutoCloseable Interface.
+
+Logging Configuration
+	Log Level: 
+		ERROR	: Only should be used if error occurs. Ex: Can be used in catch block
+		WARN 	: Should be used for warning. Ex: If there is 0 output for a search 
+		INFO	: Can be used providing info. Ex: User logged in, User logged out.
+		DEBUG	: When we need to know about steps progressed. Ex: Entering a method, Exiting a method
+		TRACE	: More details logs.
+		
+	Spring-jcl - provides logging in Spring Boot. It comes along with Spring-Boot-Started-Web
+	
+	By default logs will be written to console
+
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	logger.info("Logging the information..");
+
+Configuration File
+
+Logger vs Appender
+	Logger : Captures logging information from the code
+	Appender : Publishes information that has been logged
+		- Console Appender
+		- Rolling File Appender
+
+System.out.prinln doesn't have a severity level, whereas using logging we can have different severity levels
+
+Configuring Logging in Spring Boot App
+	- Log levels can be configured in Application.properties.
+	- Can be configured in XML files of below mentioned names	
+		+ logback-spring.xml
+		+ logback.xml
+		+ logback-spring.groovy
+		+ logback.groovy
+	- Console and Rolling File appenders can be configured in the XML file
+	- Attribute in file
+		+ Property : A variable with a value
+		Ex: Below line indicates a folder named "logs" would be created in the current directory where all logs will be saved
+		<property name="LOGS" value="./logs"/> 
+		+ Appender : Publishes information that has been logged
+			- Console Appender : Logs to System.out or System.err
+			- File Appender : Logs to a file
+			- Rolling File Appender : Roll over log files when conditions are met
+		+ Rolling File Properties
+			- %i : Represents numeric file version. When file reaches the max size new file would be created with name appended with increment
+			- %d : Rolling over date, Creating a log file based on Day or Month or Year 
+			- Add .gz or .zip for automatic compression
+			- maxHistory : How many history files to keep after which it would be deleted by housekeeping
+			- maxFileSize : Max size of a Log file, after this is reached %i would be incremented.
+			- minIndex : Start index of rollover count
+			- maxIndex : Ending index of rollover count
+			- Behvaior : With log%i.txt filename, minIndex - 1, maxIndex - 3 when max file size is reached
+				log3.txt would be deleted 
+				log2.txt would be renamed to log3.txt		
+				log1.txt would be renamed to log2.txt
+				log.txt would be renamed to log1.txt 
+		+ Pattern identifiers	
+			- %d : Date of Logging event
+			- %p : Logging priority(DEBUG,INFO)
+			- %C : Class name that is logging
+			- %t : Thread that is logging
+			- %m : Message supplied for logging
+			- %n : Operating system line break
+	
+Garbage Collection
+	- Daemon thread that runs in the background
+	- It frees up heap memory by destroying the unreachable objects
+	- Unreachable objects are the one which are not referenced by any part of the program
+	- We can choose the Garbage Collection for our program by using JVM parameter
+
+Automatic Garbage Collection Working: 
+	- Automatic GC is the process of identifying (marking) the unreachable objects and destroying(sweep) them with compaction.
+	- Issue with this approach is, as the number of objects increase GC(mark and sweep) time increases
+	- For improving the performance Generational GC methodology was introduced.
+		- Heap is divided into generations like Young Generation, Old Generation and Permanent Generation

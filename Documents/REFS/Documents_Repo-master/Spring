@@ -1,0 +1,264 @@
+Topics to be covered: 
+
+  - Transaction Management
+  - AOP Proxy
+  - Bean Scopes 
+  - Configure Hibernate Cache using Spring Boot
+
+Annotations:
+
+@Component vs @Controller vs @Service vs @ Repository
+
+@Component Annotation -  General-purpose stereotype annotation indicating that the class is a spring component.
+
+What’s special about @Component
+<context:component-scan> only scans @Component and does not look for @Controller, @Service and @Repository in general. 
+They are scanned because they themselves are annotated with @Component.
+
+@Controller, @Service and @Repository annotation definitions:
+
+@Component
+public @interface Service {
+    ….
+}
+ 
+
+@Component
+public @interface Repository {
+    ….
+}
+ 
+
+@Component
+public @interface Controller {
+    …
+}
+
+Thus, it’s not wrong to say that @Controller, @Service and @Repository are special types of @Component annotation. 
+<context:component-scan> picks them up and registers their following classes as beans, just as if they were annotated with @Component.
+
+Special type annotations are also scanned, because they themselves are annotated with @Component annotation, 
+which means they are also @Components. If we define our own custom annotation and annotate it with @Component,
+it will also get scanned with <context:component-scan>
+
+@Repository Annotation
+
+This is to indicate that the class defines a data repository.
+
+What’s special about @Repository?
+
+In addition to pointing out, that this is an Annotation based Configuration, @Repository’s job is to catch platform specific exceptions 
+and re-throw them as one of Spring’s unified unchecked exception. For this, we’re provided with 
+PersistenceExceptionTranslationPostProcessor, that we are required to add in our Spring’s application context like this:
+
+<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+This bean post processor adds an advisor to any bean that’s annotated with @Repository so that any platform-specific exceptions are caught and then re-thrown as one of Spring’s unchecked data access exceptions.
+
+@Controller Annotation 
+
+The @Controller annotation indicates that a particular class serves the role of a controller. 
+The @Controller annotation acts as a stereotype for the annotated class, indicating its role.
+
+What’s special about @Controller?
+
+We cannot switch this annotation with any other like @Service or @Repository, even though they look same. 
+The dispatcher scans the classes annotated with @Controller and detects @RequestMapping annotations within them. 
+We can use @RequestMapping on/in only those classes annotated with @Controller.
+
+@Service Annotation
+
+@Service beans hold the business logic and call methods in the repository layer.
+
+What’s special about @Service?
+
+Apart from the fact that it's used to indicate, that it's holding the business logic, 
+there’s nothing else noticeable in this annotation; but who knows, Spring may add some additional exceptional in future.
+
+What else?
+
+Similar to above, in the future Spring may add special functionalities for @Service, @Controller and @Repository 
+based on their layering conventions. 
+Hence, it's always a good idea to respect the convention and use it in line with layers.
+
+Spring AOP
+
+Aspect - A standard code/feature scattered across multiple places in the application, whic is quite different than the actual business logic
+Joinpoint - Particular point of execution like method execution, constructor calling or field assignment
+Advice - Action taken by aspect at particular joinpoint
+Pointcut - A regular expression that matches a Joinpoint. Each time a pointcut matches jointpoint advice associated with joinpoint is executed.
+Weaving - process of linking aspects with targeted objects to create an adviced object
+
+Spring Transaction Management
+
+ACID Properties
+  - Atomicity : Either transaction should be completely successful or it should not make any changes. 
+    Either all steps are successfull or no steps are successful.
+  - Consistency : Data should be consistent across the system before and after transaction 
+  - Isolation : If transaction is executed in parallel or serial output should be same
+  - Durability: Once transaction is successfull, even if system crashes transaction should be saved
+ 
+Enable Transaction Management
+  - @EnableTransactionManagement annotation to be used in on @Configuration classes and enable transactional support:
+  Ex: @Configuration
+      @EnableTransactionManagement
+      public class PersistenceJPAConfig{}
+  - Bean class can be annotated with @Transactional annotation
+  Ex: @Service
+      @Transactional
+      public class FooService {
+        //...
+      }
+  - Annotation further supports
+    + Propogation level
+    + Isolation level
+  - Spring created proxies for all the classes annotated with @Transactional 
+  - Proxy allows framework to inject transaction logic before and after method invocation, similar to AOP
+  - Only public method should be annotated with @Transaction since for other proxies cannot be created.
+  - Isolation levels
+    + DEFAULT : Use the default isolation level of the underlying database
+    + READ_COMMITTED : A constant indicating that dirty read are prevented; non-repeatable reads and phantom reads can occur.
+      This level only prohibits a transaction from reading a row with uncommitted changes in it.
+    + READ_UNCOMMITTED : A constant indicating that dirty reads, non-repeatable reads and phantom reads can occur
+      This level allows a row changed by one transaction to be read by another transaction before any changes in that row have 
+      been committed (a "dirty read"). If any of the changes are rolled back, the second transaction will have retrieved an invalid row.
+    + REPEATABLE_READ : A constant indicating that dirty reads and non-repeatable reads are prevented; phantom reads can occur. 
+      This level prohibits a transaction from reading a row with uncommitted changes in it, and it also prohibits the situation where
+      one transaction reads a row, a second transaction alters the row, and the first transaction rereads the row, getting different 
+      values the second time (a "non-repeatable read").
+    + SERIALIZABLE: A constant indicating that dirty reads, non-repeatable reads and phantom reads are prevented.
+      This level includes the prohibitions in ISOLATION_REPEATABLE_READ and further prohibits the situation where one transaction reads 
+      all rows that satisfy a WHERE condition, a second transaction inserts a row that satisfies that WHERE condition, and the first 
+      transaction rereads for the same condition, retrieving the additional "phantom" row in the second read.
+      It involves full locking.It affets performace because of locking.
+    
+  - Diry Read : If T1 transaction reads data from table A1 that was written by another concurrent transaction T2.
+    If on the way T2 is rollback,the data obtained by T1 is invalid one.E.g a=2 is original data .
+    If T1 read a=1 that was written by T2.If T2 rollback then a=1 will be rollback to a=2 in DB.
+    But,Now ,T1 has a=1 but in DB table it is changed to a=2.
+  - Non-repeatable reads : If T1 transaction reads data from table A1.If another concurrent transaction(T2) update data on table A1.
+    Then the data that T1 has read is different from table A1.Because T2 has updated the data on table A1.
+    E.g if T1 read a=1 and T2 updated a=2.Then a!=b
+  - Phantom reads : If T1 transaction reads data from table A1 with certain number of rows. 
+    If another concurrent transaction(T2) inserts more rows on table A1.The number of rows read by T1 is different from rows on table A1
+    
+  - Propogation Levels
+    + MANDATORY : Support a current transaction, throw an exception if none exists.
+    + NESTED : Execute within a nested transaction if a current transaction exists, behave like PROPAGATION_REQUIRED else.
+    + NEVER : Execute non-transactionally, throw an exception if a transaction exists.
+    + NOT_SUPPORTED : Execute non-transactionally, suspend the current transaction if one exists.
+    + REQUIRED : Support a current transaction, create a new one if none exists.
+    + REQUIRES_NEW : Create a new transaction, and suspend the current transaction if one exists.
+    + SUPPORTS : Support a current transaction, execute non-transactionally if none exists.
+
+Bean Validation
+  - Constraints has to be defined in the entity class by annotating member variable
+  - Object of the class is passed into a Validator, which checks if constraints are satisfied.
+
+Validing Input to a Spring MVC Controller
+  - Validating Request Body
+    + In POST/PUT methods usual JSON payload is accepted as Input
+    + Spring automatically maps the JSON payload to Java Objects
+    + Validation API is used to validate the JSON payload
+    
+    + Constraints are added in the domain class by annotating the member variables
+    Ex: Below constraint fails when length of String "name" is less than 2 characters
+    @Size(min = 2, message = "Book name should have atleast 2 characters")
+	  private String name;
+    
+    + For validating the object, it should be prefixed with @Valid annotation
+    Ex: Method that handles Post request which accepts a JSON object of Class Book
+    By adding @Valid annotation, We will be instructing Spring to validate book object which is present in Request Body
+    @PostMapping("/book")
+	  public ResponseEntity<Void> addBook(@Valid @RequestBody Book book)
+    
+    + If validation fails, it triggers MethodArgumentNotValidException
+    + By default, Spring translates it to BAD REQUEST-400 response
+      
+    + We can handle the exception by creating a new class which extends ResponseEntityExceptionHandler
+    + Annotate the class with @ControllerAdvice for catching the exception
+    + Override the handleMethodArgumentNotValid() method
+    + Get Binding Result from the MethodArgumentNotValidException object and send it as part of ResponseEntity object
+    + Binding Result will have the details about number of failures and field name and message provided in the domain class
+    + exception.getBindingResult().getAllErrors() will return the detailled info about validation failure
+    + So that client gets to know which field of the request body caused the failure
+    
+  - Validating Request Parameters and Path Variables
+    + Constraint can be added directly to the method parameter instead of defining it in class
+    
+    Ex: For validating path variable
+    public ResponseEntity<Book> getBook(@PathVariable @Min(1) Long id)
+    
+    Ex: For validating request parameter or query string
+    public ResponseEntity<Book> getBookById(@RequestParam @Min(1) Long id)
+    
+    + In this case even class has to be annotated with @Validated annotation
+    
+    + If validation fails, it triggers ConstraintViolationException 
+    + Spring does'nt have a default exception handler for this, hence it send INTERNAL SERVER ERROR-500 response
+    
+    + Custom Exception Handler has to be implemented for sending proper response code along with appropriate error message
+    + Creata a new class which extends ResponseEntityExceptionHandler
+    + Annotate the class with @ControllerAdvice for catching the exception
+    + Create a new method to handle ConstraintViolationException.
+    + Annotate the method with @ExceptionHandler(ConstraintViolationException.class) 
+    + Extract the error details from WebRequest object and send it as part of ResponseEntity object
+    + webRequest.getDescription(false) will return the detailled info about validation failure
+
+Validating Input to a Spring service method
+	-  For validating beans in service method, 
+		+ Similar to validation of controller, but here we need to annotate the class with @Validated for all types of validation
+		+ Annotate the class with @Validated
+		+ Annotate the argument with @Valid
+		
+Validating JPA Entities
+	- JPA validation is the last level of validation for any entity
+	- No need of externally instruction of JPA annotation
+	- Just annotate the member variables with appropriate constraint
+	
+Creating custom annotation for providing user defined contraint
+	- Create an annotation 
+	- Assign the validator class to the annotation
+	Ex: Custom annotation created for validating Author name
+	@Documented
+	@Retention(RUNTIME)
+	@Target(FIELD)
+	@Constraint(validatedBy = AuthorNameValidator.class) // Validator implementation class
+	public @interface AuthorName {
+		String message() default "Invalid Author"; // Default validation message to be thrown
+		Class<?>[] groups() default {}; // For applying validation to particular group
+		Class<? extends Payload>[] payload() default {};
+	}
+	
+	- Provide the validation logic in the validator class which implements ConstraintValidator Interface and override isValid method
+ 	Ex: Implementation for AuthorName constraint validation
+	public class AuthorNameValidator implements ConstraintValidator<AuthorName, String> {
+		@Override
+		public boolean isValid(String value, ConstraintValidatorContext context) {
+			if (value != null && value.equals("Pradeep")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+ 
+ Group validation
+ 	- It should be implemented if we need few member variables to be validated only for certain method.
+	- Like, if we need to validate ID field only for update method.
+	
+	- Create a Marker Interface with group name
+	Ex: public interface UpdateBookValidation {	}
+	
+	- Specify the group name in constraint annotation
+	Ex: Here id is validation only for UpdateBookValidation group
+	@NotNull(groups = UpdateBookValidation.class, message = "ID cannot be null while updating a book")
+	private Long id;
+	
+	- Map the validator of a method to group name
+	Ex: Here updateBook method is mapped to UpdateBookValidation group
+	@Validated(UpdateBookValidation.class)
+	public Book updateBook(@Valid Book book) { } 
+
+ Reference: https://reflectoring.io/bean-validation-with-spring-boot/
+ 
+ 

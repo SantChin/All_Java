@@ -1,0 +1,305 @@
+Angular
+
+EcmaScript is a Standard for JavaScript
+
+TypeScript - JavaScript + Strong typing
+
+Declaring variable types and method types.
+
+Command to update Node Version (g - for global update)
+npm i npm -g
+
+npm - Node Package Manager similar to Maven
+Downloads all the dependencies required for the project
+
+npm install 
+- downloads all the dependencies specified in package.json file and places it in node_modules folder
+- Will be executed internally when ng new is executed
+
+Command for installing Angular CLI
+install -g @angular/cli@7.0.3
+
+Few ng options
+
+Checking installed Angular CLI version
+ng version
+
+Creating new Angular Project with basic structure
+ng new Angular-Front-End
+
+Compile, Build and serve the app
+ng serve 
+
+List all the ng options
+ng help
+
+Check if newly written code meets the standard
+ng lint
+tslint.json - File with all the standards, we can modify it as per our requirements if required!
+
+ng build
+Creates dist folder with Runtime Files which can be deployed in a web server
+
+ng test
+For executing unit tests
+Unit tests are written using Framework - Jasmine
+We will be running it using - Karma
+
+ng e2e
+For performing E2E test
+Protractor - Layer of Selenium Framework is used for testing E2E.
+
+src Folder
+app - All angular codes. Ex:  Project components and modules
+assets - Contents that has to be rendered as it is ex: images
+environments - Deployment environment related configurations
+
+polyfills.ts - Makes sure app is compatible across all the browsers
+styles.css - Global Style Sheet
+test.ts - Starting point for Unit Test
+tsconfig.json - Specifies how TypeScript code has to be converted to JavaScript code
+
+Component
+
+Entire page is divided into components. Ex: Menu component, Header Component, Footer Component
+Each Component has
+  Template test.component.html - How elements should be displayed
+  Style test.component.css - How elements should be styled
+  Code test.component.ts - How actions has to be handled
+
+Component is identified by decorator - similar to annotation in Java 
+We are passing an object with values of member variables as input.
+@Component({
+  selector: 'app-root',   -- HTML tag that represents the component
+  templateUrl: './app.component.html', --HTML file to be displayed
+  styleUrls: ['./app.component.css']
+})
+
+Class in TypeScript
+
+All classes in a file in whole is termed as module
+
+Definition: export class classname
+export - similar to public keyword, If we need to use a class outside the module
+
+constructor() {} - similar to public A() of Java. Constructor name is always constructor().
+
+ngOnInit : void {} - Method declaration, void - return type (optional), ngOnInit - method name
+
+message : string = 'Hello World!' - Variable declaration, string - variable type (optional), message - variable name
+Based on the value assigned, type is determined if it is not specified.
+
+ng generate component login - Creates Login Component with HTML , CSS and TypeScript files
+
+Data binding
+
+Declare member variable in the component.ts and define it in the input tag 
+Interpolation: Binding member variable to tag - Data is fetched from component
+<input type="text" name="username" value= {{username}}>
+
+Event binding - User action is mapped to a method in a component
+<button (click)=handleLogin()>Login</button>
+
+2 Way data binding using banana in a box model- [()] - Data would be fetched from component and set to component as well
+<input type="text" name="username"  [(ngModel)] = "username">
+
+We can perform event binding as well as Property Binding splitting it
+Ex: [ngModel]="todo.targetDate | date:'yyyy-MM-dd'" - Binding property
+(ngModelChange)="todo.targetDate = $event" - Binding Event
+
+Routing - Similar to Redirecting/Forwarding a request.
+Used for routing from one component to another
+
+Path has to be set in app-routing.module.ts file.
+Ex:  const routes: Routes = [{path:'login' , component: LoginComponent}]
+
+Path can be used in a component for routing to any other component of choice.
+
+{path:'**', component: ErrorComponent} -> Matches all the paths, Should be last parameter in the array always
+
+router:Router, this.router.navigate(['welcome',this.username]) -> TypeScript snip for routing to welcome component
+
+<a routerLink="/todos">here</a> -> HTML tag for routing to todos component
+
+route:ActivatedRoute, this.route.snapshot.params['name'] -> TypeScript snip for fetching the parameters present in the activated route
+
+ng Attributes
+
+*ngIf -> Similar to Conditional Statement IF , Validates the expression and determines whether to display or not.
+Ex: <small *ngIf = "invalidLogin">{{errorMessage}}</small>
+
+*ngFor -> Similar to forEach loop, Used for iterating through the list of objects
+Ex: <tr *ngFor="let todo of todos"> -> Here 'let' and 'of' are keywords
+
+Convert a field from one format to another using pipe symbol (|)
+Ex. todo.targetDate | date -> Converts targetDate to simple date format
+Ex. todo.targetDate | date | uppercase -> Converts targetDate to simple date format and then it converts it into upper case
+
+Angular Module - is a group of components or directives which are dedicated for a specific purpose
+
+Angular Module vs JavaScript Module 
+Angular Module is used to group different Angular Components, they can be in separate files
+JavaScript Module is a group of classes and function in a single file
+
+Bootstrap - Module which is boot strapped is called as Root Module. First component that loads when index.html is loaded.
+
+Angular Application is built up using Angular Module - Set of Angular Components.
+Every Component should be associated with Module
+
+Web Service
+
+Service delivered over web.
+W3C Definition: Software system designed to support interoperable machine-to-machine interactions over a network
+
+Request - Input to the web service
+Response - Output the web service
+Message Exchange Format - Format of Request and Response Ex: JSON, XML
+Service Provider - Hosts the web service
+Service Consumer - Consumes the web service
+Service Definition - Contract between Service provider and consumer
+  Defines format of Request and Response
+  Structure of Request and Response
+  Where service is available - End Point
+Transport - How service is called, either over internet or through a queue
+
+REST - REpresentation State Transfer
+
+Method Standards
+GET -> For Getting the data
+DELETE -> For Deleting the data -> Response should be status of Deletion
+PUT -> For Updating the data
+POST -> For Creating new data -> Response should be Location of created resource
+
+ResponseEntity - When we need to respond with specific status
+
+Request Body  
+For retrieving contents from Request Body , Default Constructor is mandatory.
+
+REST Web Service Best Practices
+
+Consumer First - Think from the perspective of the consumer while defining URI
+
+Use right method based on the action
+
+Use proper response Status
+200 - SUCCESS
+404 - RESOURCE NOT FOUND
+400 - BAD REQUEST
+201 - CREATED - When resource is created
+401 - UNAUTHORIZED
+500 - SERVER ERROR
+
+Make sure no secure info is sent in URI
+
+URI - always use Plural
+/users/1
+
+Resources should be nouns
+
+Basic Authentication and Spring Security
+
+REST services can be hit through any browser and get the data from server, So we need to secure the REST services
+
+spring-boot-starter-security -> Adds security to the REST services
+
+By Deafault Form Based Authentication is added to the application
+
+Default password will be printed in logs.
+For setting username & password  update below fields in property file.
+spring.security.user.name=pradeep
+spring.security.user.password=dummy
+
+2 types of Authentication
+- Basic Authentication 
+  - We send Basic Authorization Header which represents Username and Password
+  - Username and passoword is encoded and sent
+  - We send this header as part of every request
+  - No expiration time. Hence not secure.
+- Form Based Authentication 
+  - Based on session on the browser 
+  - Needs an additional session at server
+  
+  Basic Authentication Header Format 
+  let basicAuthHeadStr = 'Basic ' + window.btoa(username +':'+ password) 
+  Note: there is a space after Basic.
+  
+  window.btoa -> Encodes a string to Base64 format.
+  - Creating header
+  let headers = new HttpHeaders({ 
+      Authorization:basicAuthHeadStr
+      })
+      
+  Each and every REST call should have Basic Authentication added
+  
+  When Authorization Header is added to the request header, A pre-flight request would be triggered prior to the actual request with Method:OPTIONS to check if we have right permissions
+  
+  WebSecurityConfigurerAdapter - Class containing default Security Configuration for Spring
+  We need to override the methods to change the configuration
+  
+  CSRF - Will force POST and PUT request to have CSRF token 
+  
+  Overriding Configure Method
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+		System.out.println("Overridng Spring Security Con figuration!!");
+		http
+			.csrf().disable() // Disable CSRF token
+			.authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() //Any Request with OPTIONS permit all
+				.anyRequest().authenticated() //Rest of the request authorise
+				.and()
+				// .formLogin().and()
+				.httpBasic();
+	}
+  
+  HttpIntercepter - For adding Header to all the request, Acts like a filter
+  Provide implementation for configure method: 
+  intercept(request: HttpRequest<any>, next: HttpHandler){
+    let basicAuthHeadStr = 'Basic ' + window.btoa(username +':'+ password)
+    request = request.clone({
+      setHeaders : { Authorization:basicAuthHeadStr }
+    });
+    return next.handle(request)
+  }
+
+Custome Token System - Had some flaws. JWT evolved.
+JWT - JSON Web Token - Open Industry Standard RFC7519 method for representing claims securely between 2 parties 
+JWT Token has
+	- Header - Algorithm names and type Ex: HS512
+	- Payload - Few pre-defined elements like role of the user, creation time of user etc
+	- Signature - Base64 Header and Payload and in addition to that a secret string.
+
+Getting JWT Token 
+	- POST Request to http://localhost:8080/authenticate 
+	- Request Body : { "username": "in28minutes", "password": "dummy" }
+	- Response : {token : token_value}
+	
+Refreshing a JWT Token - Increasing the expiration time
+	- GET Request to http://localhost:8080/refresh
+	- With Authorization Header : {Authorization: "Bearer token_value"}
+
+Not REST Service call
+	- Should be made by adding Authorization Header in the request headers
+	
+JPA - Java Persistence API - Interface/Specification provided by JAVA for performing database operations
+Hibernate - Framework which implements JPA Interface.
+
+Few Annotations from JPA
+	- @Entity -> Creates the table in Database with name of the Bean by default
+	- @Id -> Marks the field as Primary Key for the table
+	- @GeneratedValue -> Auto-increments the Primary Key Value on new record insertion
+	- @Table -> For specifying the table name, By default class would be considered
+	- @Column -> For specifying the column name, By default instance variable name would be considered
+
+H2 - In-Memory Database which can be embedded with spring boot project
+Can be used for development purpose. Data would be lost once the server is restarted.
+
+<dependency>
+<groupId>com.h2database</groupId>
+<artifactId>h2</artifactId>
+<scope>runtime</scope>
+</dependency>
+
+Console URL :http://localhost:8080/h2-console
+Default JDBC URL : jdbc:h2:mem:testdb
+

@@ -1,0 +1,130 @@
+Dynamically Typed Language
+Object Oriented Programming language
+But not class based language
+
+Primitive Data Types
+  - String, Number and Boolean
+ 
+ Data Type of the variable is determined at runtime based on the value it contains.
+ 
+ String - decalred by "" and '' 16bits space
+ var a ="Hello"
+ var b = 'World'
+ 
+ Number 64bits space - stores all the numbers
+ 
+ Boolean - true, false
+ 
+ Undefined null 0 Nan
+ 
+ Operators
+ 
+ == -> Compares values
+ === -> Compares values and type
+ 
+ Ex: var x="20", y =20;
+ (x==y) -> true
+ (x===y) -> false
+ 
+Function should always have return type
+
+Objects in JavaScript
+There are no classes in JavaScript
+JavaScript objects are free form and not not bind to any class
+
+Empty Object
+var myObj = {};
+
+Object - Collection of data(property) and functionalities
+Initialize the property of object on the fly
+myObj.prop="Hello";
+
+Creating and Initializing the object using literals
+var myObj = {"prop":"Hello"}
+
+Any property is always accessible by default. 
+
+If we access a property that doesn't exist it returns  "undefined"
+
+Accessing propery of object
+- Using dot operator : myObj.prop
+  + Cannot be used when we have property name with  invalid identifier/reserved word
+  + Faster than square bracket notation
+- Using square bracket notation : myObj["prop"]
+  + Can be used when we have property name with  invalid identifier/reserved word
+
+Nested Objects:
+  - Objects containing object as property 
+  - var myObj ={obj = {"prop":"hello"}}
+  - Accessing inner property myObj.obj.prop
+
+Objects are equal when they point to same memory location
+ - var myObj = {"prop":"Hello"}
+ - var myObj2 = myObj
+ - (myObj === myObj2) returns true
+
+Deleting a property of an object
+  - delete myObj.prop ; //deletes prop from myObj if we access prop it would return undefined
+
+Arrays
+  - Similar to Java Array, But during initialization [] has to be used
+  - Arrays are object in JavaScript
+  - It has properties like length
+  - var myArray =["Hello","World"];
+  - var myArray[2] = "Good Morning";
+  - myArray[1] // returns World
+  - myArray["1"] // Also returns World, Since array is treated as object with property names as numbers
+  - myArray.1 // Returns undefined since
+  - myArray.length //returns 3
+  - length doesn't count the number of elements, It takes index of last element  adds 1 to it.
+  - myArray[120] = "Good Afternoon";
+  - myArray.length // returns 121
+  - Property should be a number to be treated as an index
+  - myArray["foo"] = "bar";
+  - myArray.length // still returns 121 since "foo" is not considered as index
+  - Array Methods
+  - push(12) - Adds an element to the end of an array
+  - unshift(12) - Adds an element to the front of an array
+  - pop() - Removes an element from the end of an array
+  - shift() - Removes an element from the front of an array
+  - forEach function 
+  - myArray.forEach(function (item,index,array) {console.log(item,index);})
+
+Wrapper Objects - JavaScript internally converts from primitive to objects when we try to perform operations that are not 
+supported by primitives
+  - String
+  - Boolean
+  - Number 
+  - Symbol
+  
+Functions
+  - Similar to Java Functions, But no need of defining the argument types
+  - function sayHello(message) { console.log(message);}
+  - sayHello("Hello World"); //prints Hello World
+  - Flexible arguments, Function overloading is not possible in JavaScript
+  - sayHello(); //prints undefined , though argument is not passed error wont be thrown, instead it prints undefined
+  - sayHello("Hello World",2); //prints Hello World , Additional argument is ignored
+  - Assiging a function to a variable
+  - var f = function sayHello() { console.log("Hello");}
+  - f() //prints Hello
+  - Annonymous Function - Function without a name
+  - var f = function () { console.log("Hello");}
+  - f() //still prints Hello
+  - Passing function as argument and executing it
+  - var f = function () { console.log("Hello"); }
+  - var executor = function (fn) { fn(); }
+  - executor(f); // prints Hello , Here function f is passed as argument to function executor and it is executed inside executor function
+  - var f = function (name) { console.log("Hello "+name); }
+  - var executor = function (fn,name) { fn(name); }
+  - executor(f,"Pradeep"); // prints Hello Pradeep, passing agruments along with function
+  - Function as object property
+  - var myObj = {};
+  - myObj.myFn = function() { console.log("Hello"); }
+  - myObj.myFn(); // prints Hello
+  - Default Function Arguments
+  - arguments - default property of a function which will have all arguments passed while calling the function
+  - function sum() { var sum=0; for(var i=0;i<arguments.length;i++) { sum += arguments[i]; } }
+  - sum(1,2,3,4); // returns 10
+  - Functions are also objects in JavaScript
+
+  

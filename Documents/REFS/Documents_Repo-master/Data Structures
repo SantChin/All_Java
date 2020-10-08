@@ -1,0 +1,274 @@
+Data Structures are used to store and organize the data so that it can be used effeciently.
+
+Need for Big O Notation:
+
+Same implementation can take different time when it is run on Super Computer and Normal Computer.
+Hence for determing performance based on number of steps Big O Notation was introduced, where performance is measured by taking 
+number of steps into account.
+
+Big O Notation -
+Determines performance of the data structures
+Describes the complexity of the data structure
+Tells us how well an algorithm scales as the input increases.
+Worst case is used to determine the time complexity of the algorithm.
+
+O(1) - Constant time - No matter how many elements u have in your data structures, Algorithm always perform same number of operations
+O(logn)(base 2) - Logarithamic - Slows rises as the number of elements increases Ex: Binary Search
+O(n) - Linear - Descreases the performance as the elements decreases. Ex: For Loop, While Loop
+O(nlogn)(base 2) - n log-star-n Logarithamic - Slows rises as the number of elements increases Ex: Binary Search
+O(n^2) - Quadratic - As the number of elements increase, performance becomes very very low. Ex: Loop within loop
+O(c^n) - Exponential - Recusrive calls over n and loop over c in it.
+O(n!) - Factorial - Looping over n and recursive call in the loop for (n-1) elements
+
+Data Structures Performancen for average case: 
+                Access    Search    Insert    Delete
+Stack           O(n)      O(n)      O(1)      O(1)
+Queue           O(n)      O(n)      O(1)      O(1)
+Linked List     O(n)      O(n)      O(1)      O(1)
+Hash Table      O(1)      O(1)      O(1)      O(1)
+Binary Tree     O(logn)   O(logn)   O(logn)   O(logn)
+
+Array:
+Arrays are not dynamic data structure. 
+Once created we cannot increase or decrease the size.
+int intArray[] = new int[7]; - Integer Array which can hold max 7 elements starting from position 0.
+
+Arrays in Memory:
+  - Stored as one contigous block in memory.
+  - Hence length has to specified while creating an Array.
+  - Every element in an Array occupies same amount of space in memory.
+  - In case of Object Array. Arrays will have only Object Reference. Hence same size.
+  - If an array starts at memory address is x, and size of each element is y, then we get the position of ith element in the array.
+    By using the formula x+i*y
+  - Ex: Start Address of Array : 12, Element Size: 4
+    Address of array[0] = 12+4*0 = 12
+    Address of array[1] = 12+4*1 = 16
+    Address of array[2] = 12+4*2 = 20
+    Address of array[3] = 12+4*3 = 24
+    Address of array[4] = 12+4*4 = 28
+    
+Performance of Array:
+
+Operation                                                       Time Complexity
+Retrieve with index                                             O(1) - Constant time                                                                      
+Retrieve without index(We need to search for an element)        O(n) - Linear time
+Adding an element to the full array                             O(n) - Linear time  
+(Create a brand new Array that takes existing and new elements.)
+Adding an element to the end of an array                        O(1) - Constant time
+Insert/Update at specific location                              O(1) - Constant time
+Deleting an element by setting it to null                       O(1) - Constant time
+Deleting an element by shifting elements                        O(n) - Linar time
+
+Methods of Stack: LIFO - Last In First Out
+
+push() - Adds an item to the top of a stack
+pop() - Removes an item from the top of a stack
+contains() - Checks if an element exists in the stack
+access() - Pops all the element till an item is found
+
+Methods of Queue: FIFO - First In First Out
+
+enQueue - Inserts an element into a queue
+deQueue - Removes an element into a queue
+search - Search for an element in a queue
+access
+
+List 
+  - An Order Collection. 
+  - Implements AbstractList and AbstractSequentialList
+  - For creating data structure similar to array list AbstractList has to be extended
+  - For creating sequential data structure similar to linked list AbstractSequentialList has to be extended
+  - It is not a concrete data structure, it is abstract data type.
+  
+Abstract Data Type
+  - Doesn't dictate how that data is organized
+  - Dictates the operation you can perform
+  - In Java, Concrete Data Structure is represented by Class
+  - Abstract Data Structure is represented by Interface
+  - Any class that implements List is a list
+
+ArrayList 
+  - Resizable Array Implementation of the List Interface
+  - If we know the position of an element in the list accessing the element takes O(1).
+  - Adding items to the list takes more time if array is full. Since we need to create new array and copy all values.
+  - Removing an element as well takes more time, since it requires shifting of all the elements.
+  - Capacity - Max number of items that list can hold before it is resized
+  - Size - Number of items present in the list
+  - Initial capacity - 10, If more than items are expect to add in the list, Capacity has to be specified.
+  - Not synchronized, Not thread safe.
+  
+Methods of ArrayList:
+  - add(element) - Adds an element at the end of the list
+    + Checks first if the backing array is full, if it is full it will resize the array.
+    + Then element is added to the array
+  - set(index,data) - Updates the value at given index 
+  - add(index,data) - Adds an element at particular index
+    + Internally System.arraycopy() function is used to shift all the elements to one position right wards before adding element
+    + After shifting all the elements, new element is set at the specified index.
+  - contains(data)
+    + By default contains method uses only objects reference to compare, If equals and hashCode() method is not overridden. (==)
+    + If equals and hashCode() method is overridden, contains uses it for searching an element in the list.
+    + returns false if not found
+  - indexOf(data)
+    + Behavior is similar to contains method.
+    + returns -1 is not found
+  - remove(data)
+    + Shifts array towards the specified index by one position.
+    + Sets last element to null and decrements the size.
+    
+Vector 
+  - Thread safe Array List, Not Synchronized!
+  - Since JDK 1.0, exists earlier to ArrayList.
+  - Performance is low, because of overhead associated with synchronization.
+  - If thread safe implementation is not needed it is recomended to use Array List
+  - Similar to Array List uses a backing array
+
+Methods of vector
+  - synchronized add(element) - Similar to arraylist, only difference is synchronization
+  
+Singly Linked List 
+  - It will have only one link within each nodes
+  - For traversing we got to start from head
+  - Best used when we want to remove/add at the front of the list
+  - Advantage: Resizing is not required like array because of links.
+  - Disadvantages : Takes extra space for storing pointer.
+
+Insert an element at the front of the list
+  - Create a new node
+  - Assign next of newly created node to head node
+  - Assign head to newly created node
+  - Takes O(1) time
+  
+Delete an element at the fron of the list
+  - Copy head node to temporary field
+  - Assign head to next of head node
+  - Return temporary field
+  - Takes O(1) time
+  
+Doubly Linked List
+  - Each node points to next and previous item in the list
+  - For first item previous points to null and for last item next points to null
+  - We have reference to front and tail of the list, Hence insertion at front and last takes O(1) time
+  
+Insert at head
+  - Create new Node
+  - If Head is not null 
+    + Assign next of new node to head node
+    + Assign previous of head node to new node 
+  - Else if head is null (new node is the first in the list)
+    + Assign tail to new node
+  - Assign head to new node
+  - Takes O(1) time
+
+Insert at tail
+  - Create a new node 
+  - If tail is not null
+    + Assign previous of new node to tail 
+    + Assign next of tail to new node
+  - Else is tail is null (new node is the first in the list)
+    + Assign head to new node
+  - Assign tail to new node
+  - Takes O(1) time
+  
+Remove a Node from head
+  - Assign head to removedNode 
+  - If removedNode's next is null (It means there is only one node in the list)
+    + Assign null to tail
+    + Assign null to head
+  - Else
+    + Assign removedNode's next to head
+    + Assign head's previous to null
+  - Assign null to removedNode's next
+  - return removed node
+  - Takes O(1) time
+  
+ Remove a Node from tail
+ -  Assign tail to removed node
+ - If removed node's previous is null (It means there is only one node in the list
+    + Assign null to head
+    + Assign null to tail
+ - Else
+    + Assign removed node's previous to tail
+    + Assign tail's next to null
+  - Assign remove node's previous to null
+  - return removed node
+  - Takes O(1) time
+
+Insert Node A between Node B and Node C
+  - Assign A's next to B's next
+  - Assign A's pevious to C's previous
+  - Assign B's next to A
+  - Assign C's previous to A
+  - Takes O(1) time , But finding insertion position takes O(n) time
+  
+LinkedList Java Class
+  - Doubly Linked List implementation
+  - Implements List and Dequeue Interfaces
+  - Since it implements List interafce it has all methods of List Interface
+  - It has its own  implementation of Node class
+  - Implementation is not synchronized
+  - For getting synchronized list - Collections.synchronizedList(new LinkedList())
+
+Methods
+  - void addFirst(data) - Adds an element at the front of the list
+  - void addLast(data) - Adds an element at the end of the list 
+  - boolean add(data) - Adds an element at the end of the list - Returns true on success
+  - removeFirst() - Removes an element from the front of the list
+  - removeLast() - Removes an element from the last of the list
+  - remove() - Removes an element from the front of the list
+  
+Stack
+  - Abstract Data Type
+  - Last In First Out - LIFO
+  - Stack can be backed by any data structures
+  - Last item we add to the stack is always first item to be removed
+  - push() - adds an item as the top item of the stack
+  - pop() - removes an item from top of the stack
+  - peek() - gets the top item of the stack
+  - Linked List can be used as a data structure for stack
+  - Takes O(1) for push(), pop() and peek() operation if we use Linked List
+  - Takes O(n) for push() operation if we use Array, coz we need to resize the array when it is full
+  - Takes O(1) for peek() and pop() if we use Array.
+
+Queue
+  - Abstract Data Type
+  - First In First Out - FIFO
+  - First item added is the first item to be removed
+  - add() - also called enqueue - adds an item to the end of a queue
+  - remove() - also called dequeue - removes an item from the front of the queue
+  - peek() - get the item from the front of the queue, but don't remove it
+  - Queue can be backed with Array or Linked List.
+  
+Implementation: 
+  - add()
+    + Check if back equals to length of the queue to verify if queue is full
+    + If queue is full, resize the queue
+    + if (back == queue.length-1) { //resize the queue }
+    + Else add an element at back position and increment back
+  - remove()
+    + Check if queue is empty, if empty throw a NoSuchElementException
+    + Assign element at the front of the queue to a variable
+    + Assign position at the front of the queue with null
+    + Increment front
+    + return the assigned variable
+    + If size is 0 re-initialize front and back to 0
+  - size()
+    + return (back - front) as the size of the queue
+  - peek()
+    + Throw a NoSuchElementException, if queue is empty
+    + return element at the front of the queue
+    
+Disadvantages of Queue
+  - If more elements are removed and added in succession, size of array shoots up whereas elements would be either 1 or not.
+  - Array would be filled with empty spaces
+  
+Circular queue
+  - For overcoming the dis-advantages of regular Queue we would go for Cicular Queue
+  - Here we wrap the back of the queue with the front of the queue
+  - Back would be connected to the front of the queue
+
+Implemenatation
+  - add()
+    + Alter the condition which was used to check if queue is full
+    + Check if queue is full by making use of size() method instead of relying on back variable
+    + if (size() == queue.length-1) { //resize the queue }

@@ -1,0 +1,12 @@
+MultiThreading
+
+https://www.youtube.com/watch?v=TCd8QIS-2KI
+
+Thread.yeild() request to give up cpu.
+Thread.sleep(10000); current thread to go for sleep or wait for 10 seconds or request to go for sleep for specified seconds
+
+Syncronized - only one thread allowed to execute a method or code block
+
+t1.join(); makes sure that on which it is called is completed.
+
+1.Why MultiThreading, and its purpose?

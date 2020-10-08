@@ -1,0 +1,287 @@
+JPA - Java Persistence API - Interface/Specification provided by JAVA for performing database operations
+Hibernate - Framework which implements JPA Interface. 
+
+Few Annotations from JPA
+	- @Entity -> Creates the table in Database with name of the Bean by default
+	- @Id -> Marks the field as Primary Key for the table
+	- @GeneratedValue -> Auto-increments the Primary Key Value on new record insertion
+	- @Table -> For specifying the table name, By default class would be considered
+	- @Column -> For specifying the column name, By default instance variable name would be considered
+
+H2 - In-Memory Database which can be embedded with spring boot project
+Can be used for development purpose. Data would be lost once the server is restarted.
+
+<dependency>
+<groupId>com.h2database</groupId>
+<artifactId>h2</artifactId>
+<scope>runtime</scope>
+</dependency>
+
+Console URL :http://localhost:8080/h2-console
+Default JDBC URL : jdbc:h2:mem:testdb
+
+Composite key:
+https://vladmihalcea.com/the-best-way-to-map-a-composite-primary-key-with-jpa-and-hibernate/
+
+Hibernate Configuration Properties for Oracle DB:
+	- hbm2ddl.auto  		: update/create
+	- dialect			: org.hibernate.dialect.Oracle9Dialect
+	- connection.url		: jdbc:oracle:thin:@localhost:1521:xe
+	- connection.driver_class	: oracle.jdbc.driver.OracleDriver
+	- connection.username		: system
+	- connection.password		: system
+
+Reference: https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
+
+Persistence Context : First level cache of all objects that are loaded or saved to a database.
+In Hibernate, persistent context is represented by org.hibernate.Session
+In JPA, persistent context is represented by javax.persistence.EntityManager. 
+When we use Hibernate as JPA provider, Entity Manager implementation internally uses the underlying Session object.
+
+Different States of an entity 
+	- Transient : New object created to persist in the database. It is not attached to session.
+	- Persistent: This instance is attached to the session. On flushing the session records gets created in database.
+	- Detached : This instance was once attached to the session. On session.close or evict(), instance enters this state.
+
+Persistent instance is kind of online, whereas detached instance is offline.
+When we make changes to persistent objects, we need not save or update, just commit the transaction or closing the session and records would be saved to database.
+
+Entity Lifecycle
+	- Transient -> Persistent -> Detached
+	- (Entity entity = new Entity()) -> Transcient 
+	- Transcient -> (session.save(entity), sesssion.persist(entity), session.saveOrUpdate(entity)) -> Persistent -> (session.delete(entity)) -> Transcient
+	- Persistent -> (entity.evict(), session.close()) -> Detached -> (entity.update(),entity.merge()) -> Persistent
+
+When a new entity is created, initially it will be in Transient State
+void persist(entity) 
+	- Causes an entity to transit from Transient to Persistent state
+	- INSERT statements would be called for an entity in persistent state, when a transaction is committed or when session is flushed/closed.
+	- It operates on the passed instance. State of an entity is changed inplace.
+	- Cascades to its relations if cascade=PERSIST or cascade=ALL
+	- If we try to persist a detached instance, exception would be thrown
+save(entity)
+	- Persists an entity directly to the database. Need not commit transaction.
+	- Executes a query immediately when method is invoked.
+	- Behaves similar to persist, but it generates an identifier and assigns it to entity
+	- Hence if we try to save detached new identifier would be generated for same entity and duplicates gets saved in DB on commit.
+merge(entity)
+	- Updating the value of detached entity and getting it back to persistent state
+	- Returns an object that is loaded into persistent context and updated.
+	- Current object will not transit to Persistent state.
+	Ex:
+	Person person = new Person();
+	person.setName("Avinash);
+	session.persist(person); // Entity transits to Persistent state
+	session.evict(person); // Entity transits to Detached state
+	person.setName("Marut"); // Updating a Detached entity
+	session.merge(person);
+update(entity)
+	- Updating the value of detached entity and getting it back to persistent state
+	- Similar to merge but, State of the current entity is changed
+	- Throws exception if we try to update() transient 
+saveOrUpdate()
+	- Similar to update(), but this method will not throw exception
+	
+flush() 
+	- Flushing is the process of synchronizing the underlying persistent store with persistable state held in memory.
+	- It will update or insert into your tables in the running transaction, but it may not commit those changes.
+
+Proxy in Hibernate :
+	- Session.load() 
+		+ method returns a proxy object instead of actual object
+		+ Employee pradeep = session.load(Employee.class,1L); //Creates a un-initialized proxy object which will contain only id value
+		+ String firstName = pradeep.getFirstName(); // Causes hibernate to query database and get data using id.
+		+ throws ObjectNotFoundException is data is not found in Database.
+	- One to Many Relationships : Company is mapped with many employees
+		public class Company {
+			private String name;
+			private Set<Employee> employees;
+		}
+		Company cts = session.load(Company.class,1L);
+		String name = cts.getName(); 
+		+ On invoking getName(), Hibernate will only get the name of the company from the database, if fetch is lazy.
+	- Many to One Relationships : Many employees are mapped to a company
+		public Employee {
+			private String name;
+			private Company company;
+		}
+		Employee pradeep = session.load(Employee.class,1L);
+		String firstName = pradeep.getFirstName();
+		+ On invoking getFirstName(), Hibernate will get only first name and returns an un-intialized proxy of Company
+	- Session.get() 
+		+ Method directly querries database and gets data.
+		+ Will not throw exception if data is not found, instead return null object.
+	- Performance:
+		+ get() is convenient but load() is lighter.
+		+ Proper use of get() and load()
+		Employee pradeep = session.get(Employee.class,1L);
+		Company cts = session.load(Company.class,1L);
+		pradeep.setCompany(cts);
+		session.persist(pradeep);
+
+Hibernate Inheritance Mapping
+
+Relational Databases cannot map class hierarchy to tables directly,
+For addressing it, JPA provides few strategies:
+	1. MappedSuperClass : Parent classes can't be entities, Table will not be created separately for parent.
+		Ex: For below code snip, Table would be created only for Employee with fields aadharNumber,name(Inherited fields) and company 
+		@MappedSuperClass
+		public class Person {
+			@Id
+			private Long aadharNumber;
+			private String name;
+		}
+		@Entity
+		public class Employee extends Person {
+			private String company;
+		}	
+	2. Single Table : Single table would be created for entire hierarchy. Default Inheritance Strategy
+		Ex: For below mentioned domains, single table would be created with fields product_id,name,color and author
+		@Entity
+		@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+		public class Product {
+			@Id
+			private Long productId;
+			private String name;
+		}
+		@Entity
+		public class Pen extends Product {
+			private String color;
+		}
+		@Entity
+		public class Book extends Product {
+			private String author;
+		}
+		DTYPE - Discriminator Type -  Default column added by Hibernate to differentiate entity, value: Entity name
+		Column Name and value can be changed and we can set the type of value
+		@Entity
+		@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+		@DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.INTEGER)
+		public class Product { }
+		
+		For setting value
+		@Entity
+		@DiscriminatorValue("1")
+		public class Pen extends Product { }
+		
+	3. Joined Table : Table would be created for each class in the hierarchy. Primary key column of the parent is added in all the childs
+		Normalized Tables would be created
+		Ex: 2 tables would be created, one Animal Table with animal_id , one more Pet table with name and animal_id
+		@Entity
+		public class Animal {
+			@Id
+			private Long animalId;
+			private String species;
+		}
+		@Entity
+		public class Pet extends Animal{
+			private String name;
+		}
+		Foreign key column name can be altered by annotating child class with @PrimaryKeyJoinColumn(name ="PET_ID")
+		
+	4. Table per Class : Table would be created for each class in the hierarchy. Child class table will have all the inherited fields.
+		Ex: 2 tables would be created, one Animal Table with animal_id , one more Pet table with name, animal_id and species
+		@Entity
+		public class Animal {
+			@Id
+			private Long animalId;
+			private String species;
+		}
+		@Entity
+		public class Pet extends Animal{
+			private String name;
+		}
+	
+
+JPA Relationships
+
+One to One Mapping : 
+
+	@OneToOne -> Indicates current class has one to one mapping with the reference class specified
+	By Default ADDRESS_ID is set as Join Column Name, We can change it by using @JoinColumn annotation
+	Ex:  Student class is having one to one relationship with Address class, 
+	Student Table gets created with additional field HOME_ADDRESS_ID, which maps a student with address
+	class Student {
+  		@OneToOne
+  		@JoinColumn(name="HOME_ADDRESS_ID")
+  		private Address address;
+	}
+Reference : https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
+One to Many Mapping : One to Many relation can be represented with @OneToMany or @ManyToOne associations
+	1. Unidirectional @OneToMany association : Simpler one since only parent defines the relations.
+		- Only annotate Parent class with @OneToMany(cascade=CascadeTye.ALL, orphanRemoval = true
+		- Persisting the parent object causes the child objects also to be persisted.
+		Ex: 
+		Post post = new Post("Hibernate relationship mapping");
+		post.getComments().add(new PostComment("Can you explain Many to Many relationship with more examples."));
+		post.getComments().add(new PostComment("What is the default fetch type in your example?"));
+		postDAOService.insertPost(post);
+
+		Triggers below insert statements : Default behavior of One To Many Mapping
+		Hibernate internally creates a mapping table for mapping the association.
+		insert into post (title, post_id) values (?, ?)
+		insert into post_comment (comment, id) values (?, ?)
+		insert into post_comment (comment, id) values (?, ?)
+		insert into post_comments (post_post_id, comments_id) values (?, ?)
+		insert into post_comments (post_post_id, comments_id) values (?, ?)
+
+		For fixing additional mapping table issue we can use @JoinColumn 
+		@OneToMany(cascade= CascadeType.ALL, orphanRemoval = true)
+		@JoinColumn(name = "POST_ID")
+		List<PostComments> comments = new ArrayList<>();
+
+		@JoinColumn 
+			- Adds an extra column in Child table to store the foreign key reference
+			- Updates the foreign key reference after inserting data
+
+		insert into post (title, post_id) values (?, ?)
+		insert into post_comment (comment, id) values (?, ?)
+		insert into post_comment (comment, id) values (?, ?)
+		update post_comment set post_id=? where id=?
+		update post_comment set post_id=? where id=?
+
+		Child records are inserted first
+		During collection handling phase foreign key reference is updated
+
+		On remove()
+		First foreign key reference is removed then record is removed from table
+		post.getComments().remove(0); entityManager.merge(post); //Triggers below sql statements
+		update post_comment set post_id=null where post_id=? and id=?
+		delete from post_comment where id=?
+	
+	2. Bidirectional @OneToMany association : Child entity is responsible for controlling the association.
+		- Parent class has to be annotated with @OneToMany 
+		- Child class has to be annotated with @ManyToOne 
+		Post post = new Post("First post");
+ 		post.addComment( new PostComment("My first review"))
+		post.addComment( new PostComment("My second review"));
+		post.addComment( new PostComment("My third review"));
+ 		entityManager.persist(post);
+		
+		- Foreign key is updated with values during insertion itself
+		insert into post (title, id) values ('First post', 1)
+ 		insert into post_comment (post_id, review, id) values (1, 'My first review', 2)
+		insert into post_comment (post_id, review, id) values (1, 'My second review', 3)
+ 		insert into post_comment (post_id, review, id) values (1, 'My third review', 4)
+	
+	3. @ManyToMany association : 
+	
+JPA Repository : 
+
+	- By default, transaction and session would be created for each method in JPA Repository interface
+	Ex: 
+	public void savePost(){
+		postRepository.save(post); //Create a new transaction and commits the transaction
+		post.setName("Updated Name"); //post will be in detached state now
+		postRepository.save(post); //Create one more transaction and commits the transaction, post would be merged
+	}
+	- By annotating the service class with @Transactional we can create a single transaction for entire service method.
+	Ex: 
+	@Transactional // Creates a single transaction which p
+	public void savePost(){
+		postRepository.save(post); 
+		post.setName("Updated Name")
+		postRepository.save(post); 
+	}
+
+

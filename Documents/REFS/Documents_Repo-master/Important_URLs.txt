@@ -1,0 +1,51 @@
+Issues faced while uploading Eclipse project
+
+Not able to find Share Project option
+Resolution: Right click on Project -> Team -> Disconnect
+
+Issue while cloning a project from GIT
+GitHub - failed to connect to github 443 windows/ Failed to connect to gitHub - No Error
+
+Resolution: Setup proxy using GIT Bash
+git config --global http.proxy http[s]://userName:password@proxyaddress:port
+
+URL References: 
+https://rip747.wordpress.com/2008/09/12/git-clone-over-http-who-knew/
+https://stackoverflow.com/questions/18356502/github-failed-to-connect-to-github-443-windows-failed-to-connect-to-github
+
+Angular - ng is not recognized as an internal or external command
+
+npm config get prefix
+
+and copy&paste the path that you get it from the top into your computer environment variables-->user variables box --> path --> edit -- C:\Program Files\nodejs\node_global, your path may different.
+
+Click Ok and reopen your cmd window, type in ng version
+
+URL Reference : 
+https://stackoverflow.com/questions/37991556/ng-is-not-recognized-as-an-internal-or-external-command
+
+Issues while uploading code from Visual Studio Code to GitHub repository
+
+Failed to connect to github.com port 443: Connection refused
+
+Setup the proxy using terminal of Visual Studio Code
+git config --global http.proxy http[s]://userName:password@proxyaddress:port
+
+URL Reference :
+https://stackoverflow.com/questions/18356502/github-failed-to-connect-to-github-443-windows-failed-to-connect-to-github
+
+Issue while executing Spring Boot Project
+Caused by: java.util.zip.ZipException: invalid LOC header (bad signature)
+
+Resolution: Delete the particular jar that was corrupted, Repeat the process till all the corrupted jars are removed.
+
+URL Reference
+https://stackoverflow.com/questions/32090921/deploying-maven-project-throws-java-util-zip-zipexception-invalid-loc-header-b
+
+Issue while starting the tomcat Server: java.lang.NoClassDefFoundError: javax/xml/bind/ValidationException in JDK 12
+
+jaxb-api excluded from classpath since JDK 9, Hence externally it has to be declared
+
+URL Reference: https://www.concretepage.com/questions/556
+
+

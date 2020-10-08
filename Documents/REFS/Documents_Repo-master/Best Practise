@@ -1,0 +1,10 @@
+Avoid using increment or decrement operators in condition checks.
+Always enclose a statements with curly braces. Even if there is a single statement.
+Minimize use of break and continue statements inside loop.
+
+For Each Loop Can only iterate over an array or an instance of java.lang.Iterable
+
+Logging: 
+  - Use appropriate logging levels
+  - Use general log files
+  - Use log statements in the catch blocks
