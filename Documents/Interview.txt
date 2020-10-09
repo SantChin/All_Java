@@ -1,0 +1,217 @@
+Comparable Vs Comparator
+
+
+
+
+
+
+
+Why do I need to override the equals and hashCode methods in Java?
+You must override hashCode() in every class that overrides equals(). 
+Failure to do so will result in a violation of the general contract for Object.hashCode(), which will prevent your class 
+from functioning properly in conjunction with all hash-based collections, including HashMap, HashSet, and Hashtable.
+
+
+Collections such as HashMap and HashSet use a hashcode value of an object to determine how it should be stored inside a collection,
+ and the hashcode is used again in order to locate the object in its collection.
+
+Hashing retrieval is a two-step process:
+
+Find the right bucket (using hashCode())
+Search the bucket for the right element (using equals() )
+Here is a small example on why we should overrride equals() and hashcode().(Equals ans HashCode Example)
+
+Consider an Employee class which has two fields: age and name.
+
+
+Q : Can we access a static method of a class through null reference? If Yes how  and if No why 
+A : Yes..because static members belongs to the class rather than instance
+    And we should avoid such type of coding as it is misleading
+    
+    
+Q : What bebefit do u get by allowing a default method in interface?
+A : Not all classed implemeting an interface need to override it.-- need to check
+ 
+Q : What is try with resources. What will happen if exception in thrown in try? how the resources will get closed?
+A : When the try block finishes the FileInputStream will be closed automatically, 
+	This is possible because fileInputStream impleemts the java.lang.Autoclosable Interaface,
+	All classes impleemnting this interfce can be used inside the try with resource construct.
+	
+Q : 
+
+
+
+
+
+
+
+
+
+Angular:
+====================
+
+Q : What is Angualr?
+A : UI frmawork, Used to build SPA applications, It is type Script based open source web application framework,  
+	maintained by google,
+	It has features like declarative templates,dependency Injectin,end to end tooling ..etc that facilitates web app developement
+	
+Q : How is SPA differs from traditional web technology?
+A :
+
+Q : Difference between Components and Directives in Angular ? 
+A : Components break up the application into small parts, where as ,   	
+	Directives add behaviour to an eisting DOM element.
+
+Q : Can you explain services in Angular?
+A : Serive is like a Singleton Object in Angular, Instantiated once contains methods that maintain data through out the life of app,
+	Primary intent of it like share business logic ,models or data and functions with various components of an anguar app.
+	The func offered offered by angular service can be invoked from any angular component, such as a controller or directive
+	
+Q : How do Observables differ from Promises?
+A : Observable : 
+	Observable are lazy, means nothing happens untill a subscription is made
+	Observable is a stream that allows passing of more than one event,
+	A call back is made for each event in observable
+	Promises:
+	Promises Handles a single event,as soon as the execution takes place.
+	
+Q : Explain directives in Angular?
+A : Directives are core features in Angular,
+	They follow a developer to write new, application specific HTML syntax.
+	In actual, directives are funcs that are executed by the angular compiler,
+	There are 3 types of drectives..
+	1.Attribute directives
+	2.Component directives
+	3.Structural directives
+	
+Q : Explain building blocks of Angular?
+A : 
+
+
+Q : Explain data binding , in how many way it can be done?
+A : In order to connect applicaion data with the DOM(Data Object Model), data binding used.
+	It happens b/w the template(HTML) and component(TypeScript).
+	There are 3 ways to achive data binding
+	Event binding : Enables the application to respond to user input in the targeted environ
+	Property Binding : Enables interpolation of values computed from the application data into the HTML
+	Two-way bindning: chnages made in the application state gets automatically reflected in the view and vice versa.
+	The ngModel directive is used for achevin this type of data binding
+	
+Q : What is the use of @input and @output?
+A : When it comes to the communication of Angular Components,Which are in Parent-child relationship, 
+	we use @input in child component whenever we are passing data from parent to Child Component
+	@Output is used in child component to receive an event from child to parent Component.
+	
+  
+
+Spring/SpringBoot:
+================== 	
+Q : Explain in Detail , SPringboot vs Spring MVC vs Spring?
+A : Spring Framework : Most important feature of Spring framework is DI.
+	At the core all spring modules is DI or IOC
+	
+	When DI or IOC is used properly, we can develop loosely coupled applications. And loosely coupled applications can be easily unit tested.
+	Spring MVC : Spring MVC framewrk provides decoupled way of developing web applicatios. With simple concepts like Dispatcher servlet, ModelAndView and ViewResolver , it makes it easy to develop a web application.
+	
+	
+	The problem with spring and spring mvc is the amunt od configuarion that is needed,
+	
+	Spring Boot:
+	Springboot solves the problem through a combination of autoConfigurtion and Starter Projects.
+	SB also provides a few non functional feture to make building production ready application faster.
+	
+Q : What annotaions you have used as Part of Spring/Springboot?
+A : @Bean : Indicates amethod produces a bean to be managed by Spring.
+	@Serivce : class level annotaion.. indicates it is a servive class.. contains business logic
+	@Repository : class level..contians db level access logic..is an abstraction of data access and storage
+	@Configuration : is an config class contains bean definations
+	@Controller : makes the class as webcontroller, capable of handling the requestd
+	@RequestMApping : maps HTTP requests with a path to a controller method.	
+	@Autowired : makes a constructoe,field ,or setter method to be autowired by spring di
+	@Springbootapplicatin: enables SB autoconfiguration and component scanning
+	
+	
+Q : What are SB Starter Projects?
+A : SB starters are set of convinient dependecy descriptors that you can incude in ur app
+	where u find spring and its reated tech at one place that u needd
+	for example... if u want start work with spring and JPA for databse access,	
+	including spring starter JPA dependecy in ur project is enough.. and u are all set .. good to go
+	
+Q : How to auto reload ur app?
+A : devtools starter dependency will help that and scope runtime
+
+Q : How to Disable autoConfiguation?
+A : Using Exclude attribure of @EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
+
+
+Q : Constructor Injection vs Setter Injection ? 
+A : Constructor Injection : 
+	There is no partial Injection
+	it does not override the setter property
+	It will cretae  a new instacne if any new modificaion doen
+	it works btter for many properties
+	
+	Setter Injection
+	There can be partial injection
+	It overrides the constrctor property
+	It will not create a new instance if any new modification is done
+	It works better for few propeties
+	
+Q : Explain bean life cycle in spring bean factory container?
+A : The spring container instantiate the bean from the beans defination in the XMl file
+	spring populates all of the properties suing the same DI,as specified in the bean defination
+	the factory calls setBeanName() by passing the beans id, if the bean implements the BeanNameAware Interfcce
+	the factory calls setBeanFactory() by passing an instance of itself , if the bean implements the BeanFctoryAware Interface
+	preProcessbeforeInitializaions() methods are called if there any BeanPostprocessor assocaited with the bean
+	if an init method specified foe the bean then it is callled
+	finally,postProcessAfterInitialization() methods will be called if thre any BeanPostprocessors associatd with the bean.
+	
+Q : Explain @RequestMapping Annotation?
+A : Used to map paarticular HTTP request to s apecific class or method in controller
+	It can be applied at class level and method level
+	class level : maps the url requested
+	method level : maps the url requested and HTTP request method
+	
+Q : Explain AOP?
+A : Programming technique to modularize cross cutting concerns
+	exmaple of cross cutting can be logging and transaction management
+	The core AOP is an ASPECT.
+	It encapsulates behaviuor that can affect multiple classes into reusable modules
+
+Q : What do you mean by Aspect?
+A : Aspect is a modularization of concern which cuts across multiple objects.
+	Transaction mgmt i a good example of cross cutting concern in J2ee applications
+	aspects are implemented using regular classed annotated with @Aspect annotation in Spring framwork
+
+Q : Explain JoinPoint?
+A : A point during the execution of a program is called JointPoint
+	Such as the execution of a m() or the handling of an exception
+	In spring AOP a jointpoint always represents a method exection
+	
+Q : What is Advice?
+A : An action takes by an aspect at a particulr joint point is known as advice
+	Spring AOP uses advice as iterceptor ,maintaing a chain of interceptrs, "around" the joint point.
+	
+Q : What is Swagger? Did you implemeted it with SpringBoot?
+A : Swagger is widely used for visual APIs,using the swagger UI 
+
+Database Related:
+Q : What are diff types of joins you know
+Q : Difference b/w inner join and Outer join
+Q : What is Stored Procedure
+Q : What are triggers
+Q : find the higest salary,second highest salry, return employess whos salary is grater than amagers
+
+GIT Related:
+Q:differece between GIT and SVN
+Q:What is conflict in git and how do you resolve it
+Q:write few git commands
+
+
+		
+	
+	
+	
+	 
+
+

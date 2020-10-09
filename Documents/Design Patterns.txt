@@ -1,0 +1,110 @@
+Design Pattern:
+======================
+	A design pattern is a well-proved solution for solving the specific problem/task.
+	For example, to create a class for which only a single instance should be created and that single object can be used by all other classes, 
+	use Singleton design pattern.
+	Design patterns are programming language independent, it is for solving the common object-oriented design problems
+	A design pattern represents an idea, not an implementation.
+	By using the design patterns we can make our code more flexible, reusable and maintainable.
+	
+	In core java, there are mainly three types of design patterns, which are further divided into their sub-parts:
+
+======================	
+--Creational Design Pattern:
+	Factory Pattern
+	Abstract Factory Pattern
+	Singleton Pattern
+	Prototype Pattern
+	Builder Pattern
+	
+--Structural Design Pattern
+	Adapter Pattern
+	Bridge Pattern
+	Composite Pattern
+	Decorator Pattern
+	Facade Pattern
+	Flyweight Pattern
+	Proxy Pattern
+	
+--Behavioral Design Pattern
+	Chain Of Responsibility Pattern
+	Command Pattern
+	Interpreter Pattern
+	Iterator Pattern
+	Mediator Pattern
+	Memento Pattern
+	Observer Pattern
+	State Pattern
+	Strategy Pattern
+	Template Pattern
+	Visitor Pattern
+
+
+
+Creational design patterns:
+======================	
+Creational design patterns are used when creating objects.	
+
+--Singleton Design Pattern:
+	It is creational dp
+	only one instance of the class should exist at any point
+	Other classes should be able to get Instance of this class
+	Used in Logging,Cache,Session,Drivers..etc
+	
+	Implementation Way:
+	
+	constructor should be private
+	There should be a public method for returning Instance
+	Instance type - private static
+	
+	Eager Initialization
+	Lazy Initialization
+	Thread safe method Initialization
+	Thread safe block Initialization
+
+-----------------------------------------------------------------------------------
+--Factory Pattern:
+	It is a creational dp
+	Used when we have multiple sub classes of super class & based on input we want
+	to return one class instance
+	It provides abstraction between implementation and client classes
+	Removes the instantiation of a client classes from client code  
+	
+	Implementation way:
+	Super class can be interface or abstract class or basic class
+	Factory class has a static method which return the instance of subclass based on input
+-----------------------------------------------------------------------------------
+--Abstract Factory Pattern
+	Abstract Factory pattern is another creational pattern.
+	Abstract Factory patterns, also called as Factory of factories, have a factory which creates other factories.
+	When using Abstract Factory pattern, we first use super factory to create factory, then use the created factory to create objects.
+	
+		
+-----------------------------------------------------------------------------------
+--Builder Design Pattern:
+	It is a creational dp
+	Used when we have to many parmas/args to send to constructor & it hard to maintain the order
+	When we dont want to send all params in Object initialization(we send optional params as null)
+	
+	Implementation way:
+	We create static nested class of outer class which contains all the args/fields/params
+	As per naming convention if class name is Vehicle , we name builder as VehicleBuilder
+	Builder class will have a public constructor with all required parameters
+	Builder class will have setter methods for optional parmas. After setting which return the same builder object(this)
+	There should be a build() which return the final object(here Vehicle)
+	
+	Builder pattern is used to create a complex object using simple objects.
+	It creates the bigger object step by step from small and simple object.
+	For example, when creating a window as our application's main window,
+	we need to create a menu, a toolbar and then add the menu and toolbar.
+
+-----------------------------------------------------------------------------------	
+--ProtoType Pattern:
+	Prototype pattern is one of the creational patterns.
+	Prototype pattern helps create duplicate object with better performance.
+	In Prototype Pattern a clone of an existing object is returned instead of creating new one.
+	We use Prototype Design Pattern, if the cost of creating a new object is expensive and resource intensive.
+
+	
+-----------------------------------------------------------------------------------	
+--Template Pattern:
