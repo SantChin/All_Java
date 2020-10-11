@@ -1,0 +1,414 @@
+SOLID Principles
+
+-- Is a coding Standard
+-- All developers should have clear understanding of them to avoid BAD design of Software
+-- It was promoted by Robert C Martin. Used across the Object-Oriented Spectrum.
+-- When all used properly the code becomes more extendble,logical and easier to read.
+
+
+S - Single Responsibility Principle (SRP )
+O - Open Closed Principle (OCP)
+L - Liskov Substitution Principle (LSP)
+I - Interface Segregation (ISP)
+D - Dependency Inversion Principle (DIP)
+
+
+S - Single Responsibility Principle (SRP )
+================================================
+-- A class should have one, and only one, reason to change.
+-- “a class must have only one reason to change”.
+-- It deals with cohesion.(binding togather)
+-- Everything in the class should be related to that single purpose, i.e. be cohesive.
+
+Eg:
+
+class Employee {
+  public Pay calculatePay() {...}
+  public void save() {...}
+  public String describeEmployee() {...}
+}
+
+//another Examle
+interface User{
+public Map<String,Object) login(......);
+public Map<String,Object) register(.....);
+public Map<String,Object) logErrro(....);
+public Map<String,Object) sendEmail(....);
+}
+
+//Applying single responsibility principle
+interface User{
+	public Map<String,Object) login(......);
+	public Map<String,Object) register(.....);
+}
+
+interface ILogger{
+public Map<String,Object) logErrro(....);
+}
+
+interface ISendEmail{
+public Map<String,Object) sendEmail(....);
+}
+//Now we are narrowed down it to
+
+Here we have pay 1) calculation logic with 2) database logic and 3) reporting logic all mixed up within one class.
+If you have multiple responsibilities combined into one class, it might be difficult to change one part without breaking others. 
+Mixing responsibilities also makes the class harder to understand and harder to test, decreasing cohesion. 
+The easiest way to fix this is to split the class into three different classes, with each having only one responsibility: database access, calculating pay and reporting, all separated.
+
+------------------------------------------------
+O - Open Closed Principle (OCP)
+==================================================
+-- You should be able to extend a classes behavior, without modifying it.
+-- software entities (classes, modules, functions, etc.) must be opened for an extension, but closed for modification
+-- In detail, it says that we can extend the behavior of a class, when necessary, through inheritance, interface, and composition, but we cannot allow the opening of this class to make minor modifications.
+
+-- “Open to extension” means that you should design your classes so that new functionality can be added as new requirements are generated. 
+-- “Closed for modification” means that once you have developed a class you should never modify it, except to correct bugs.
+
+Eg:
+
+//We have a class rectangle
+public class Rectangle
+{
+public double length;
+public double width;
+}
+
+//Now we want to caclculate area of rectangle
+public class AreaCalculator
+{
+  public double calculateRectangleArea(Rectangle rectangle)
+ {
+  return rectangle.length *rectangle.width;
+ }
+}
+
+//Now we have second shape comes in, take it as circle
+public class Circle
+{
+	public double radius;
+}
+
+//Then we modify Areacalculator class to add circle calculations through a new method calculateCircleaArea()
+public class AreaCalculator
+{
+  public double calculateRectangleArea(Rectangle rectangle)
+ {
+  return rectangle.length *rectangle.width;
+ }
+ 
+ //new area
+	public double calculateCircleArea(Circle circle)
+	{
+			return (22/7)*circle.radius*circle.radius;
+	}
+}
+
+Lets say we have a new shape pentagon. In that case, we will again end up modifying the AreaCalculator class.
+As the types of shapes grows this becomes messier as AreaCalculator keeps on changing,every time a new shape comes it will be modified. So, this design is not closed for modification.
+
+//Solution
+//First make this design extensible ,we need to first define a base type Shape and have Circle & Rectangle implement Shape interface.
+
+public interface Shape
+{
+	public double calculateArea();
+}
+
+
+public class Rectangle implements Shape
+{
+double length;
+double width;
+public double calculateArea()
+{
+return length * width;
+}
+}
+
+
+public class Circle implements Shape
+{
+public double radius;
+public double calculateArea()
+{
+return (22/7)*radius*radius;
+}
+}
+
+//Now the area calculator looks something like
+	public class AreaCalculator
+	{
+		public double calculateShapeArea(Shape shape)
+			{
+				return shape.calculateArea();
+			}
+	}
+
+
+-----------------------------------------------------------------
+L - Liskov Substitution Principle (LSP)
+==================================================
+-- Derived classes must be substitutable for their base classes.
+-- It says “subtypes should be replaceable by their base types,”
+--  Intorduced by Barbara Liskov
+-- It is an extension of the open closed principle
+-- No new exception can be thrown by the subype
+-- Clients should not know which specific subtype they are calling
+-- New derived classes just extend without replacing the functionality of old classes
+
+OTHER WAY
+
+Definition : Substitutability is a principle in object-oriented programming and it states that, in a computer program, if S is a Subtype of T, then objects of type T may be replaced with objects of type S 
+
+1. Which means, Derived types must be completely substitutable for their base types
+
+2. More formally, the Liskov substitution principle (LSP) is a particular definition of a subtyping relation, called (strong) behavioral subtyping
+
+3. This Principle is introduced by Barbara Liskov in 1987 during her conference address on Data abstraction and hierarchy
+
+4. This principle is just an extension of the Open Close Principle
+
+The examples used in this session are related to the open closed principle. Hence we request you to watch the Open Closed Principle tutorial before proceeding. 
+
+Implementation guidelines : In the process of development we should ensure that  
+
+1. No new exceptions can be thrown by the subtype unless they are part of the existing exception hierarchy.
+
+2. We should also ensure that Clients should not know which specific subtype they are calling, nor should they need to know that. The client should behave the same regardless of the subtype instance that it is given.
+
+3. And last but not the least, New derived classes just extend without replacing the functionality of old classes
+
+
+
+Example :
+We have class Employee
+	public abstarct class Employee {
+		public int ID { get; set; }
+		public string Name { get; set; }
+		
+		public abstract decimal CalculateBonus(decimal salary);
+	
+	}
+	
+//Now wwe have two types of employeess.. consider permenet/temporary both elgible for bonus
+	
+	class PermenentEmployee extends Employee{
+		@Override	
+		public decimal CalculateBonus(decimal salary)
+        {
+            return salary * .1M;
+        }
+	}
+	
+	class TemeroryEmployee extends Employee{
+		@Override	
+		public decimal CalculateBonus(decimal salary)
+        {
+            return salary * .1M;
+        }
+	}
+	
+
+//Now we have one more employee type as Contractula employee
+	
+	class PermenentEmployee extends Employee{
+		@Override	
+		public decimal CalculateBonus(decimal salary)
+        {
+            throw new NotImplementedException();
+        }
+	}
+	
+Above is breaking LSP priciple
+
+Solution
+
+	interface IEmployee
+    {
+        decimal GetMinimumSalary();
+    }
+
+	interface IEmployeeBonus
+    {
+        decimal CalculateBonus(decimal salary);
+    }
+	
+	abstarct class  Employee implements IEmployee,IEmployeeBonus
+	{
+	 public abstract decimal CalculateBonus(decimal salary);
+	 public abstract decimal GetMinimumSalary();
+	
+	}
+	
+	class PermenentEmployee extends Employee{
+		@Override	
+		public decimal CalculateBonus(decimal salary)
+        {
+            return salary * .1M;
+        }
+		@Override
+		 public override decimal GetMinimumSalary()
+        {
+            return 15000;
+        }
+	}
+
+
+	class TemeroryEmployee extends Employee{
+		@Override	
+		public decimal CalculateBonus(decimal salary)
+        {
+            return salary * .1M;
+        }
+		
+		@Override
+		 public override decimal GetMinimumSalary()
+        {
+            return 15000;
+        }
+	}
+
+// Now we have Contractual Employee
+
+	class Contactual employee implements IEmployee{
+		@Override
+		 public override decimal GetMinimumSalary()
+        {
+            return 15000;
+        }
+	}
+
+
+// Now three employee types are substiutable for IEmployee super type.
+
+
+---------------------------------------------------------------------
+I - Interface Segregation (ISP)
+==================================================
+-- No Clent should be forced to depend on methds it does not use.
+-- One fat interface need to be split into many smaller and relevant interface so that clients can know about the interfaces that are relevant to them.
+-- It eas forst used and formulated by rober c martin while consulting for xereox
+
+Eg:
+
+interface printerTask{
+public printContent(String Content);
+public scanContent(String Content);
+public PhotoContent(String Content);
+}
+
+class JetModel653Printer impleemts printerTask{
+//overrides all 3 methods
+//as it supports all 3 tasks/features
+}
+
+class JetModel652Printer impleemts printerTask{
+//not support all 3 methods..
+//here we are in trouble as it is forces us to implemt
+}
+
+
+now the case if we add one more extra faeture in the interface all the impmented classes needs to provide defination for the same.
+By above problems we narrowed down interface to finite interfaces.
+
+
+
+---------------------------------------------------------------------
+D - Dependency Inversion Principle (DIP)
+==================================================
+-- High level modules should not depend on low level modules.Both should depend on abstraction.
+-- Abstraction should not depend on details. Details should depend on abstractions.
+--The interaction between high level and low level modules should be tought of as an abstract interaction between them
+--Intorduced by Robert C Martin
+
+Example :
+
+class BusinessService {
+	@Autowired
+	private DAOLayer daoLayer;
+	
+	public void Save(Object details){
+		daoLayer.save(details);
+	}
+	
+}
+
+public class DAOLayer {
+	public void save(Object details){
+	//performs save
+	}
+}
+
+from we can clearly see as business level layer directly depend on the lower level(DAO) layer.. here we can see it is hard to perform
+unit test on th code as both are coupled.
+
+To decouple above layers we do DP...
+
+to do that we introduced one interface(Repository Interface) which acts as abstraction between them.
+
+
+class BusinessService {
+	@Autowired
+	private IRepositoryLayer IRepositoryLayer;
+	
+	public void Save(Object details){
+		IRepositoryLayer.save(details);
+	}
+	
+}
+
+public class IRepositoryLayer {
+void save(Object details)
+}
+
+public class DAOLayer implemets IrepositoryLayer{
+public void save(Oject details)
+{
+//perform save
+}
+}
+
+
+Adapter design pattern can be seen as an example of DP.
+
+
+
+
+
+
+https://github.com/SimpleProgramming/springboot-kafka
+
+apache kafka is a distributed,public-subscribe messaging system
+orginally deeloped at linkedin , later become a part of apache project
+kafka is fast,scalable,durable,fault tolrent,and distributed by design
+kafka used for realtime streams of data & used to collect big data for real time analytics
+
+Apache Kafka is a Distributed publisher-subscriber messaging system
+which can handle high volume of data
+It has high reliability, and be scaled easily
+It is fault tolerance because the messages are persisted in the disk before sending to consumer to prevent data loss
+It has high throughput, and it can perform 2 million writes per sec
+
+Use Cases
+Log Aggregator - Collect logs from different services - as a log streaming event (Zipkin stream server makes use of this)
+Streaming of real time data (like Uber, etc.)
+Can be used in Event sourcing in Microservices. Multiple Microservices will be writing to kafka streams. And these streams will be responsible to write to database
+
+Kafka Elements
+Kafka Cluster
+Zookeeper
+Topic
+Partition
+Partition Offset
+Consumer Group
+Leaders
+Follower
+
+
+logId = scedularLogger.ScheduleLogger(8, 0, 0);
+scedularLogger.ScheduleLogger(0, 1, logId);
+
+
+consumer_IOT

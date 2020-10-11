@@ -1,0 +1,37 @@
+@Autowired - the spring container auto-wires the bean by matching data-type.
+-used to autowire spring bean on setter methods, instance variable, and constructor.
+
+@Configuration: It is a class-level annotation.
+-used by Spring Containers as a source of bean definitions.
+
+@ComponentScan: It is used when we want to scan a package for beans. It is used with the annotation @Configuration. We can also specify the base packages to scan for Spring Components.
+
+@Bean: It is a method-level annotation. 
+ It tells the method to produce a bean to be managed by Spring Container.
+ 
+ @Component: It is a class-level annotation
+ used to mark a Java class as a bean.
+ @Component is found during the classpath.
+ The Spring Framework pick it up and configure it in the application context as a Spring Bean.
+ 
+ @Controller: The @Controller is a class-level annotation.  It is a specialization of @Component.
+ It marks a class as a web request handler.
+ By default, it returns a string that indicates which route to redirect. It is mostly used with @RequestMapping annotation.
+ 
+ @Service: It is also used at class level. It tells the Spring that class contains the business logic.
+ 
+ @Repository: It is a class-level annotation. The repository is a DAOs (Data Access Object) that access the database directly.
+ 
+ 
+ @EnableAutoConfiguration: It auto-configures the bean that is present in the classpath and configures it to run the methods. The use of this annotation is reduced in Spring Boot 1.2.0 release because developers provided an alternative of the annotation, i.e. @SpringBootApplication.
+ 
+ @SpringBootApplication: It is a combination of three annotations @EnableAutoConfiguration, @ComponentScan, and @Configuration.
+ 
+ 
+ @RequestMapping: It is used to map the web requests
+ 
+ @RestController: It can be considered as a combination of @Controller and @ResponseBody annotations. The @RestController annotation is itself annotated with the @ResponseBody annotation. It eliminates the need for annotating each method with @ResponseBody.
+ 
+ 
+ 
+ comparable vs comparator

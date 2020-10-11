@@ -1,0 +1,162 @@
+JPA
+===========
+
+URLS:
+https://asbnotebook.com/2019/07/11/jpa-one-to-one-example-spring-boot/
+
+DB Props:
+-------------
+
+# DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring.datasource.url=jdbc:mysql://localhost:3306/jpa_one_to_one_demo?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+spring.datasource.username=root
+spring.datasource.password=root
+
+spring.jpa.hibernate.ddl-auto = update           --->will automatically create/update the database tables as per the entity classes 
+logging.level.org.hibernate.SQL=DEBUG            --->The logging properties will help us debug SQL statements executed by hibernate.
+logging.level.org.hibernate.type=TRACE
+
+
+one to one Mapping
+---------------------
+A one-to-one relationship is defined using JPA’s @OneToOne annotation. 
+It Accepts below Arrtibutes:
+1.fetch = FetchType.LAZY - Fetch the related entity lazily from the database.
+2.cascade = CascadeType.ALL - Apply all cascading effects to the related entity. That is, whenever we update/delete a User entity, update/delete the corresponding UserProfile as well.
+3.mappedBy = “user” - We use mappedBy attribute in the User entity to tell hibernate that the User entity is not responsible for this relationship and It should look for a field named user in the UserProfile entity to find the configuration for the JoinColumn/ForeignKey column.
+
+In a bi-directional relationship, we specify @OneToOne annotation on both the entities but only one entity is the owner of the relationship.
+Most often, the child entity is the owner of the relationship and the parent entity is the inverse side of the relationship.
+
+The owner of the relationship contains a @JoinColumn annotation to specify the foreign key column, and the inverse-side of the relationship contains a mappedBy attribute to indicate that the relationship is mapped by the other entity.
+
+
+CascadeType.DETACH :- Target object will be cascaded with parent object for detach operation.
+
+CascadeType.MERGE : – Target object will be cascaded with parent object for merge operation.
+
+CascadeType.PERSIST :- Target object will be cascaded with parent object for persist operation.
+
+CascadeType.REFRESH :-Target object will be cascaded with parent object for refresh operation.
+
+cascadeType.REMOVE :- Target object will be cascaded with parent object for remove operation.
+
+CascadeType.ALL :- Target object will be cascaded with the parent object for the above operations.
+
+{
+"firstName" : "Santosh",
+"lastName":"Ch",
+"email":"santoshch@gmail.com",
+"password":"12345"
+"userProfile" : {
+"phoneNumber":"",
+"gender":"MALE",
+"dateOfBirth":"1992-08-21",
+"address1":"Hyderabad",
+"address2":"Hyderabad",
+"street":"Chnada Nagar",
+"city":"Hyderabad",
+"state":"TG",
+"country":"India",
+"zipCode":"500050"
+}
+}
+
+
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+@Transactional
+	public List<Student> getAllStudentsAsSorted(String firstSortBy, String secondSortBy) {
+		List<String> fieldsWantToSort = new ArrayList<String>();
+		fieldsWantToSort.add(firstSortBy);
+		fieldsWantToSort.add(secondSortBy);
+		Sort sort = new Sort(Direction.ASC, fieldsWantToSort);
+		// another way to sort
+		// Sort anotherWayToSort = Sort.by(firstSortBy).ascending().and(Sort.by(secondSortBy).descending());
+		List<Student> studentResponse = (List<Student>) studentRepository.findAll(sort);
+		return studentResponse;
+	}
+
+	@Transactional
+	public List<Student> getAllStudentsAsPageble(int pageIndex, int sizeOfPage) {
+
+		Pageable pageable = PageRequest.of(pageIndex, sizeOfPage);
+		Page<Student> page = studentRepository.findAll(pageable);
+		if (page != null) {
+			List<Student> studentResponse = (List<Student>) page.getContent();
+			return studentResponse;
+		}
+		return null;
+	}
+
+@Transactional
+	public List<Student> getAllStudentsSortedAsWellPageble(int pageIndex, int sizeOfPage, String sortByParameter) {
+
+		Pageable pageable = PageRequest.of(pageIndex, sizeOfPage, Direction.ASC,sortByParameter);
+		Page<Student> page = studentRepository.findAll(pageable);
+		if (page != null) {
+			List<Student> studentResponse = (List<Student>) page.getContent();
+			//this studentResponse will be sorted as well pageable
+			return studentResponse;
+		}
+		return null;
+	}
+	
+	
+	
+[Yesterday 1:44 PM] Sandeep Sahu
+    http://54.202.28.71/phpMyAdmin/index.php
+
+Username:- begumbazaar
+
+Pwd :- BegumB@z@@r4815$
+
+Port : 80
+
+http://54.202.28.71:8080/api/isServerUp
+https://begumbazaar.in/api/isServerUp
+
+
+15594596
+
+58712244
+
+(CX1/29)+2735945
+
+2294566
+
+(CX1/29)+2735945
+
+2020-09-16 08:34:58
+2020-09-16 13:17:22
+
+15153217
+
+SELECT * FROM "TU_IOT_PLATFORM_PROD"."RAW_SENSOR_DATA" 
+WHERE "INVENTORY_ID" = 65 
+AND "CHANNEL_NUMBER" = 1 AND 
+"RECEIVED_TIME" BETWEEN     
+				TO_TIMESTAMP('2020-09-12 20:55:00', 'YYYY-MM-DD HH24:MI:SS') 	
+				AND TO_TIMESTAMP('2020-09-13 00:11:08', 'YYYY-MM-DD HH24:MI:SS')
+ORDER BY 2 DESC 
+
+
+
+UPDATE "TU_IOT_PLATFORM_PROD"."RAW_SENSOR_DATA"
+SET  "CONVERTED_VALUE" = '6937617.50' 
+WHERE "INVENTORY_ID" = 65 
+AND "CHANNEL_NUMBER" = 1 AND 
+"RECEIVED_TIME" BETWEEN     
+				TO_TIMESTAMP('2020-09-12 20:55:00', 'YYYY-MM-DD HH24:MI:SS') 	
+				AND TO_TIMESTAMP('2020-09-13 00:11:08', 'YYYY-MM-DD HH24:MI:SS')
+
+	
+{
+    "timestamp": "2020-09-16T06:57:30.742+0000",
+    "status": 500,
+    "error": "Internal Server Error",
+    "message": "Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: null,  message from server: \"Host '54.202.28.71' is not allowed to connect to this MySQL server\"",
+    "path": "/Authenticate/1"
+}
