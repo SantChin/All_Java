@@ -1,0 +1,53 @@
+Comparable Vs Comparator
+
+
+
+
+
+
+
+Why do I need to override the equals and hashCode methods in Java?
+You must override hashCode() in every class that overrides equals(). 
+Failure to do so will result in a violation of the general contract for Object.hashCode(), which will prevent your class 
+from functioning properly in conjunction with all hash-based collections, including HashMap, HashSet, and Hashtable.
+
+
+Collections such as HashMap and HashSet use a hashcode value of an object to determine how it should be stored inside a collection,
+ and the hashcode is used again in order to locate the object in its collection.
+
+Hashing retrieval is a two-step process:
+
+Find the right bucket (using hashCode())
+Search the bucket for the right element (using equals() )
+Here is a small example on why we should overrride equals() and hashcode().(Equals ans HashCode Example)
+
+Consider an Employee class which has two fields: age and name.
+
+
+Q : Can we access a static method of a class through null reference? If Yes how  and if No why 
+A : Yes..because static members belongs to the class rather than instance
+    And we should avoid such type of coding as it is misleading
+    
+    
+Q : What bebefit do u get by allowing a default method in interface?
+A : Not all classed implemeting an interface need to override it.-- need to check
+ 
+Q : What is try with resources. What will happen if exception in thrown in try? how the resources will get closed?
+A : When the try block finishes the FileInputStream will be closed automatically, 
+	This is possible because fileInputStream impleemts the java.lang.Autoclosable Interaface,
+	All classes impleemnting this interfce can be used inside the try with resource construct.
+	
+Q : 
+
+
+
+
+
+
+		
+	
+	
+	
+	 
+
+

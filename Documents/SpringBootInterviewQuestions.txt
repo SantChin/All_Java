@@ -1,0 +1,90 @@
+Spring/SpringBoot:
+================== 	
+Q : Explain in Detail , SPringboot vs Spring MVC vs Spring?
+A : Spring Framework : Most important feature of Spring framework is DI.
+	At the core all spring modules is DI or IOC
+	
+	When DI or IOC is used properly, we can develop loosely coupled applications. And loosely coupled applications can be easily unit tested.
+	Spring MVC : Spring MVC framewrk provides decoupled way of developing web applicatios. With simple concepts like Dispatcher servlet, ModelAndView and ViewResolver , it makes it easy to develop a web application.
+	
+	
+	The problem with spring and spring mvc is the amunt od configuarion that is needed,
+	
+	Spring Boot:
+	Springboot solves the problem through a combination of autoConfigurtion and Starter Projects.
+	SB also provides a few non functional feture to make building production ready application faster.
+	
+Q : What annotaions you have used as Part of Spring/Springboot?
+A : @Bean : Indicates amethod produces a bean to be managed by Spring.
+	@Serivce : class level annotaion.. indicates it is a servive class.. contains business logic
+	@Repository : class level..contians db level access logic..is an abstraction of data access and storage
+	@Configuration : is an config class contains bean definations
+	@Controller : makes the class as webcontroller, capable of handling the requestd
+	@RequestMApping : maps HTTP requests with a path to a controller method.	
+	@Autowired : makes a constructoe,field ,or setter method to be autowired by spring di
+	@Springbootapplicatin: enables SB autoconfiguration and component scanning
+	
+	
+Q : What are SB Starter Projects?
+A : SB starters are set of convinient dependecy descriptors that you can incude in ur app
+	where u find spring and its reated tech at one place that u needd
+	for example... if u want start work with spring and JPA for databse access,	
+	including spring starter JPA dependecy in ur project is enough.. and u are all set .. good to go
+	
+Q : How to auto reload ur app?
+A : devtools starter dependency will help that and scope runtime
+
+Q : How to Disable autoConfiguation?
+A : Using Exclude attribure of @EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
+
+
+Q : Constructor Injection vs Setter Injection ? 
+A : Constructor Injection : 
+	There is no partial Injection
+	it does not override the setter property
+	It will cretae  a new instacne if any new modificaion doen
+	it works btter for many properties
+	
+	Setter Injection
+	There can be partial injection
+	It overrides the constrctor property
+	It will not create a new instance if any new modification is done
+	It works better for few propeties
+	
+Q : Explain bean life cycle in spring bean factory container?
+A : The spring container instantiate the bean from the beans defination in the XMl file
+	spring populates all of the properties suing the same DI,as specified in the bean defination
+	the factory calls setBeanName() by passing the beans id, if the bean implements the BeanNameAware Interfcce
+	the factory calls setBeanFactory() by passing an instance of itself , if the bean implements the BeanFctoryAware Interface
+	preProcessbeforeInitializaions() methods are called if there any BeanPostprocessor assocaited with the bean
+	if an init method specified foe the bean then it is callled
+	finally,postProcessAfterInitialization() methods will be called if thre any BeanPostprocessors associatd with the bean.
+	
+Q : Explain @RequestMapping Annotation?
+A : Used to map paarticular HTTP request to s apecific class or method in controller
+	It can be applied at class level and method level
+	class level : maps the url requested
+	method level : maps the url requested and HTTP request method
+	
+Q : Explain AOP?
+A : Programming technique to modularize cross cutting concerns
+	exmaple of cross cutting can be logging and transaction management
+	The core AOP is an ASPECT.
+	It encapsulates behaviuor that can affect multiple classes into reusable modules
+
+Q : What do you mean by Aspect?
+A : Aspect is a modularization of concern which cuts across multiple objects.
+	Transaction mgmt i a good example of cross cutting concern in J2ee applications
+	aspects are implemented using regular classed annotated with @Aspect annotation in Spring framwork
+
+Q : Explain JoinPoint?
+A : A point during the execution of a program is called JointPoint
+	Such as the execution of a m() or the handling of an exception
+	In spring AOP a jointpoint always represents a method exection
+	
+Q : What is Advice?
+A : An action takes by an aspect at a particulr joint point is known as advice
+	Spring AOP uses advice as iterceptor ,maintaing a chain of interceptrs, "around" the joint point.
+	
+Q : What is Swagger? Did you implemeted it with SpringBoot?
+A : Swagger is widely used for visual APIs,using the swagger UI 

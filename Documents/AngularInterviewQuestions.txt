@@ -1,0 +1,183 @@
+//https://www.youtube.com/watch?v=NT8Chwgk37E
+
+
+To Check node version : node -v
+To check npm version : npm -v
+To check angular cli version : ng -v
+
+*ngFor is a "structural directive". 
+Structural directives shape or reshape the DOM's structure, typically by adding, removing, and manipulating the elements to 
+which they are attached. Directives with an asterisk, *, are structural directives.
+
+--interpolation syntax {{ }}. -> Interpolation renders a property's value as text.
+--property binding [ ] lets you use the property value in a template expression.
+
+--Event binding uses a set of parentheses, ( ), around the event,
+
+
+Components : 
+===================
+Components define areas of responsibility in the user interface, or UI, that let you reuse sets of UI functionality.
+
+A component consists of three things:
+1.A component class that handles data and functionality. (.ts)
+2.An HTML template that determines the UI. (.html)
+3.Component-specific styles that define the look and feel. (.css)
+
+An Angular application comprises a tree of components, in which each Angular component has a specific purpose and responsibility.
+
+--@Component() decorator. This indicates that the following class is a component.
+It provides metadata about the component, including its selector, templates, and styles.
+The selector identifies the component. 
+The selector is the name you give the Angular component when it is rendered as an HTML element on the page.
+The template and style filenames reference the HTML and CSS files
+
+The component definition also exports the class, ProductAlertsComponent, which handles functionality for the component.
+@Input() decorator. The @Input() decorator indicates that the property value passes in from the component's parent,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.Angular Framework?
+Angular is a typescript based opensorce fornt end platform that makes it easy to build applications in web/mobile/desktop
+the major feures of this framework are decalrative templates,dependency injection,end to end testing and more
+2. diff bw angialr js and angualr?
+ angular is a completely revived component based frameworj in which
+an application is tree of individual components
+
+angualr.js
+mvc architectire
+uses javascript to build apppli
+based on controller conceppt
+not a mobile friendly framworj
+difficult in SEO friendly app develop
+
+
+Angualr
+based on Service/Controller
+uses typescrpt
+this is a component baed UI aproch
+developed considering mobile platform
+ease to crate SO friendly application
+
+3.What is typeScript?
+is a suerset of jva script created by microsft that adds optional types,classes,async.awai, and many other features and compiler to plain java script
+angular built entirely on typescript used as primary langualge
+u can install it as globally as
+npm install -g typescript
+
+4.Whar key components of angular?
+-1.Component: baic building block of app to controll HTML views
+-2.Modules: is a set of angular basic building locks like componet,directive,service etc. n application is divided into logical pieces of code is called as module. it performs a single task
+-3.Temlates: This respresents the viiews of th anglau application
+-4.Routin : defined routing strategy for application
+-5.Services: used to created component which can be shared acrross the entore application
+-6.Metadata:used to add more data to angular calss
+
+5.What are directives?
+Directives add behaviuor to an existing dom element or an exiting component instance
+	import {Directive,ElemetRef,Input} from '@angular/Core';
+	@Directive({selector:'[myHighlight]'})
+	export class highlightDirective{
+		cinstructor(el:ElemetRef){
+			el.nativeElement.style.backgroundColor='yellow';		
+			}
+	}
+	
+Now this directive extends HTML element behaviour with a yellow background as yellow
+	<p myHighlight>Highlight Me</p>
+	
+	
+6.Waht are component>
+
+
+
+
+
+
+
+
+=================================================================================================================================================
+Another Set
+=================================================================================================================================================
+
+
+
+
+
+Q : What is Angualr?
+A : UI frmawork, Used to build SPA applications, It is type Script based open source web application framework,  
+	maintained by google,
+	It has features like declarative templates,dependency Injectin,end to end tooling ..etc that facilitates web app developement
+	
+Q : How is SPA differs from traditional web technology?
+A :
+
+Q : Difference between Components and Directives in Angular ? 
+A : Components break up the application into small parts, where as ,   	
+	Directives add behaviour to an eisting DOM element.
+
+Q : Can you explain services in Angular?
+A : Serive is like a Singleton Object in Angular, Instantiated once contains methods that maintain data through out the life of app,
+	Primary intent of it like share business logic ,models or data and functions with various components of an anguar app.
+	The func offered  by angular service can be invoked from any angular component, such as a controller or directive
+	
+Q : How do Observables differ from Promises?
+A : Observable : 
+	Observable are lazy, means nothing happens untill a subscription is made
+	Observable is a stream that allows passing of more than one event,
+	A call back is made for each event in observable
+	Promises:
+	Promises Handles a single event,as soon as the execution takes place.
+	
+Q : Explain directives in Angular?
+A : Directives are core features in Angular,
+	They follow a developer to write new, application specific HTML syntax.
+	In actual, directives are funcs that are executed by the angular compiler,
+	There are 3 types of drectives..
+	1.Attribute directives
+	2.Component directives
+	3.Structural directives
+	
+Q : Explain building blocks of Angular?
+A : 
+
+
+Q : Explain data binding , in how many way it can be done?
+A : In order to connect applicaion data with the DOM(Data Object Model), data binding used.
+	It happens b/w the template(HTML) and component(TypeScript).
+	There are 3 ways to achive data binding
+	Event binding : Enables the application to respond to user input in the targeted environ
+	Property Binding : Enables interpolation of values computed from the application data into the HTML
+	Two-way bindning: chnages made in the application state gets automatically reflected in the view and vice versa.
+	The ngModel directive is used for achevin this type of data binding
+	
+Q : What is the use of @input and @output?
+A : When it comes to the communication of Angular Components,Which are in Parent-child relationship, 
+	we use @input in child component whenever we are passing data from parent to Child Component
+	@Output is used in child component to receive an event from child to parent Component.

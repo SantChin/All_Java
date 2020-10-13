@@ -1,0 +1,272 @@
+=============================================================================================================================
+Reflection API In JAVA:
+=============================================================================================================================
+
+Q1.What do you understand by Reflection in the Java programming language?
+
+Reflection API makes it possible to inspect classes, methods, fields etc. at runtime.
+It is also possible to instantiate objects, call methods and set field values using reflection.
+Using java reflection we can inspect a class, interface, enum, get their structure, methods and fields information at runtime even though class is not accessible at compile time.
+
+Or
+
+Java Reflection is the process of analyzing and modifying all the capabilities of a class at runtime. 
+Reflection API in Java is used to manipulate class and its members which include fields, methods, constructor, etc. at runtime
+
+One advantage of reflection API in Java is, it can manipulate private members of the class too.
+=============================================================================================================================
+Q2.Where is Java Reflection commonly used?
+
+Reflection in Java is a very powerful concept and it’s of little use in normal programming but it’s the backbone for most of the Java, J2EE frameworks. 
+JUnit – uses reflection to parse @Test annotation to get the test methods and then invoke it.
+Spring – dependency injection
+Tomcat web container to forward the request to correct module by parsing their web.xml files and request URI.
+Eclipse auto completion of method names
+Struts
+Hibernate
+=============================================================================================================================
+Q3.What are the disadvantages of Reflection?
+
+Poor Performance – Since java reflection resolve the types dynamically, it involves processing like scanning the classpath to find the class to load, causing slow performance.
+Security Restrictions – Reflection requires runtime permissions that might not be available for system running under security manager. This can cause you application to fail at runtime because of security manager.
+Security Issues – Using reflection we can access part of code that we are not supposed to access, for example we can access private fields of a class and change it’s value. This can be a serious security threat and cause your application to behave abnormally.
+High Maintenance – Reflection code is hard to understand and debug, also any issues with the code can’t be found at compile time because the classes might not be available, making it less flexible and hard to maintain.
+=============================================================================================================================
+Q4.What is a Class object. How do you get a Class object via reflection?
+
+Every type; including reference types, primitive types (int, char etc.) and arrays have an associated java.lang.Class object.
+
+To perform reflection operation on a class, we have to first get its associated class object. Following are the different ways to get a Class object, depending on what the code has access to - object, type, class or name of class.
+
+Class.forName(): If the code has access to a fully-qualified class name you can use 'Class.forName()' to get the class object of the fully-qualified class name.
+
+Object.getClass(): If the code has access to an instance object you can use 'Object.getClass()' syntax to get the class object for the object instance.
+
+Type.class:If the code has access to the type of class, you can use 'Type.class' syntax to get the class object for the type.
+
+Other Way :
+
+We can get Class of an object using three methods – through static variable class, using getClass() method of object and java.lang.Class.forName(String fullyClassifiedClassName). For primitive types and arrays, we can use static variable class. Wrapper classes provide another static variable TYPE to get the class.
+
+// Get Class using reflection
+Class<?> concreteClass = ConcreteClass.class;
+concreteClass = new ConcreteClass(5).getClass();
+try {
+	// below method is used most of the times in frameworks like JUnit
+	//Spring dependency injection, Tomcat web container
+	//Eclipse auto completion of method names, hibernate, Struts2 etc.
+	//because ConcreteClass is not available at compile time
+	concreteClass = Class.forName("com.journaldev.reflection.ConcreteClass");
+} catch (ClassNotFoundException e) {
+	e.printStackTrace();
+}
+
+Class<?> cDouble = Double.TYPE;
+System.out.println(cDouble.getCanonicalName()); // prints double
+Q5.How do you access the package/interfaces implemented /parent class/access modifiers/Methods /Constructor /Fileds/annotations of a class?
+The package of a class can be accessed by calling the method getPackage() on the class object.
+Class myClass = Class.forName('java.lang.String');
+Package package = myClass.getPackage();
+
+Type[] interfaces = Class.forName("java.util.HashMap").getGenericInterfaces();
+//prints "[java.util.Map<K, V>, interface java.lang.Cloneable, interface java.io.Serializable]"
+System.out.println(Arrays.toString(interfaces));
+
+Class<?> superClass = Class.forName("com.journaldev.reflection.ConcreteClass").getSuperclass();
+
+System.out.println(Modifier.toString(Class.forName("com.journaldev.reflection.BaseInterface").getModifiers())); 
+Method[] publicMethods = Class.forName("com.journaldev.reflection.ConcreteClass").getMethods();
+//prints public methods of ConcreteClass, BaseClass, Object
+System.out.println(Arrays.toString(publicMethods));
+Constructors of a class can be accessed by calling the method getConstructors() on the class object.
+
+
+Class myClass = Class.forName('java.lang.String');
+Field[] fields = myClass.getFields();
+
+Class myClass = Class.forName('java.lang.String');
+Annotation[] annotations = myClass.getAnnotations();
+
+============================================================================================================================= 
+Q6.How do I invoke a Java method when given the method name as a string?
+
+If I have two variables:
+Object obj; String methodName = "getName";
+
+java.lang.reflect.Method method; 
+try {
+ method = obj.getClass().getMethod(methodName, param1.class, param2.class, ..); 
+} catch (SecurityException e) { ... } 
+catch (NoSuchMethodException e) { ... }
+The parameters identify the very specific method you need (if there are several overloaded available, if the method has no arguments, only give methodName).
+Then you invoke that method by calling
+try { 
+method.invoke(obj, arg1, arg2,...);
+ } catch (IllegalArgumentException e) 
+{ ... } 
+catch (IllegalAccessException e) { ... } 
+catch (InvocationTargetException e) { ... }
+Again, leave out the arguments in .invoke, if you don't have any.
+
+=============================================================================================================================
+Java - Lambda Expressions
+=============================================================================================================================
+What are Lambda expressions in the Java programming language?
+
+Lambda expression provides functional programming constructs to Java.
+A Java lambda expression can be considered as a function which can be created without belonging to any class. Also, it can be passed around as if it was an object and executed on demand.
+Properties:
+Anonymous : it doesn’t have an explicit name like a method.
+Function:It can be thought of as a function because a lambda isn’t associated with a particular class like a method is. 
+Passed around: A lambda expression can be passed as argument to a method or stored in a variable.
+Concise: We don’t need to write a lot of boilerplate like we do for anonymous classes.
+
+=============================================================================================================================
+What are functional interfaces?
+
+Functional interfaces are Java interfaces which have only one declared (abstract) method. 
+Functional interfaces can have other implemented methods such as default methods and static methods.
+Some of the common functional interfaces in Java are Runnable, Comparable, ActionListner etc.
+Functional interfaces are generally implemented as inner classes and anonymous inner classes, which results in bulky code with many lines. This is sometimes referred to as 'Vertical' problem
+Lambda expressions are used to implement functional interfaces which define a single method. Lambda expressions avoid the vertical problem by simplifying the code of the traditional inner classes and anonymous inner classes.
+
+Eg:
+Without using lamda Expression:
+Runnable r = new Runnable(){
+			@Override
+			public void run() {
+				System.out.println("My Runnable");
+			}};
+
+ Using lamda Expression:
+Runnable r1 = () -> System.out.println("My Runnable");
+Runnable is a functional interface, that’s why we can use lambda expression to create it’s instance.
+Since run() method takes no argument, our lambda expression also have no argument.
+Just like if-else blocks, we can avoid curly braces ({}) since we have a single statement in the method body. For multiple statements, we would have to use curly braces like any other methods.
+=============================================================================================================================
+Can lambda expressions be used to implement interfaces having default and static methods?
+
+Yes, Untill it has single abstract method in it.
+From Java 8 onwards, an interface can contain default methods and static methods whose implementation is defined directly in the interface declaration.
+
+=============================================================================================================================
+What is the syntax of lambda expressions in Java programming language?
+
+A lambda expression consists of three parts
+First - A parenthesized set of parameters,
+Second - An arrow pointing to right, 
+Third - A body, which can be a block of Java code or a single expression.
+Eg:
+//Passes an integer argument i, and returns 10+i
+(int i) -> 10+i;
+//Passes no arguments and returns 50
+() -> 50;
+//Passes string argument s and returns nothing
+(String s) -> {system.out.println(s);}
+
+=============================================================================================================================
+How many parameters can a lambda expression have?
+A lambda expression can have zero, one or multiple parameters.
+
+Write a functional interface and implement it using non-lambda code and lambda expression
+Without using lamda Expression:
+Runnable r = new Runnable(){
+			@Override
+			public void run() {
+				System.out.println("My Runnable");
+			}};
+
+ Using lamda Expression:
+Runnable r1 = () -> System.out.println("My Runnable");
+What criteria must be met to match a lambda expression to an interface?
+1. The interface must have one (and only one) abstract method.
+2. The number of parameters of the lambda expression must match the number of parameters of the abstract method.
+3. return type of the lambda expression must match the return type of the abstract method.
+What is the major difference between lambda expression vs anonymous interface implementation with regards to state?
+Anonymous interface implementations can have state (member variables), whereas lambda expressions are stateless.
+
+=============================================================================================================================
+Do you need to specify the type for parameters in a lambda expression?
+
+In Most cases NO,
+The java compiler infers the type for the parameters by matching them with the parameter types of the abstract method of the functional interface.
+=============================================================================================================================
+Can you have multiple lines of code in a lambda function body?
+YES
+=============================================================================================================================
+Why do we need Lambda Expression?
+
+1.Reduced Lines of Code.
+2.Sequential and Parallel Execution Support
+//Traditional approach
+private static boolean isPrime(int number) {		
+	if(number < 2) return false;
+	for(int i=2; i<number; i++){
+		if(number % i == 0) return false;
+	}
+	return true;
+}
+
+
+//Declarative approach
+private static boolean isPrime(int number) {		
+	return number > 1
+			&& IntStream.range(2, number).noneMatch(
+					index -> number % index == 0);
+}
+
+
+3.Passing Behaviors into methods
+public static int sumWithCondition(List<Integer> numbers, Predicate<Integer> predicate) {
+	    return numbers.parallelStream()
+	    		.filter(predicate)
+	    		.mapToInt(i -> i)
+	    		.sum();
+	}
+Usage:
+//sum of all numbers
+sumWithCondition(numbers, n -> true)
+//sum of all even numbers
+sumWithCondition(numbers, i -> i%2==0)
+//sum of all numbers greater than 5
+sumWithCondition(numbers, i -> i>5)
+
+4.Higher Efficiency with Laziness
+private static int findSquareOfMaxOdd(List<Integer> numbers) {
+		int max = 0;
+		for (int i : numbers) {
+			if (i % 2 != 0 && i > 3 && i < 11 && i > max) {
+				max = i;
+			}
+		}
+		return max * max;
+	}
+public static int findSquareOfMaxOdd(List<Integer> numbers) {
+		return numbers.stream()
+				.filter(NumberTest::isOdd) 		//Predicate is functional interface and
+				.filter(NumberTest::isGreaterThan3)	// we are using lambdas to initialize it
+				.filter(NumberTest::isLessThan11)	// rather than anonymous inner classes
+				.max(Comparator.naturalOrder())
+				.map(i -> i * i)
+				.get();
+	}
+	public static boolean isOdd(int i) {
+		return i % 2 != 0;
+	}
+	public static boolean isGreaterThan3(int i){
+		return i > 3;
+	}
+	public static boolean isLessThan11(int i){
+		return i < 11;
+	}
+
+
+
+
+
+
+Examples of Lambda Expression:
+List<String> greenApples 
+  = listOfApples.stream().filter(a -> a.getColor().equals("Green"))
+      .collect(Collectors.toList());
+Here, filter() method expects a Predicate. We just passed a lambda instead of the required interface.

@@ -1,0 +1,6 @@
+Database Related:
+Q : What are diff types of joins you know
+Q : Difference b/w inner join and Outer join
+Q : What is Stored Procedure
+Q : What are triggers
+Q : find the higest salary,second highest salry, return employess whos salary is grater than amagers

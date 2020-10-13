@@ -1,0 +1,153 @@
+=============================================================================================================================
+Java - Generics
+=============================================================================================================================
+What do you understand by Generics in Java programming language? What are the benefits of Generics.
+
+Generics was added in Java 5 to provide compile-time type checking and removing risk of ClassCastException that was common while working with collection classes. 
+Generics Eliminated explicit casting.
+Generics provide a way to reuse the same code with different inputs.
+What are generic types? How are they declared and instantiated?
+A generic type is a class or interface that is parameterized over types. We use angle brackets (<>) to specify the type parameter.
+Eg:
+public class GenericsTypeOld {...}
+public class GenericsType<T> {...}
+What are generic methods?
+Sometimes we don’t want the whole class to be parameterized, in that case, we can create java generics method. Since the constructor is a special kind of method, we can use generics type in constructors too.
+
+Eg:
+public class GenericsMethods {
+	//Java Generic Method
+	public static <T> boolean isEqual(GenericsType<T> g1, GenericsType<T> g2){
+		return g1.get().equals(g2.get());
+	}
+	public static void main(String args[]){
+		GenericsType<String> g1 = new GenericsType<>();
+		g1.set("Pankaj");
+		GenericsType<String> g2 = new GenericsType<>();
+		g2.set("Pankaj");
+		boolean isEqual = GenericsMethods.<String>isEqual(g1, g2);
+		//above statement can be written simply as
+		isEqual = GenericsMethods.isEqual(g1, g2);
+		//This feature, known as type inference, allows you to invoke a generic method as an ordinary method, without specifying a type between angle brackets.
+		//Compiler will infer the type that is needed
+	}
+}
+isEqual method signature showing syntax to use generics type in methods. 
+We can specify type while calling these methods or we can invoke them like a normal method. 
+ava compiler is smart enough to determine the type of variable to be used, this facility is called type inference.
+=============================================================================================================================
+What are Java Generic Type Names Used?
+
+The most commonly used type parameter names are:
+E – Element (used extensively by the Java Collections Framework, for example ArrayList, Set etc.)K – Key (Used in Map)
+N – Number
+T – Type
+V – Value (Used in Map)
+S,U,V etc. – 2nd, 3rd, 4th types
+============================================================================================================================= 
+What is Java Generic Interface?
+
+Comparable interface is a great example of Generics in interfaces and it’s written as:
+package java.lang;
+import java.util.*;
+
+public interface Comparable<T> {
+    public int compareTo(T o);
+}
+=============================================================================================================================
+What are bounded type parameters?
+
+Bounded type parameters enable you to restrict the types that you can use as arguments for a parameterized type.
+For example if a method acts only on numbers, then you can use bounded parameters to specify that the method accepts only instances of Number or its sub-classes.
+
+Eg:
+=============================================================================================================================
+How do you create sub-classes of generic classes?
+
+We can subtype a generic class or interface by extending or implementing it. 
+The relationship between the type parameters of one class or interface and the type parameters of another are determined by the extends and implements clauses.
+For example, ArrayList<E> implements List<E> that extends Collection<E>, so ArrayList<String> is a subtype of List<String> and List<String> is subtype of Collection<String>
+Are Generics applied at compile time or run time? What is type erasure?
+Generics are applied at compile time to provide stronger type checks. 
+Once the type checks are complete, the compiler erases the type check code so that generics do not incur runtime overhead.
+The compiler performs type erasure as follows:
+Replace all type type parameters with their bounds type if bounded, or with 'object' type if unbounded.
+Inserts casts if necessary to preserve type safety.
+=============================================================================================================================
+Can Java generics be applied to primitive types?
+No Java generics cannot be applied to primitive types. But you can use wrapper classes of primitive type to use Java generics.
+=============================================================================================================================
+Can you declare static fields whose types are generic type parameters?
+No static fields are declared at the class level and are shared by all instances of the class. You cannot declare static fields whose types are generic types.
+=============================================================================================================================
+Can you create instances of generic type parameters?
+No you cannot create instances of generic type parameters.
+=============================================================================================================================
+What do you understand by wildcards in generics?
+The question mark (?) is termed as wildcard in generics code. The wildcard represents an unknown type. For example List can refer to a list of any Java object
+What is Java Generics Upper Bounded Wildcard?
+Used to relax the restriction on the type of variable in a method.
+Eg:
+ we want to write a method that will return the sum of numbers in the list, so our implementation will be something like this.
+
+public static double sum(List<Number> list){
+		double sum = 0;
+		for(Number n : list){
+			sum += n.doubleValue();
+		}
+		return sum;
+	}
+Above implementation is that it won’t work with List of Integers or Doubles because we know that List<Integer> and List<Double> are not related, this is when an upper bounded wildcard is helpful.
+We use generics wildcard with extends keyword and the upper bound class or interface that will allow us to pass argument of upper bound or it’s subclasses types.
+
+Eg:
+
+public static double sum(List<? extends Number> list){
+		double sum = 0;
+		for(Number n : list){
+			sum += n.doubleValue();
+		}
+		return sum;
+	}
+
+
+=============================================================================================================================
+What is Java Unbounded Wildcard?
+Sometimes we want our generic method to be working with all types, in this case, an unbounded wildcard can be used. Its same as using <? extends Object>.
+
+Eg:
+public static void printData(List<?> list){
+		for(Object obj : list){
+			System.out.print(obj + "::");
+		}
+	}
+=============================================================================================================================	
+What is Java Lower Bounded Wildcard?
+We want to add Integers to a list of integers in a method, we can keep the argument type as List<Integer> but it will be tied up with Integers whereas List<Number> and List<Object> can also hold integers, so we can use a lower bound wildcard to achieve this.
+We use generics wildcard (?) with super keyword and lower bound class to achieve this.
+
+Eg:
+public static void addIntegers(List<? super Integer> list){
+		list.add(new Integer(50));
+	}
+=============================================================================================================================	
+How to do Subtyping using Generics Wildcard?
+List<? extends Integer> intList = new ArrayList<>();
+List<? extends Number>  numList = intList;  // OK. List<? extends Integer> is a subtype of List<? extends Number>
+=============================================================================================================================
+What Generics Type Erasure Do?
+Generics in Java was added to provide type-checking at compile time and it has no use at run time.
+Java compiler uses type erasure feature to remove all the generics type checking code in byte code and insert type-casting if necessary.
+Type erasure ensures that no new classes are created for parameterized types; consequently, generics incur no runtime overhead.
+=============================================================================================================================
+Why do we use Generics in Java?
+Generics provide strong compile-time type checking and reduces risk of ClassCastException and explicit casting of objects.
+=============================================================================================================================
+What is T in Generics?
+We use <T> to create a generic class, interface, and method. The T is replaced with the actual type when we use it.
+=============================================================================================================================
+How does Generics work in Java?
+Generic code ensures type safety. The compiler uses type-erasure to remove all type parameters at the
+compile time to reduce the overload at runtime.
+Generics doesn’t support sub-typing, so List<Number> numbers = new ArrayList<Integer>();
+We can’t create generic array, so List<Integer>[] array = new ArrayList<Integer>[10] will not compile

@@ -1,0 +1,789 @@
+Interview Questions:
+
+Links:
+https://www.youtube.com/watch?v=yx-TEifQiYY
+https://www.youtube.com/watch?v=24pZ-xiAArQ
+
+Links for Interview Question And Answer:
+https://javasearch.buggybread.com/InterviewQuestions/questionSearch.php?searchOption=label&keyword=
+https://www.buggybread.com/2014/04/java-j2ee-interview-questions-and_13.html
+https://www.buggybread.com/2014/05/java-collections-interview-questions.html
+
+https://java2blog.com/java-interview-questions-for-5-years-experience/
+https://java2blog.com/observer-design-pattern-in-java/
+
+//springboottutorial.com/introduction-to-jpa-with-spring-boot-data-jpa
+
+https://www.quora.com/What-are-good-technical-interview-questions-for-Java-multi-threading-and-collections-assuming-the-interview-is-for-a-guy-with-7+-years-of-experience
+
+(Telephonic Interviews)
+https://www.youtube.com/watch?v=OvAHS31_CkE&list=PLTahUKalow1E9oV0EIMXJ1lnJGFeiYTcc
+=============================================================================================================================
+1.what are the features added in Java-8?
+    forEach() method in Iterable interface.
+    //creating sample Collection
+		List<Integer> myList = new ArrayList<Integer>();
+		for(int i=0; i<10; i++) myList.add(i);
+		
+		//traversing using Iterator
+		Iterator<Integer> it = myList.iterator();
+		while(it.hasNext()){
+			Integer i = it.next();
+			System.out.println("Iterator Value::"+i);
+		}
+		
+		//traversing through forEach method of Iterable with anonymous class
+		myList.forEach(new Consumer<Integer>() {
+
+			public void accept(Integer t) {
+				System.out.println("forEach anonymous class Value::"+t);
+			}
+
+		});
+		
+		//traversing with Consumer interface implementation
+		MyConsumer action = new MyConsumer();
+		myList.forEach(action);
+		----------------------------------------------------------------
+    default and static methods in Interfaces.
+    We can use default and static keyword to create interfaces with method implementation. forEach method implementation in Iterable interface is:
+    
+    
+    
+    Functional Interfaces and Lambda Expressions
+    
+    
+    Functional interfaces are new concept introduced in Java 8. An interface with exactly one abstract method becomes Functional Interface.
+	We don’t need to use @FunctionalInterface annotation to mark an interface as Functional Interface.
+	@FunctionalInterface annotation is a facility to avoid accidental addition of abstract methods in the functional interfaces. 
+    
+    
+    List<Integer> myList = new ArrayList<>();
+		for(int i=0; i<100; i++) myList.add(i);
+		
+		//using lambda with Stream API, filter example
+		Stream<Integer> highNums = parallelStream.filter(p -> p > 90);
+		
+		
+    
+    Java Stream API for Bulk Data Operations on Collections.
+    Java Time API.
+    Collection API improvements.
+    
+    Map replaceAll(), compute(), merge() methods.
+    
+    JDBC-ODBC Bridge has been removed.
+    PermGen memory space has been removed
+
+=============================================================================================================================
+2.what is the advantage of new features available in Interfaces in Java-8?
+Java 8 interface default methods will help us in avoiding utility classes, such as all the Collections class method can be provided 
+in the interfaces itself.
+Java interface default methods has bridge down the differences between interfaces and abstract classes.
+
+One of the major reason for introducing default methods in interfaces is to enhance the Collections API in Java 8 to 
+support lambda expressions.
+
+
+Functional interfaces are long awaited and much sought out feature of Java 8 because it 
+enables us to use lambda expressions to instantiate them. A new package java.util.function with bunch of functional interfaces 
+are added to provide target types for lambda expressions and method references.
+
+=============================================================================================================================
+3.what is the purpose of using Atomic variables?
+
+In mutithreading, the shared entity mostly leads to a problem when concurrency is incorporated.
+A shared entity such as, mutable object or variable, might be changed, which may result in the inconsistency of the program or database. 
+So, it becomes crucial to deal with the shared entity while accessed concurrently.
+ An atomic variable can be one of the alternatives in such a scenario.
+
+=============================================================================================================================
+4.Synchronization and diff. between obj. level lock and class level lock?
+
+Synchronization is ability to restrict access to shared resource to only one thread. 
+
+Class level lock is achieved by keyword "Static Synchronized,where as object level is achieved only by synchronized keyword. 
+Object level lock is achieved to restrict same object to operate through different thread,where as class level lock is achieved
+ to restrict any object to operate.
+
+
+Class level locking:
+Class level locking prevents multiple threads to enter in synchronized block in any of all available instances on runtime. 
+This means if in runtime there are 100 instances of DemoClass, then only one thread will be able to execute demoMethod() 
+in any one of instance at a time, and all other instances will be locked for other threads.
+ This should always be done to make static data thread safe.
+
+
+Object level locking:
+Object level locking is mechanism when you want to synchronize a non-static method or non-static code block such that only
+one thread will be able to execute the code block on given instance of the class. This should always be done to make 
+instance level data thread safe. This can be done as below :
+
+
+=============================================================================================================================
+4.What is externalizable interface and how it differs with serializable interface?
+    
+    Serializable is a marker interface i.e. does not contain any method.
+    Serializable interface pass the responsibility of serialization to JVM and it’s default algorithm.
+    Mostly, default serialization is easy to implement, but has higher performance cost.
+    It’s hard to analyze and modify class structure because any change may break the serialization.
+    Default serialization does not call any class constructor.
+    
+    
+    Externalizable interface contains two methods writeExternal() and readExternal() which implementing classes MUST override.
+    Externalizable provides control of serialization logic to programmer – to write custom logic.
+    Serialization done using Externalizable, add more responsibility to programmer but often result in better performance.
+    It’s more easy to analyze and modify class structure because of complete control over serialization logic.
+    A public no-arg constructor is required while using Externalizable interface.
+    
+    
+    Externalizable interface is child interface of Serializable i.e. Externalizable extends Serializable.
+	So if any class implements        Externalizable interface and override it’s writeExternal() and readExternal() 
+	methods then first preference is given to these           methods over default serialization mechanism provided by JVM.
+    
+=============================================================================================================================
+5.What are the types of statements available in JDBC and how it differs with eachother?
+
+There are 3 types of Statements, as given below:
+
+Statement:
+
+It can be used for general-purpose access to the database. It is useful when you are using static SQL statements at runtime.
+
+PreparedStatement:
+
+It can be used when you plan to use the same SQL statement many times. The PreparedStatement interface accepts input parameters at runtime.
+
+CallableStatement:
+
+CallableStatement can be used when you want to access database stored procedures.
+=============================================================================================================================
+6.what are sequences in Oracle?
+A sequence is an object in Oracle that is used to generate a number sequence. This can be useful when you need to create a unique number
+to act as a primary key.
+=============================================================================================================================
+7.Example of left outer join
+
+=============================================================================================================================
+8.What are webservices? Explain REST abbrevation and its usage. why it is called Representational State Transfer?
+
+REST or RESTful API design (Representational State Transfer) is designed to take advantage of existing protocols.
+While REST can be used over nearly any protocol, it usually takes advantage of HTTP when used for Web APIs.
+
+Representational State Transfer refers to transferring "representations". 
+You are using a "representation" of a resource to transfer resource state which lives on the server into application state on the client.
+Although REST is stateless, it has state transfer in its name
+=============================================================================================================================
+9.How data consumes in Rest webservice.
+@Consumes({"text/plain,text/html"})
+The following example shows how to apply @Consumes at both the class and method levels:
+
+@Path("/myResource")
+@Consumes("multipart/related")
+public class SomeResource {
+	@POST
+	public String doPost(MimeMultipart mimeMultipartData) {
+		...
+	}
+
+	@POST
+	@Consumes("application/x-www-form-urlencoded")
+	public String doPost2(FormURLEncodedProperties formData) {
+		...
+	}
+}
+=============================================================================================================================
+10.Which design patterns you've used?
+
+=============================================================================================================================
+11.What are the differences between abstract factory design pattern and factory-method design pattern?
+
+
+================================================================================================================
+Java Source File:
+    - A source file can have any number of classes.But it can have max 1 public class.
+    - If there are there more than one public class, Compiler asks us to declare the class in separate file.
+    - If there is no pubic class, Any name can be used as Source File name.
+    - A source file can have any number of main methods. For running any class it is mandatory to have main 
+    method with JVM supported format
+    
+Compiling and Running Java Source Code with package declaration:
+    - Full Directory Path has to be sepecified while compiling
+    - D:\Users\734456\workspace\Core-Java-Practise\src\main\java>javac -d . T.java
+    - Command create folders with package name in the current working directory
+    - Fully Qualified class name has to be specified while running a class.
+    - D:\Users\734456\workspace\Core-Java-Practise\src\main\java>java com.practice.sample.T
+=============================================================================================================================
+Import Statements:
+    - Explicit Import : import java.util.ArrayList;
+    - Implicit Import : import java.util.*;
+    - Explicit import is always recommended since it improves readbility.
+    - Implicit import statement will only import all classes present in the current package. Classes in the sub package are 
+     not imported.
+    - Ex: java.util.regex.Pattern will be imported by using import java.util.regex.*
+    - import java.util.* will not import Patternn class.
+
+Classes and Interfaces present in java.lang imported automatically. Ex: Thread, Exception.
+All classes present in current working directory is available by default. No need of importing it.
+=============================================================================================================================
+Package : 
+    - Encapsulation mechanism to group of related classes and interfaces to a single unit.
+    - In any JAVA Source file atmost one package declaration is allowed.
+    - Package declaration should be first statement in the source file always.
+
+Order for JAVA Source file
+    - package declaration
+    - import statment
+    - ass/interface/enums
+
+Advantages: 
+    - Naming conflicts
+    - Modularity
+    - Maintainability
+    - Security
+=============================================================================================================================
+Class Level Access Modifiers - Provides information about the behavior of the class to JVM
+
+Modifier applicable for top level class
+public - class can be accessed by anywhere.
+default - class can be accessed only within the package.
+
+
+abstract - applicable for classes and methods
+If a class has atleast one abstract method, it has to be declared abstract.
+
+final - 
+strictfp - 
+
+Modifier applicable for inner class in addition to above modifiers
+private -
+protected - 
+static
+
+Access Modifiers
+Class  - default: Accessible only inside the package, public: Visible everywhere
+Methods - public: Accessible everywhere, protected: Can only be used either in same package or sub-class
+             private: Only available inside the class, default: Only available inside the package
+             
+   Protected Access Modifier:
+         Members can be accessed throughout the package.
+         In different package, 
+              members can be accessed directly or by creating object and reference of sub class.
+              members cannot be accessed by creating object and reference of super class.   
+   
+ Non-Access Modifiers
+   final
+      - Class cannot be extended 
+      - Method cannot be overriden 
+      - Variable value cannot be changed once it is assigned
+      - Varibae value can be assigned only once if it is not initialized
+   static
+      - Variable are present at Class level
+      - Single instance is available and shared accross all the objects
+      - Methods cannot access instance variables or methods . But Instance methods can access static variables and methods
+      - Methods can only access Static Methods and variables.
+  
+  Declaring constants : public static final int PI = 3.14;
+=============================================================================================================================
+JVM Memory Model:
+
+Heap Area : Memory is allocated for Objects and arrays. Created when JVM starts.
+Method Area : Methods and fields are stored. 
+JVM Stacks: Local variable and partial results are stored. Stack frame is created for each thread.
+Native Method Stacks: Supports native methods
+
+Heap Memory : 
+
+Heap Memory - Will store the objects
+Stack Memory - Will store the variables
+
+Primitive variable - will have variable values
+Reference variable - will have reference to the memory location
+
+Comparison of reference variable compares its memory location not the values of instance variables.
+
+String - Immutable
+Once created, value cannot be changed in the memory location.
+
+IntegerCache
+    - Feature introduced in JDK 5 for improving performance.
+    - Integer num1 = Integer.valueOf(20), Integer num2 = Integer.valueOf(20) 
+    - num1 == num2 will be true, Since value is cached and same reference would be used.
+    - Default values that are cached -127 to 127
+    - However it can be changed by altering VM parameter: -XX:AutoBoxCacheMax=1000
+=============================================================================================================================
+Creating Immutable Class in JAVA
+    - Class should be declared as final, so that no other class can extend it.
+    - All variables of the class should be declared private, so that it cannot be accessed outside.
+    - There should not be any setter methods for modifying the variable values.
+    - Perform deep cloning of all reference variables(If class has reference variable do not assign it directly, 
+    instead extract the values of the reference variable and create a new Object).
+    
+Object.hashCode() and System.identityHashCode()
+    - When Object.hashCode() is called first preference is given to the hashCode() method overridden by the class.
+    - If hashCode() is not overridden, System.identityHashCode() is called to generate default hashCode of an object.
+
+Variable Arguments. Takes any number inputs to a method. Introduced in JDK 5
+Syntax : sum (int... marks) 
+Sample method call: sum(2,3) sum(2,3,5)
+
+Variable argument should always be last arugment inside a method.
+Ex: sum(int length,int... num ) - Correct
+Ex: sum(int... num, int length) - Wrong
+
+Arrays:
+int[] intArray = new int[5];
+intArray = {1,2,3};
+int[] newArray = {5,6,7}
+
+=============================================================================================================================
+Object Oriented Programming
+
+Composition : Has-a relationship. Ex: Person has a Adress, Book has a Review, 
+Inheritance : Is-a relationship. Ex: Student is a Person, Ferrari is a Car. 
+Sub-class inherits all the state and behavior of the parent class.
+
+Method Overriding - Overriding the implementation provided in the super class with new implementation.
+
+super - Keyword to access state and behavior of parent class
+this - keyword to access state and behavior of current class
+
+OOPS Concepts 
+
+	1. Data Hiding : Hiding of data, Outside class cannot access member data directly.
+		Ex: Check for mail in GMAIL , We will not be able to view mails unless we provide credentials.
+		- Implementation of data hiding
+			+ private field mail is declared as Private
+			+ public method is made available which can accept credentials and return the mail details
+		- Advantage of Data Hiding
+			+ Security : Only after providing credentials mail can be accessed
+	
+	2. Abstraction : Hiding the internal implementation, and only highlighting the set the services that we offer
+		Ex: ATM Machine. When we request for withdrawl, we will only get money. But we will not get any information on 
+		the internal implementation of withdrawl method. Bank will not never share such information.
+		Ex: 
+		- Implementation of abstraction
+			+ provide abstract methods using Interface
+			+ provding services only through GUI screens
+		- Advantage
+			+ Security : No one will be aware of internal implmentation
+			+ Easy to enhance : We can keep same GUI and change the back-end technology
+			+ Maintainanility and Modularity of application would be improved
+			
+	3. Encapsulation : 
+
+============================================================================================================================= 
+=============================================================================================================================
+Exception Handling
+=============================================================================================================================
+
+
+Finally block - 
+ - Executes even if exception is raised
+ - Even if return statement is present
+ - Will not be executed if lines inside finally throws exception
+ - If JVM crashes (System.exit(0)) - DO NOT TRY
+
+2 types of Exceptions
+- Sub-classes of Runtime Exceptions
+- Not a Sub-class of Runtime Exceptions (All classes that extends Exceptions and not Runtime Exceptions)
+
+class Error extends Throwable
+
+class Exception extends Throwable
+class InterruptedException extends Exception 
+ - Checked Exception 
+ - Any class that extends Exception 
+ - Should be handled always by throwing or surrounding by try/catch 
+
+class RuntimeException extends Exception
+class NullPointerException extends RuntimeException 
+ - Un-Checked Exception 
+ - Any class that extends Runtime Exception
+ - Not mandatory of handling the exception
+
+
+============================================================================================================================= 
+Functional Programming
+Stream - source of objects 
+ 
+ 2 Operations on stream
+  - Intermediate operation - 
+    Input -> Stream
+    Output -> Stream
+    Ex: filter(), sorted(), distinct() 
+    Stream can have multiple Intermediate Operations
+    
+  - Terminal operation 
+    Input -> Stream  
+    Single output 
+    Ex: min(), max(), forEach(), reduce(), collect()
+    
+ Concurrent Collection
+   Concurrent collections provide Thread safe without significant performance impact in specific scenarios.
+ Concurrent HashMap 
+   Complete HashMap is not locked, instead few regions are locked, thus improved performance and thread safe.
+   
+ CopyOnWriteArrayList
+    Should be used when there more read operation than write.
+   
+Nested Class
+    - Default Nested Class - Requires outer class reference for instantiating. InnerClass innerClass = nestedClassRunner.new InnerClass();
+    - Static Nested Class - Can be instantiated directly. StaticNestedClass staticNestedClass = new StaticNestedClass();
+
+Anonymous class 
+   - Inner class without a name. 
+   - Can be created by implementing an Interface or by extending a Class
+ 
+=============================================================================================================================
+Serialization - Used of for storing the state of object in the disk or transferring over network.
+Class has to implement Serializable Marker Interface for allowing serilization of instances of the class.
+
+serialVersionUID 
+    - JVM generates by default based on the members of the class.
+    - Changes everytime when members are modified.
+    - Used during serialization and de-serialization as unique identifier of the class.
+
+Issues with JVM generated serialVersionUID
+    - Creates issues during De-serialization if there in a modification to the existing members of the class
+    - Throws an InvalidClassException, since SerialVersionUID changes on modification of existing members. 
+      Hence JVM treats it as a different class
+
+Declaring serialVersionUID
+    - If we declare serialVersionUID in our class, same would be used during serialization and de-serialization.
+    - Thus, even if we modify the members of the class serialVersionUID remains same. Hence JVM identifies class as 
+      new version of the existing class
+
+JIT Compiler Internal Implementation
+
+Overloading Overriding
+
+Marker Interface
+
+AutoCloseable Interface
+For Try with Resources implementation, Classes should implement AutoCloseable Interface.
+
+Logging Configuration
+	Log Level: 
+		ERROR	: Only should be used if error occurs. Ex: Can be used in catch block
+		WARN 	: Should be used for warning. Ex: If there is 0 output for a search 
+		INFO	: Can be used providing info. Ex: User logged in, User logged out.
+		DEBUG	: When we need to know about steps progressed. Ex: Entering a method, Exiting a method
+		TRACE	: More details logs.
+		
+	Spring-jcl - provides logging in Spring Boot. It comes along with Spring-Boot-Started-Web
+	
+	By default logs will be written to console
+
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	logger.info("Logging the information..");
+
+Configuration File
+
+Logger vs Appender
+	Logger : Captures logging information from the code
+	Appender : Publishes information that has been logged
+		- Console Appender
+		- Rolling File Appender
+
+System.out.prinln doesn't have a severity level, whereas using logging we can have different severity levels
+
+Configuring Logging in Spring Boot App
+	- Log levels can be configured in Application.properties.
+	- Can be configured in XML files of below mentioned names	
+		+ logback-spring.xml
+		+ logback.xml
+		+ logback-spring.groovy
+		+ logback.groovy
+	- Console and Rolling File appenders can be configured in the XML file
+	- Attribute in file
+		+ Property : A variable with a value
+		Ex: Below line indicates a folder named "logs" would be created in the current directory where all logs will be saved
+		<property name="LOGS" value="./logs"/> 
+		+ Appender : Publishes information that has been logged
+			- Console Appender : Logs to System.out or System.err
+			- File Appender : Logs to a file
+			- Rolling File Appender : Roll over log files when conditions are met
+		+ Rolling File Properties
+			- %i : Represents numeric file version. When file reaches the max size new file would be created with name appended with increment
+			- %d : Rolling over date, Creating a log file based on Day or Month or Year 
+			- Add .gz or .zip for automatic compression
+			- maxHistory : How many history files to keep after which it would be deleted by housekeeping
+			- maxFileSize : Max size of a Log file, after this is reached %i would be incremented.
+			- minIndex : Start index of rollover count
+			- maxIndex : Ending index of rollover count
+			- Behvaior : With log%i.txt filename, minIndex - 1, maxIndex - 3 when max file size is reached
+				log3.txt would be deleted 
+				log2.txt would be renamed to log3.txt		
+				log1.txt would be renamed to log2.txt
+				log.txt would be renamed to log1.txt 
+		+ Pattern identifiers	
+			- %d : Date of Logging event
+			- %p : Logging priority(DEBUG,INFO)
+			- %C : Class name that is logging
+			- %t : Thread that is logging
+			- %m : Message supplied for logging
+			- %n : Operating system line break
+=============================================================================================================================	
+Garbage Collection
+	- Daemon thread that runs in the background
+	- It frees up heap memory by destroying the unreachable objects
+	- Unreachable objects are the one which are not referenced by any part of the program
+	- We can choose the Garbage Collection for our program by using JVM parameter
+
+Automatic Garbage Collection Working: 
+	- Automatic GC is the process of identifying (marking) the unreachable objects and destroying(sweep) them with compaction.
+	- Issue with this approach is, as the number of objects increase GC(mark and sweep) time increases
+	- For improving the performance Generational GC methodology was introduced.
+		- Heap is divided into generations like Young Generation, Old Generation and Permanent Generation
+
+
+11.Reflection API and Implementation?
+Reflection is an API Which is used to examine or modify the behaviour of methods,classes,interfaces at runtime.
+
+What do you understand my reflection in Java programming language?
+reflection API make possible to inspect process method fields headset at runtime without knowing their names and compile time.
+ initiate objects call methods and set field values using reflection.
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+12. Serialization and how it is achieved with an example?
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+13.Set and Treeset Differences and Info?
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+14.Comparable and Comparator ?
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+15.Fail Fast and Fail Safe?
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+16.sleep(),yield(),wait() differences?
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+17.
+
+=============================================================================================================================
+Q 1. What is object-oriented programming? What are the key principles of object-oriented programming?
+Object-oriented programming is a programming methodology based on the concept of ‘objects' which contain data.
+
+Java is a class based object-oriented programming language, which means objects in Java are instances of classes. Think of a class as a blueprint, and object as an instance of this blueprint.
+
+Object-oriented programming is based on 4 key principles - Abstraction, Encapsulation, Inheritance and Polymorphism.
+
+
+=============================================================================================================================
+Q 2. What is Abstraction?
+Data Abstraction is the property by virtue of which only the essential details are displayed to the user.The trivial or the non-essentials units are not displayed to the user. Ex: A car is viewed as a car rather than its individual components.
+
+Also Defined as the process of identifying only the required characteristics of an object ignoring the irrelevant details.
+
+In java, abstraction is achieved by interfaces and abstract classes. We can achieve 100% abstraction using interfaces.
+
+
+Abstract classes
+Abstract methods
+An abstract class is a class that is declared with an abstract keyword.
+An abstract method is a method that is declared without an implementation.
+An abstract class may or may not have all abstract methods. Some of them can be concrete methods
+A method defined abstract must always be redefined in the subclass,thus making overriding compulsory OR either make subclass itself abstract.
+Any class that contains one or more abstract methods must also be declared with abstract keyword.
+
+
+There can be no object of an abstract class.That is, an abstract class can not be directly instantiated with the new operator.
+
+But JVM does at Runtime.
+
+
+An abstract class can have parametrized constructors and default constructor is always present in an abstract class.
+
+
+
+
+
+
+
+When to use abstract classes and abstract methods with an example :
+
+
+
+
+
+
+
+
+
+=============================================================================================================================
+Java - Lambda Expressions
+=============================================================================================================================
+What are Lambda expressions in the Java programming language?
+
+Lambda expression provides functional programming constructs to Java.
+A Java lambda expression can be considered as a function which can be created without belonging to any class. Also, it can be passed around as if it was an object and executed on demand.
+Properties:
+Anonymous : it doesn’t have an explicit name like a method.
+Function:It can be thought of as a function because a lambda isn’t associated with a particular class like a method is. 
+Passed around: A lambda expression can be passed as argument to a method or stored in a variable.
+Concise: We don’t need to write a lot of boilerplate like we do for anonymous classes.
+
+=============================================================================================================================
+What are functional interfaces?
+
+Functional interfaces are Java interfaces which have only one declared (abstract) method. 
+Functional interfaces can have other implemented methods such as default methods and static methods.
+Some of the common functional interfaces in Java are Runnable, Comparable, ActionListner etc.
+Functional interfaces are generally implemented as inner classes and anonymous inner classes, which results in bulky code with many lines. This is sometimes referred to as 'Vertical' problem
+Lambda expressions are used to implement functional interfaces which define a single method. Lambda expressions avoid the vertical problem by simplifying the code of the traditional inner classes and anonymous inner classes.
+
+Eg:
+Without using lamda Expression:
+Runnable r = new Runnable(){
+			@Override
+			public void run() {
+				System.out.println("My Runnable");
+			}};
+
+ Using lamda Expression:
+Runnable r1 = () -> System.out.println("My Runnable");
+Runnable is a functional interface, that’s why we can use lambda expression to create it’s instance.
+Since run() method takes no argument, our lambda expression also have no argument.
+Just like if-else blocks, we can avoid curly braces ({}) since we have a single statement in the method body. For multiple statements, we would have to use curly braces like any other methods.
+=============================================================================================================================
+Can lambda expressions be used to implement interfaces having default and static methods?
+
+Yes, Untill it has single abstract method in it.
+From Java 8 onwards, an interface can contain default methods and static methods whose implementation is defined directly in the interface declaration.
+
+=============================================================================================================================
+What is the syntax of lambda expressions in Java programming language?
+
+A lambda expression consists of three parts
+First - A parenthesized set of parameters,
+Second - An arrow pointing to right, 
+Third - A body, which can be a block of Java code or a single expression.
+Eg:
+//Passes an integer argument i, and returns 10+i
+(int i) -> 10+i;
+//Passes no arguments and returns 50
+() -> 50;
+//Passes string argument s and returns nothing
+(String s) -> {system.out.println(s);}
+
+=============================================================================================================================
+How many parameters can a lambda expression have?
+A lambda expression can have zero, one or multiple parameters.
+
+Write a functional interface and implement it using non-lambda code and lambda expression
+Without using lamda Expression:
+Runnable r = new Runnable(){
+			@Override
+			public void run() {
+				System.out.println("My Runnable");
+			}};
+
+ Using lamda Expression:
+Runnable r1 = () -> System.out.println("My Runnable");
+What criteria must be met to match a lambda expression to an interface?
+1. The interface must have one (and only one) abstract method.
+2. The number of parameters of the lambda expression must match the number of parameters of the abstract method.
+3. return type of the lambda expression must match the return type of the abstract method.
+What is the major difference between lambda expression vs anonymous interface implementation with regards to state?
+Anonymous interface implementations can have state (member variables), whereas lambda expressions are stateless.
+
+=============================================================================================================================
+Do you need to specify the type for parameters in a lambda expression?
+
+In Most cases NO,
+The java compiler infers the type for the parameters by matching them with the parameter types of the abstract method of the functional interface.
+=============================================================================================================================
+Can you have multiple lines of code in a lambda function body?
+YES
+=============================================================================================================================
+Why do we need Lambda Expression?
+
+1.Reduced Lines of Code.
+2.Sequential and Parallel Execution Support
+//Traditional approach
+private static boolean isPrime(int number) {		
+	if(number < 2) return false;
+	for(int i=2; i<number; i++){
+		if(number % i == 0) return false;
+	}
+	return true;
+}
+
+
+//Declarative approach
+private static boolean isPrime(int number) {		
+	return number > 1
+			&& IntStream.range(2, number).noneMatch(
+					index -> number % index == 0);
+}
+
+
+3.Passing Behaviors into methods
+public static int sumWithCondition(List<Integer> numbers, Predicate<Integer> predicate) {
+	    return numbers.parallelStream()
+	    		.filter(predicate)
+	    		.mapToInt(i -> i)
+	    		.sum();
+	}
+Usage:
+//sum of all numbers
+sumWithCondition(numbers, n -> true)
+//sum of all even numbers
+sumWithCondition(numbers, i -> i%2==0)
+//sum of all numbers greater than 5
+sumWithCondition(numbers, i -> i>5)
+
+4.Higher Efficiency with Laziness
+private static int findSquareOfMaxOdd(List<Integer> numbers) {
+		int max = 0;
+		for (int i : numbers) {
+			if (i % 2 != 0 && i > 3 && i < 11 && i > max) {
+				max = i;
+			}
+		}
+		return max * max;
+	}
+public static int findSquareOfMaxOdd(List<Integer> numbers) {
+		return numbers.stream()
+				.filter(NumberTest::isOdd) 		//Predicate is functional interface and
+				.filter(NumberTest::isGreaterThan3)	// we are using lambdas to initialize it
+				.filter(NumberTest::isLessThan11)	// rather than anonymous inner classes
+				.max(Comparator.naturalOrder())
+				.map(i -> i * i)
+				.get();
+	}
+	public static boolean isOdd(int i) {
+		return i % 2 != 0;
+	}
+	public static boolean isGreaterThan3(int i){
+		return i > 3;
+	}
+	public static boolean isLessThan11(int i){
+		return i < 11;
+	}
+
+
+
+
+
+
+Examples of Lambda Expression:
+List<String> greenApples 
+  = listOfApples.stream().filter(a -> a.getColor().equals("Green"))
+      .collect(Collectors.toList());
+Here, filter() method expects a Predicate. We just passed a lambda instead of the required interface.
+
+
+
