@@ -1,0 +1,90 @@
+User 1 : Raghav  
+User 2 : Ajay 
+
+AWS Links:
+===========
+https://www.youtube.com/watch?v=fc05rd0iZhM
+
+IAM (IDENTITY AND ACCESS MANAGEMENT)
+--User Creation
+----------------------------------------------------------------------------
+--provide programatic access / conole access
+--what kind of permission
+	-providing exisitin policy
+		-s3 access
+		-Lamda full access
+--Next Tgas
+	Review and cretae User
+
+
+	
+--Role creation
+-----------------------------------------------------------------------------
+-- If u want to use any of aws service.. lot of them ask for a role
+-- eg u want to use lamda function , it will ask you for a role 
+-- we creat a role assign it in lamda , cloud watch or in step function where ever it is required
+--
+
+--creating a role
+-- choosing a usecase(example can be lamda here) to apply this role
+-- add existing policy / create new and give a anme to role and create role
+-- you can see the role in lamda function
+
+
+--Policies Creation
+-------------------------------------------------------------------------------
+ Aws by default provides a lot of policies .. when we creating a user or role we can choose the policies that we can associate with user/role
+ --if we want to create our own custom policy
+ --for example u can take like we can see s3 full access in aws given policy.. what if we want access restriction to  a partiular bucket.. this can b done using our own custom policy
+ 
+ --Creating a policy
+ --two ways we can do it.. using editor/json
+	--select service (here s3)
+	--access(read/write/full access) 
+	--Resources
+		--here u can give all/full access on all buckets
+		--or u can pick a particular bucket
+--Review Policy
+	--Name : policy name here
+	--desc if there
+	--create Policy
+
+
+
+
+S3 (Simple Storage Service) :
+----------------------------------------------
+Creating a Bucket:
+
+
+
+
+
+Total Experience of 5.1 years.
+Presently working in Techuva Solution Pvt. Ltd as a Software Developer from the period Nov 2018 to present.
+Worked inVirtusa as a Java developer, hold the Designation of Engineer from the period September 2015 to Nov 2018. 
+
+
+
+
+
+
+
+
+
+
+
+AWS Lamda:
+-------------------------
+Link : https://www.youtube.com/watch?v=d8uDLVkLIJg
+
+Steps
+----- 
+1.SetUp AWS Tool Kit in Eclipse/STS
+2.Create a New Lamda Project
+3.Upload a Project to AWS Lamda
+4.Invoke Lamda Functions from STS
+5.Invoke Lamda function from AWS console
+6.Create an API and using AWS API gateway bind it with Lamda
+7.Hit the API to invoke the AWS Lamda Functions
+
