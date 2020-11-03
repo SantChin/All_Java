@@ -1,0 +1,73 @@
+HTTP Status Codes
+    When browser requests a service from web server, it will return some status code. I have listed all HTTP Status codes as below,
+
+1xx -  Informational
+==========================
+100 - Continue - The server has received the request headers, and the client should proceed to send
+	  the request body
+101 - Switching Protocols -  The Server switches protocol.
+
+2xx - Successful
+=========================== 
+200 - OK      -  This is a successful HTTP request
+201 - Created  -  Request is completed, new resource is created.
+202 - Accepted -  The request is accepted for processing, but the processing is not complete.
+203 - Non-Authoritative Information -  The information in the entity header is from a local or third-
+	  party copy, not from the original server.
+204 - No Content  -  A status code and a header are given in the response, but there is no entity-body 
+      in the reply.
+205 - Reset Content - Browser will clear the form data .
+206 - Partial Content - The server is delivering only part of the resource due to a range header sent 
+                                     by the client
+
+3xx - Redirection
+===========================
+300 - Multiple Choices - A link list. The user can select a link and go to that location.
+	  Maximum five addresses  .
+301 - Moved Permanently - Requested page permanently moved to new URL.
+302 - Found - Requested page temporarily moved to new URL.
+303 - See other - Requested page can be found some other URL.
+304 - Not Modified - Requested has not modified.
+305 - Use Proxy - The requested URL must be accessed through the proxy mentioned in the Location
+      header.
+306 - Unused - This code was used in a previous version. It is no longer used, but the code is 
+      reserved. 
+307 - Temporary Redirection - The requested page has moved temporarily to a new URL
+
+4xx - Client error
+===========================
+400 - Bad Request - The Request can not be fulfilled because of some bad syntax.
+401 - Unauthorized - The request has not been applied because it lacks valid authentication
+      credentials for the target resource.
+402 - Payment Required - Now you can not use this code.
+403 - Forbidden - The request is a legal request, but the server is refusing to respond to it due to 
+      some factor.
+404 - Page Not Found - Requested page is not found.
+405 - Method Not Allowed - Method specified in the request is not allowed
+406 - Not Acceptable - Generated server response not accepts the client.
+407 - Proxy Authentication Required - The client must first authenticate itself with the proxy 
+408 - Request Timeout - The Server time out waiting for the request
+409 - Conflict - The request could not be completed because of a conflict.
+410 - Gone - The requested page is no longer available.
+411 - Length Required - The server refuses to accept the request without a defined Content-Length.
+412 - Pre condition failed - The precondition given in the request evaluated to false by the server 
+413 - Request Entity too large - The server will not accept the request, because the request entity 
+      is  too large.
+414 -  Request URI too long - The server will not accept the request, because the url is too long. 
+       Occurs when you convert a "post" request to a "get" request with a 
+       long query information .
+415 -  Unsupported Media Type - If media type is not supported, it won't accept the request.
+416 - Request range not satisfiable - The client has asked for a portion of the file, but the server 
+      cannot supply that portion
+417 - Exception failed - The server cannot meet the requirements of the Expect request-header field
+
+5xx - Server Error
+============================= 
+500 - Internal Server Error - The request was not completed.  The server met an unexpected condition.
+501 - Not Implemented - The server does not support the functionality required to fulfill the request. 
+502 - Bad Gateway - The server, while acting as a gateway or proxy, received an invalid response  
+	  from an inbound server it accessed while attempting to fulfill the request. 
+503 - Service Unavailable - The server is currently unavailable
+504 - Gateway Timeout - The server, while acting as a gateway or proxy, did not receive a timely response 
+	 from an upstream server it needed to access in order to complete the request.
+505 - HTTP Version not supported - The server does not support the HTTP protocol version used in the request.

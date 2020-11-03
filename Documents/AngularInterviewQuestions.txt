@@ -1,5 +1,7 @@
 //https://www.youtube.com/watch?v=NT8Chwgk37E
 
+SET PATH=C:\Users\santoshch\AppData\Roaming\npm\node_modules\@angular\cli\bin
+SET PATH=C:\Users\santoshch\AppData\Roaming\npm
 
 To Check node version : node -v
 To check npm version : npm -v
@@ -37,14 +39,30 @@ The component definition also exports the class, ProductAlertsComponent, which h
 
 
 
+Routing:
+=================
+Routing enables navigation from one view to the next (within the same page) as users perform tasks such as the following:
+
+Entering a URL in the address bar to navigate to a corresponding view.
+Clicking links on the page to navigate to a new view.
+Clicking the browser's back and forward buttons to navigate backward and forward through the browser history.
+
+The Angular Router displays components based on the browser's URL and your defined routes.
+
+The ActivatedRoute is specific to each routed component that the Angular Router loads.
+ It contains information about the route, its parameters, and additional data associated with the route.
+
+By injecting the ActivatedRoute, you are configuring the component to use a service.
 
 
 
+Services
+========================
+Services are an integral part of Angular applications. 
+In Angular, a service is an instance of a class that you can make available to any part of your application using Angular's 
+dependency injection system.
 
-
-
-
-
+Services are the place where you share data between parts of your application.
 
 
 
@@ -181,3 +199,8 @@ Q : What is the use of @input and @output?
 A : When it comes to the communication of Angular Components,Which are in Parent-child relationship, 
 	we use @input in child component whenever we are passing data from parent to Child Component
 	@Output is used in child component to receive an event from child to parent Component.
+	
+Q : What is 2 way data binding in angular?
+A : Two-way data binding in Angular will help users to exchange data from the component to view and from view to the component.
+	It will help users to establish communication bi-directionally. 
+	Two-way data binding can be achieved using a ngModel directive in Angular.

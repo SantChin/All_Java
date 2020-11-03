@@ -1,0 +1,43 @@
+Docker:
+1.What is Docker?
+Dcoker is a tool is designed to make it easier to build,deploy and run application by using containers.
+
+Problem before Docker : 
+	Dependency version mismatch from env to another env
+	Library corrupted
+	Software Upgrade
+	
+What docker continer do?
+	Container allows a developer to package up an application with all the parts it needs such as libraries and
+	other dependencies and ship it all as one package.
+
+--Keep jar file Name as : 
+	Under build:
+	<finalName>DockerSolution</finalName>
+Writing Docker File : 
+-->In Project Directory -- create file as : DockerFile
+Inside Docker File :
+FROM openjdk:8
+EXPOSE 8080
+ADD target/DockerSolution.jar DockerSolution.jar
+ENTRYPOINT ["java","-jar","/DockerSolution.jar"]
+
+
+===>
+-Open Docker terminal->go to springboot project directory
+--type command
+$docker build -t DockerSolution.jar .
+
+to check docker images:
+$docker image ls
+to run docker image
+$docker run -p 9090:8080 DockerSolution.jar
+
+
+
+//To Check rest end point using docker container port
+http://192.168.0.101:9090/message
+
+
+
+
