@@ -54,14 +54,16 @@ public Map<String,Object) sendEmail(....);
 Here we have pay 1) calculation logic with 2) database logic and 3) reporting logic all mixed up within one class.
 If you have multiple responsibilities combined into one class, it might be difficult to change one part without breaking others. 
 Mixing responsibilities also makes the class harder to understand and harder to test, decreasing cohesion. 
-The easiest way to fix this is to split the class into three different classes, with each having only one responsibility: database access, calculating pay and reporting, all separated.
+The easiest way to fix this is to split the class into three different classes, with each having only one responsibility:
+database access,calculating pay and reporting, all separated.
 
 ------------------------------------------------
 O - Open Closed Principle (OCP)
 ==================================================
 -- You should be able to extend a classes behavior, without modifying it.
 -- software entities (classes, modules, functions, etc.) must be opened for an extension, but closed for modification
--- In detail, it says that we can extend the behavior of a class, when necessary, through inheritance, interface, and composition, but we cannot allow the opening of this class to make minor modifications.
+-- In detail, it says that we can extend the behavior of a class, when necessary, through inheritance, interface, and composition,
+but we cannot allow the opening of this class to make minor modifications.
 
 -- “Open to extension” means that you should design your classes so that new functionality can be added as new requirements are generated. 
 -- “Closed for modification” means that once you have developed a class you should never modify it, except to correct bugs.
@@ -106,7 +108,8 @@ public class AreaCalculator
 }
 
 Lets say we have a new shape pentagon. In that case, we will again end up modifying the AreaCalculator class.
-As the types of shapes grows this becomes messier as AreaCalculator keeps on changing,every time a new shape comes it will be modified. So, this design is not closed for modification.
+As the types of shapes grows this becomes messier as AreaCalculator keeps on changing,every time a new shape comes it will be modified.
+So, this design is not closed for modification.
 
 //Solution
 //First make this design extensible ,we need to first define a base type Shape and have Circle & Rectangle implement Shape interface.
@@ -160,17 +163,20 @@ L - Liskov Substitution Principle (LSP)
 
 OTHER WAY
 
-Definition : Substitutability is a principle in object-oriented programming and it states that, in a computer program, if S is a Subtype of T, then objects of type T may be replaced with objects of type S 
+Definition : Substitutability is a principle in object-oriented programming and it states that, in a computer program, 
+if S is a Subtype of T, then objects of type T may be replaced with objects of type S 
 
 1. Which means, Derived types must be completely substitutable for their base types
 
-2. More formally, the Liskov substitution principle (LSP) is a particular definition of a subtyping relation, called (strong) behavioral subtyping
+2. More formally, the Liskov substitution principle (LSP) is a particular definition of a subtyping relation,
+called (strong) behavioral subtyping
 
 3. This Principle is introduced by Barbara Liskov in 1987 during her conference address on Data abstraction and hierarchy
 
 4. This principle is just an extension of the Open Close Principle
 
-The examples used in this session are related to the open closed principle. Hence we request you to watch the Open Closed Principle tutorial before proceeding. 
+The examples used in this session are related to the open closed principle. Hence we request you to watch the 
+Open Closed Principle tutorial before proceeding. 
 
 Implementation guidelines : In the process of development we should ensure that  
 

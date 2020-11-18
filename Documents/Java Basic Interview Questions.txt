@@ -1,0 +1,47 @@
+Sorting:
+=======================
+
+Stable and Unstable sort:
+	Stable sort : preserving the relative order of the duplicated items and doing the sorting 
+	(Bubble Sort)(swap can not happen b/w is duplicated items)
+
+
+	UnStable sort : duplicate items relative order is not maintained
+	
+Selection Sort:
+===================
+	At each traverse we find the largest element and place at its correct position by swapping that number with the largest.
+ 	Next traverse we find the next largest element and do the same. and goes on till it completely sorted.
+ 	
+ 	it is a In place algorithm
+ 	O(n2) time complexity -quadratic
+ 	it will take 100 steps to sort 10 items,10000 to 100,1000000 to 1000
+ 	Does not require as much as swapping as bubble sort
+ 	Unstable algorithm
+ 	
+
+Insertion Sort:
+==================
+	It partitions the array into sorted partition and unsorted partition
+	It is a In-place algorithm
+	O(n2) time complexity - quadratic
+	it will take 100 steps to sort 10 items,10000 to 100,1000000 to 1000
+	Stable Algorithm
+	
+	Uses: Insertion sort is used when number of elements is small. It can also be useful when input array is almost sorted, only few elements are misplaced in complete big array.
+	Insertion sort is a simple sorting algorithm that works the way we sort playing cards in our hands.
+	
+	Algorithm
+	// Sort an arr[] of size n
+	insertionSort(arr, n)
+	Loop from i = 1 to n-1.
+	……a) Pick element arr[i] and insert it into sorted sequence arr[0…i-1]
+	
+
+Shell Sort :
+===================
+		
+	
+	
+	
+	

@@ -39,5 +39,26 @@ $docker run -p 9090:8080 DockerSolution.jar
 http://192.168.0.101:9090/message
 
 
+Docker Commands:
 
+docker run nginx
+docker ps --list all containeres and some basic info
+docker ps -a -- containeres running status
 
+To stop a container:
+docker stop <container ID/Name>
+
+To remove docker image:
+docker rm <container ID/Name>
+
+To see list of docker Images and their sizes:
+docker images
+
+To Remove Image
+docker rmi nginx
+
+//attached mode
+docker run kodekcloud/simple-webapp
+
+//detached mode
+docker run -d kodekcloud/simple-webapp

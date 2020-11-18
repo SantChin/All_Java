@@ -1,0 +1,25 @@
+
+********************Kafka-windows********************************************
+
+//start zookeeper server
+zookeeper-server-start.bat ../config/zookeeper.properties
+
+//start kafka server
+kafka-server-start.bat ../config/server.properties
+
+//to check broker id
+zookeeper-shell.bat localhost:2181 ls /brokers/ids
+
+
+//create a topic
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic TestTopic
+
+//producer
+kafka-console-producer.bat --broker-list localhost:9092 --topic TestTopic
+
+//consumer
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
+
+
+//terminate batch 
+ctrl+c
