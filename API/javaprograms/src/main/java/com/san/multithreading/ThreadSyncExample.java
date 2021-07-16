@@ -47,5 +47,7 @@ public class ThreadSyncExample {
 
 		t1.start();
 		t2.start();
+		
+	
 	}
 }

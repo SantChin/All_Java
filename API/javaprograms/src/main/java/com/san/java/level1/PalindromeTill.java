@@ -25,4 +25,25 @@ public class PalindromeTill {
 		
 	System.out.println(cnt);
 	}
+	
+	 public boolean isPalindrome(int x) {
+		    
+	       if(x < 0 || (x % 10 == 0 && x != 0)) {
+	            return false;
+	        }
+	        
+	        boolean flag = false;
+	        int val = 0;
+	        int temp = x;
+	        while(temp > 0){
+	            int rem = temp%10;
+	            temp=temp/10;
+	            val = val*10+rem;
+	        }
+	        
+	        if(x == val){
+	            flag = true;
+	        }
+	        return flag;
+	    }
 }

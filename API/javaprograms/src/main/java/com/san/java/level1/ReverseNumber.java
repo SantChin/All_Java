@@ -24,8 +24,17 @@ public class ReverseNumber {
 
 	public static void main(String[] args) {
 		
-		int num = 1234;
-	
+		//int num = 1234;
+		
+		int num = -321;
+		
+		System.out.println(reverseNumV1(num));
+		boolean flag = false;
+		if(num < 0) {
+			flag = true;
+			num = num * -1;
+		}
+		
 		int reversNum = 0;
 		
 		while(num>0)
@@ -35,7 +44,23 @@ public class ReverseNumber {
 			reversNum = reversNum * 10 +reminder;
 		}
 		
+		if(flag) {
+			reversNum = reversNum * -1;
+		}
+		
 		System.out.println(reversNum);
+		
+		
+	}
 	
+	
+	// Another way
+	public static int reverseNumV1(int x) {
+		String reversed = new StringBuilder().append(Math.abs(x)).reverse().toString();
+		try {
+		    return (x < 0) ? Integer.parseInt(reversed) * -1 : Integer.parseInt(reversed);
+		} catch (NumberFormatException e) {
+		    return 0;
+		}
 	}
 }
