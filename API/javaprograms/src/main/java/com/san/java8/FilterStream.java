@@ -22,6 +22,7 @@ public class FilterStream {
 		
 		List<Employee> collectList = employeeList.stream().filter(emp->emp.getAge()>50).collect(Collectors.toList());
 		collectList.forEach(emp->System.out.println(emp));
+		collectList.forEach(emp->System.out.println(emp));
 		
 	
 		//Using the Map
