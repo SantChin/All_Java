@@ -22,3 +22,6 @@ public class SetOfTwoConsecutiveNumbersWithHighestSum {
 		System.out.println("Numbers : "+ arr[index1] + ","+arr[index2] + " ...indexes"+ index1 +","+index2);
 	}
 }
+
+	 
+
