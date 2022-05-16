@@ -1,0 +1,136 @@
+
+Algoritham:
+==============
+* An algoritham is a set of instructions(or sequence of steps) to perform a task or to solve a given problem.
+* Analysis of algoritham deals in finding the best solution which runs fast and takes in less memory
+
+Time Complexity:
+----------------
+* It is amount of time taken by an algoritham to run.
+* The input processed by an algoritham helps in determining the time complexity
+
+Space Complexity:
+----------------
+* It is the amount of space or memory taken by an algoritham to run.
+* The memory required to process the input by an algoritham helps in determining the space complexity
+
+
+Mathematical forms or tools of analysing algoortihams .. asymptotic analysis or notations
+
+
+Asymptotic Analysis:
+---------------------
+* It helps in evealuating the performance of an algoortihams in terms of input size 
+* Using this we dont measure the actual running time of an algoortiham.
+* It helps in determining how time and space taken by an algoortiham increases with input size.
+
+
+Asymptotic Notations:
+---------------------
+* Are the mathematical tools which are used to describe the running time of an algoortiham in terms of input size.
+
+These helps us in deltermining the
+1.Best Case
+2.Average Case
+3.Worst Case
+
+
+Types of Asymptotic Notations:
+ 1.Omega() Notation 		(Lower Bound) - Rarely Used
+ 2.Big O(O) Notation		(Upper Bound) - Mostly Used
+ 3.Theta (0) Notation		(LB and UB) - Rarely Used
+ 
+Omega Notation:
+--------------
+* It is the formal way to express the lower bound of an algoortiham running time.
+* Lower bound means for any given input this notation determines the amount of time an algoortiham takes to complete
+	Eg : certain algoritham takes minimum 100secs to complete..it might take more but it will not take less than 100 secs.
+	
+
+Big O(O) Notation:
+-----------------
+* It is the formal way of expressing the upper bound of an algorithams running time.
+* Upper bound means for any given input this notations determines longest amount of time an algoritham can take to complete
+	Eg : Certain algoortiham takes 100secs to complete.. the algoritham may take less than 100 secs..bot not more than 100 secs
+
+Theta (0) Notation:
+-------------------
+* It is the formal way of expressing lower bound and upper bound of an algoortihams running time
+* For any given Input this notation determines the average amount of time an algoortiham can take to complete.
+	Eg : Certain algoortiham takes 100sec on 1st Run... 120 secs on 2nd Run.. 110 secs on 3rd Run..
+		 This will give the average running time of algoritham...
+
+
+
+
+Analysis of Time Complexity : Big O(O) Notation:
+--------------------------------------------------
+Rules: 
+Assuming
+1.Its a single processor machine
+2.Its performs sequential execution of statements.
+3.Assignment operation,return statement or arthematic operation,Logical Operation,etc takes 1 unit of time(like 1 milli sec,or 1 sec..etc)
+4.drop lower order terms
+5.Drop constant multipliers
+
+	Eg : T = n²+3n+1 ==>O(n²) -- here dropping lower ordre terms 3n+1
+		 T = 3n²+6n+1==>O(n²) -- here dropping lower ordre terms 6n+1 and dropping constant multipliers like 3
+
+
+
+
+
+
+Singly Linked List:
+======================
+
+
+
+
+Sorting:
+=======================
+
+Stable and Unstable sort:
+	Stable sort : preserving the relative order of the duplicated items and doing the sorting 
+	(Bubble Sort)(swap can not happen b/w is duplicated items)
+
+
+	UnStable sort : duplicate items relative order is not maintained
+	
+Selection Sort:
+===================
+	At each traverse we find the largest element and place at its correct position by swapping that number with the largest.
+ 	Next traverse we find the next largest element and do the same. and goes on till it completely sorted.
+ 	
+ 	it is a In place algorithm
+ 	O(n2) time complexity -quadratic
+ 	it will take 100 steps to sort 10 items,10000 to 100,1000000 to 1000
+ 	Does not require as much as swapping as bubble sort
+ 	Unstable algorithm
+ 	
+
+Insertion Sort:
+==================
+	It partitions the array into sorted partition and unsorted partition
+	It is a In-place algorithm
+	O(n2) time complexity - quadratic
+	it will take 100 steps to sort 10 items,10000 to 100,1000000 to 1000
+	Stable Algorithm
+	
+	Uses: Insertion sort is used when number of elements is small. It can also be useful when input array is almost sorted, only few elements are misplaced in complete big array.
+	Insertion sort is a simple sorting algorithm that works the way we sort playing cards in our hands.
+	
+	Algorithm
+	// Sort an arr[] of size n
+	insertionSort(arr, n)
+	Loop from i = 1 to n-1.
+	……a) Pick element arr[i] and insert it into sorted sequence arr[0…i-1]
+	
+
+Shell Sort :
+===================
+		
+	
+	
+	
+	
