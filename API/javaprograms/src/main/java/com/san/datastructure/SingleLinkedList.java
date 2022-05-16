@@ -1,10 +1,9 @@
 package com.san.datastructure;
 
-import java.awt.DisplayMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omg.PortableInterceptor.DISCARDING;
+//Single Linked List Implementation
 
 public class SingleLinkedList {
 
