@@ -4,7 +4,7 @@ public class ReplaceAllVowelsIntoCapitalCase {
 
 	public static void main(String[] args) {
 
-		String s = "santosh";
+		String s = "intelcore";
 
 		char[] ch = s.toCharArray();
 		char[] temp = new char[ch.length];

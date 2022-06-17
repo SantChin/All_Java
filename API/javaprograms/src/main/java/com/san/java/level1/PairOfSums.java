@@ -12,7 +12,7 @@ public class PairOfSums {
 			for(int j=i+1;j<arr.length;j++) {
 				
 				
-				System.out.println("Comapres.."+arr[i]+","+arr[j]);
+				//System.out.println("Comapres.."+arr[i]+","+arr[j]);
 				
 				if(arr[i]+arr[j] == 6) {
 					System.out.println("Pairs.."+arr[i]+","+arr[j]);
