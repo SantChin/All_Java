@@ -6,7 +6,7 @@
 	<groupId>com.san</groupId>
 	<artifactId>javaprograms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>javaprograms</name>
 	<url>http://maven.apache.org</url>
@@ -24,6 +24,142 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>3.10.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.10-FINAL</version>
+		</dependency> -->
+		
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+<!-- <dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>5.0.0</version>
+</dependency>
+https://mvnrepository.com/artifact/org.apache.poi/poi
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>5.0.0</version>
+</dependency> -->
+
+
+<!-- <dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>4.1.2</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>4.1.2</version>
+</dependency> -->
+
+
+<dependency>
+    <groupId>com.github.rzymek</groupId>
+    <artifactId>opczip</artifactId>
+    <version>1.2.0</version>
+</dependency>
+
+<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>5.0.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>5.0.0</version>
+		</dependency>
+		
+
+
+
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.12.0</version>
+</dependency>
+
+<dependency>
+    <groupId>org.dhatim</groupId>
+    <artifactId>fastexcel-reader</artifactId>
+    <version>0.12.8</version>
+</dependency>
+
+<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.dhatim/fastexcel -->
+<dependency>
+    <groupId>org.dhatim</groupId>
+    <artifactId>fastexcel</artifactId>
+    <version>0.14.3</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
+<dependency>
+    <groupId>net.sourceforge.jexcelapi</groupId>
+    <artifactId>jxl</artifactId>
+    <version>2.6.12</version>
+</dependency>
+
+
+
+		
+		  <dependency>
+    <groupId>fr.opensagres.xdocreport</groupId>
+    <artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>
+    <version>1.0.3</version>
+     </dependency>
+		
+	<!-- 		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>stax-api</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+<dependency>
+    <groupId>commons-codec</groupId>
+    <artifactId>commons-codec</artifactId>
+    <version>1.15</version>
+</dependency>
+		
+		
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180813</version>
+		</dependency>
+		
+		<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+  <version>2.5.14</version>
+  <scope>test</scope>
+</dependency>
 
 	</dependencies>
 
