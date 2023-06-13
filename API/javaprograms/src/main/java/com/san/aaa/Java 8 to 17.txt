@@ -1,0 +1,57 @@
+Java 8 (Released in March 2014):
+======================================
+Lambda Expressions: A powerful feature that allows you to write more concise functional code by providing a way to pass behavior as a method argument.
+Stream API: Introduces a new Stream API for processing collections of data in a functional programming style.
+Default Methods: Enables interfaces to have default method implementations, reducing the need for abstract classes.
+Optional: Introduces the Optional class, which provides a way to handle null values more effectively.
+Date and Time API: Replaces the outdated java.util.Date and java.util.Calendar classes with a new Date and Time API.
+
+Java 9 (Released in September 2017):
+======================================
+Modules: Introduces the Java Platform Module System (JPMS), allowing you to create modular applications and improve encapsulation.
+JShell: A Read-Eval-Print Loop (REPL) tool that provides an interactive shell for quickly experimenting with Java code snippets.
+Private Interface Methods: Allows interfaces to have private methods, enabling code reuse and providing a way to share common code between default methods.
+
+Java 10 (Released in March 2018):
+======================================
+Local Variable Type Inference: Introduces the var keyword, which allows you to declare local variables with inferred types.
+Garbage-Collector Interface: Provides a way to create custom garbage collectors for the Java Virtual Machine (JVM).
+
+
+Java 11 (Released in September 2018):
+======================================
+HTTP Client API: Introduces a standardized HTTP client API as a replacement for the legacy HttpURLConnection class.
+Local-Variable Syntax for Lambda Parameters: Allows the var keyword to be used as a parameter in lambda expressions.
+Launch Single-File Source-Code Programs: Enables you to directly run Java programs without explicitly compiling them.
+
+Java 12 (Released in March 2019):
+======================================
+Switch Expressions (Preview): Enhances the switch statement to be used as an expression, allowing you to use it in a more concise manner.
+Compact Number Formatting: Provides a way to format and parse numbers in a compact notation.
+
+
+Java 13 (Released in September 2019):
+======================================
+Text Blocks: Introduces a new syntax for multiline string literals, making it easier to write and read multiline strings.
+
+
+Java 14 (Released in March 2020):
+======================================
+Pattern Matching for instanceof: Enhances the instanceof operator to eliminate the need for explicit casting and simplify common code patterns.
+
+
+Java 15 (Released in September 2020):
+======================================
+Sealed Classes: Allows you to define sealed classes and interfaces, providing control over which other classes or interfaces can extend or implement them.
+Hidden Classes: Introduces a way to create classes that are not discoverable via reflection.
+
+Java 16 (Released in March 2021):
+======================================
+Records: Introduces record classes, a concise way to declare classes that are used primarily to store data.
+Pattern Matching for Switch (Standard): Enhances the switch statement to simplify common code patterns and eliminate the need for repetitive code.
+
+Java 17 (Released in September 2021):
+======================================
+Sealed Classes (Finalization): Adds enhancements to sealed classes, including support for interfaces and intersection types.
+Foreign Function & Memory API (Incubator): Introduces a standardized API to interact with native code and memory from Java.
+These are just the highlights of the major features introduced in each Java version from Java 8 to Java
