@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,27 +16,44 @@ public class ComapreTwoListOfStringsFromFile {
 	public static void main(String[] args) throws IOException {
 		
 	
-		List<String> hyperLinkQExists;
+		List<String> partDataList;
 		try (Stream<String> lines = Files.lines(Paths.get("C:\\Users\\Santosh\\Desktop\\HQ\\New folder\\PART DATA.txt"))) {
-			hyperLinkQExists = lines.collect(Collectors.toList());
+			partDataList = lines.collect(Collectors.toList());
 		}
 		
-		List<String> allData;
+		List<String> allDataList;
 		try (Stream<String> lines = Files.lines(Paths.get("C:\\Users\\Santosh\\Desktop\\HQ\\New folder\\ALL DATA.txt"))) {
-			allData = lines.collect(Collectors.toList());
+			allDataList = lines.collect(Collectors.toList());
 		}
 		
-		allData.removeAll(new HashSet(hyperLinkQExists));
+//		allData.removeAll(new HashSet(hyperLinkQExists));
+//		
+//		
+//		FileWriter writer = new FileWriter("C:\\Users\\Santosh\\Desktop\\HQ\\New folder\\output.txt"); 
+//		for(String str: allData) {
+//		  writer.write(str + System.lineSeparator());
+//		}
+//		writer.close();
+//		
+//		//System.out.println(allData);
+//		
+//		System.out.println("DONE");
+		
+		List<String> deletedList = new ArrayList<String>();
+		List<String> notDeletedList = new ArrayList<String>();
 		
 		
-		FileWriter writer = new FileWriter("C:\\Users\\Santosh\\Desktop\\HQ\\New folder\\output.txt"); 
-		for(String str: allData) {
-		  writer.write(str + System.lineSeparator());
+		for(String part : partDataList) {
+			if(allDataList.contains(part)) {
+				notDeletedList.add(part);
+			}else {
+				deletedList.add(part);
+			}
 		}
-		writer.close();
 		
-		//System.out.println(allData);
 		
-		System.out.println("DONE");
+		System.out.println("Not Deleted List : "+notDeletedList);
+		
+		System.out.println("Deleted List : "+deletedList);
 	}
 }

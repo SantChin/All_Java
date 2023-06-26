@@ -21,20 +21,22 @@ public class JsonParserFromFile {
 		
 		 JSONParser parser = new JSONParser();
 	      try {
-	         Object obj = parser.parse(new FileReader("C:\\Santosh WorkSpace\\Other Files\\JSON Files\\test.json"));
+	         Object obj = parser.parse(new FileReader("C:\\Users\\Santosh\\Desktop\\Sample Data\\test.json"));
 	         JSONObject jsonObject = (JSONObject)obj;
 	        
-	         JSONArray jsonArry  = (JSONArray) jsonObject.get("result");
+	         JSONArray jsonArry  = (JSONArray) jsonObject.get("value");
 	         
-//	     	for(int i =0;i<=jsonArry.size()-1;i++) {
-//			//	System.out.println(i);
-//				JSONObject tmep = new JSONObject();
-//				tmep =  (JSONObject) jsonArry.get(i);
-//				
-//				//if(Integer.parseInt(tmep.get("total").toString()) > 1)
-//				System.out.println("\""+tmep.get("_id")+"\""+",");
-//				//System.out.println(tmep.get("_id"));
-//			}
+	         
+	         
+	     	for(int i =0;i<=jsonArry.size()-1;i++) {
+			//	System.out.println(i);
+				JSONObject tmep = new JSONObject();
+				tmep =  (JSONObject) jsonArry.get(i);
+				
+				//if(Integer.parseInt(tmep.get("total").toString()) > 1)
+				System.out.println("\""+tmep.get("id")+"\""+",");
+				//System.out.println(tmep.get("_id"));
+			}
 
 	         
 	         
@@ -83,33 +85,33 @@ public class JsonParserFromFile {
 	     	
 	     	
 	     	//UseCase 3 Printing Using map in desecding order
-	     	int count = 0;
-	     	int totalCount = 0;
-	     	
-	     	List<String> list = new ArrayList<String>();
-	     	Map<String,Integer> dataMap = new HashMap<>();
-	     	
-	     	for(int i =0;i<=jsonArry.size()-1;i++) {
-				//	System.out.println(i);
-					JSONObject tmep = new JSONObject();
-					tmep =  (JSONObject) jsonArry.get(i);
-					dataMap.put(tmep.get("_id").toString(), Integer.parseInt(tmep.get("count").toString()));
-			}
+//	     	int count = 0;
+//	     	int totalCount = 0;
+//	     	
+//	     	List<String> list = new ArrayList<String>();
+//	     	Map<String,Integer> dataMap = new HashMap<>();
+//	     	
+//	     	for(int i =0;i<=jsonArry.size()-1;i++) {
+//				//	System.out.println(i);
+//					JSONObject tmep = new JSONObject();
+//					tmep =  (JSONObject) jsonArry.get(i);
+//					dataMap.put(tmep.get("_id").toString(), Integer.parseInt(tmep.get("count").toString()));
+//			}
 	     	
 	     	//System.out.println(totalCount);
-	     	
-	     	Map<String, Integer> sorted = dataMap 
-	     			.entrySet() 
-	     			.stream() 
-	     			.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
-	     			.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
-
-	     	
-	     	  for (HashMap.Entry<String, Integer> val : sorted.entrySet()) { 
-
-	     		System.out.println(val.getKey() +","+val.getValue());
-	     		
-	     		   }  
+//	     	
+//	     	Map<String, Integer> sorted = dataMap 
+//	     			.entrySet() 
+//	     			.stream() 
+//	     			.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
+//	     			.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
+//
+//	     	
+//	     	  for (HashMap.Entry<String, Integer> val : sorted.entrySet()) { 
+//
+//	     		System.out.println(val.getKey() +","+val.getValue());
+//	     		
+//	     		   }  
 	     	
 	     	
 	     	
@@ -118,4 +120,8 @@ public class JsonParserFromFile {
 	         e.printStackTrace();
 	      }
 	}
+	
+	
+	
+	
 }

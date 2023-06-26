@@ -1,0 +1,14 @@
+
+1.What are the advantages of SB(not in perspective of development)?
+2.How can we change tomcat setting in SB? 
+3.How will you resolve the resource pool not found error?
+4.What is the need of marker interface,When do we use marker interface,How to create custom marker interface?
+5.What is the need of executor framework? Benfits of executor framework?
+6.Explain how does the springboot project connects to the data source while using JPA?(Asked for internal implementation and logic behind that)
+7.Suppose there is a model class user with attributes name,age,dob,addr and model class is annotated with entity. ANd i dont need age column in DB as i can
+	calaculate from DOB.And it is throwing anerror while inserting? How can we resolve it? (Hint : @Transient)
+	
+8.Why will we use hashMap comapred to concurrent hashMap even though it causes issues in multithreading env? (Depends on context. Debatable question)
+9.Given a String find the no of occurences for all the sequences.
+  Eg : "abcaabcbabcaabbabc" -- abc--3 times,aa-2 times,bca-3 times
+							

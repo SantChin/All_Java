@@ -1,0 +1,206 @@
+Tech M
+=============
+1.Core Jave oops concepts in depth.java 8 features,(Lamda,functional interfaces,Hasmap & Garbage 
+Collection changes,collection,exception,multi threading,serialization,SQL
+
+2.How HashMap and concurrent hashMap works internally, adv of concurrent hashMap over hashMap
+3.Explain try with resource..why we dont need finally block here
+4.Why wait,notify() and notifyall() are in obj class,not in Thread class?
+5.How to achieve thread safety aprt from using synchronization?
+6.How many ways singleton pattern can be broken? how to fix them?
+7.custom serialaiztion and externalization with example?
+8.Detect a loop in single linked list?
+9.Indexing in SQL,How to write optimized query?
+
+R-2
+----
+1.Write program using notepad++?
+2.Create you own immutable class with mutable object like Date?
+3.Given an employee class having attribute id,name,sal . Write a prgn to sort emp obj using 
+	sal,if sal is same using name?
+4..Given an employee class having attribute id,name,sal .Write a prgm to store them into map
+	so no two duplicate emp obj should be there?
+5.Write a prgm, Given a string find the first duplicate character form it?
+6.Write a prgm, Given a String find the longest palindrome from it?
+7.Explain executor service. submit vs execute
+
+R-3
+----
+1.Why switching comp?
+2.Most 2 challengin situation you have faced in your project?
+
+
+
+High Radius
+===========
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TCS:
+=========
+1.Write a program to find a number is even/add with out using modulus operator.
+
+
+2. Why there is scopes in spring? Why there are diff scope not one? //Single ton,proto type..etc
+3.Explain JVM architecture? Deep Understanding?
+4.What are OOPs concepts used in you project and explain them?
+   Encapsulation...Every class
+   Abstraction ....
+   PolyMarphism.....
+   Inheritance.........
+	
+5."*" Pattern  finding?
+
+6.Explain thread life cycle?
+7.What is the need of functional interface, When we will go for functional?
+
+8.What is Optional class? We can do null check before every operation on object, then why optional class?
+
+9.Explain internal flow of concurrent Hashmap, How many no of threads can act on concurrent hashMap?
+	JDK 1.5,belongs to java.uti.concurrent,implements ConcurrentMap and Serialozable interafce.
+	Enhancement to HashMap, deals with threads in appp
+	Underlinke data structre user is HashTable
+	Thread safe.
+	NUmber of threads act upon on object for read operation,object divided into number of 
+	segments to the concurrency level.
+	The default concurrency level of concurrent hashmap is 16
+	For updating object thread must lock the segment. This type of locking called segment locking or bucket locking
+	At a time 16 update operation can be peformed bu threads.
+	Inseting null objects is not posssible in chmap as key or value
+	
+	
+R-2
+----
+1.Self Intro
+2.About the proect
+3.CI-CD in your project
+4.Why looking for a job change
+5.Are you ready to relocate.
+
+
+
+
+
+UST Global 
+=============
+--coding questions
+1.Find words starting with A and collect them?
+2.Filter employees and group them based on gender?
+3.Find duplicates words in a String with their count?
+4.Create a custom functional interface and use it in main method with lambda expression?
+
+--Interview Questions
+1.Why use Springboot over spring framwwork? (Opiniatedview of spring platform)
+2.How to configure database in SB?
+	--Add dpendecy for DB connector in pom.xl
+	--Rmove H2 dependecy or make its scope to test
+	--set up and configure props in properties file
+	
+4.How to exclude a class from getting auto configured?
+	We can user exclude attribute of @EnableAutoConfiguration annotation.
+	If that class is not on the classpath ,we can use excludeName attribute of the annotation and specify the 
+		fully qualified class name.
+5.What is @Qualifier and when to use it. How it is differ from @Primary?
+	@Primary - indicates bean should be given preference,when multiple candidates are qualified
+				to autowire a single valued dependency.
+	@Qualifier - indicates specific bean should be autowired when there are multiple candidates.
+	
+6.Diff b.w @Component vs @Bean
+	
+7.Are Single ton bean are thread safe?
+    --i.e one instance per context, Here class level variable any thread can update, leads to inconsistent data.
+    
+8.How to do @OneToMany ,@MantToOne mapping with an example?
+9.Diff b.w BeanFactory and Application Context?
+   Bean Factory Provides basic functionality for managing and manipulating beans, often in prgrmatic way.
+   The application context provides extra functinality like Message Source,Access to resources,Event Propagation to beans,
+   Loading of Multiple (Heriarichal) Contexts.
+   
+10.Spring Interceptor,Give me an example?
+	Spring Interceptor used to intercept client request and process them,Sometimes we want to intercept the HTTP 
+	request and do some processing before handing it over to the controller hadler methods.
+	This is where SPring MVC (HandlerInterceptor) come in hand.
+	
+11.How does @Transactional works along with propagation and isolation levels?
+12.How to use sring security module? What are all confogurations required for basic username and password auth?
+13.How to handle Global Exceptions?
+14.Diff b/w @Controller and @RestController?
+15.Spring bean scopers?What is the default scope?
+16.Types of Injections ? Diff b/w COnstructor and Setter Injections?
+17.What is IOC and how it is differnt from DI?
+	- DI is method of providing dependencies
+	- IOC is the end result of DI.
+	- IOC is the design principle whert the control flow of the program is inverted.
+	- DI is one of the subtypes of the IOC pronciple?
+	
+18.How to unit test a rest controller?
+19.microservice module used in project? And how to configure them? confog server/eureka server/ribbon client/hysterix/zull api gateway ?
+
+R-2
+================
+1.OOPs In detail
+2.Abstract class vs Interface
+3.Can abstract class have constrctor if yes how to call it?
+4.What is static?
+5.When no beandefination exception happens?
+6.When to user arrayList comapred to array and linkedlist?
+7.What is synchronozed? Object Level and Class Level locks?
+8.What do you mean by reentrance in a clock?
+9.What is volitile and transient?
+10.Can we overrride clone with out implementing clonable interface?
+11.Desing patterns Single ton and factory?
+12.How to create a threadsafe lazily initilized singleton class?
+13.How to break singleton pattern? //reflection
+14.What is cyclic barrier and countdown latch?
+
+
+React Js
+============
+1.What are hooks? useSelect,useEffect,useSatte,useCallback,usememo,userDispatch,useReducer?
+2.How to increase react app performance?
+3.Why use redux and why to use over context api?
+4.e2e redux flow - from component to action and dispatch to store?
+5.What are uncontrollable components?
+6.What are sunthentic events?
+7.What do u mean by the lifiting the state up?
+8.What HOCs - give example
+
+
+1.Expalin Project archtecture?
+2.Expalin deployment process to AWS EKS?
+3.Common docker commands and builddpec yaml content configured for Code build AWS service?
+4.Java 8 fetures, WHy default methods added in interface?
+5.Microservice modules used in your project?
+
+
+
+
+
+
+
+Deloite
+==============
+1.What is OOPS? (In detail)
+2.What is Functional Interface?
+3.Does main method or static block executes first? A:Static Block
+4.What are spring profiles? How to configure?
+5.Have you used queues in your project? If so explain the use case?
+6.LifeCycle of Threads?
+7.Spring actuator? How to configure? some end point details?
+8.Diff types of constraint present in mysql DB? (NOT NULL,UNIQUE,CHECK,DEFAULT,CREATE INDEX)..etc
+9.What is Normalization? A: Minimizes Redundancy
+10.Different types of joins? A: INNER JOIN,LEFT JOIN,RIGHT JOIN, CROSS JOIN
+11.
+
+	
