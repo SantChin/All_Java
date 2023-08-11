@@ -1,0 +1,18 @@
+Exception :
+	An unwanted even that disturbs the program’s normal execution after getting compiled, while running is called an exception.
+ 
+ 
+ Exceptions are divided into two types.
+ Checked exceptions:
+ 	Detected by the compiler
+ Unchecked Exceptions:
+ 	Not detected by the compiler
+ 	
+ Examples :
+ 	IllegalArgumentException
+	ArrayOutOfBoundException
+	StackOverflowException
+	NumberFormatException
+	NullPointerException
+	
+	

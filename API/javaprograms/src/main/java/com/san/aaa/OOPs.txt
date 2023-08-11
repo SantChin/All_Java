@@ -1,0 +1,138 @@
+
+OOPs Concepts:
+================
+--Deals in terms of objects
+
+ There are four main principles of OOP in Java: encapsulation, inheritance, polymorphism, and abstraction.
+ 
+Encapsulation:
+ ------------------
+1.Bundling of data and methods within a single unit called a class.
+2. The data is typically accessed and modified through methods known as getters and setters.
+
+					public class Circle {
+					    private double radius;
+					
+					    public double getRadius() {
+					        return radius;
+					    }
+					
+					    public void setRadius(double radius) {
+					        this.radius = radius;
+					    }
+					
+					    public double calculateArea() {
+					        return Math.PI * radius * radius;
+					    }
+					}
+					
+					
+In the above example, the Circle class encapsulates the data radius and provides public methods to access and modify it (getRadius() and setRadius()).
+
+
+Inheritance:
+--------------
+1.Allows one class to inherit the properties and methods of another class.
+2.The class that is inherited from is called the super/parent class, class that inherits is called the sub/child class.
+3.The subclass can extend the functionality of the superclass by adding its own attributes and methods.
+
+
+						public class Animal {
+						    public void eat() {
+						        System.out.println("Animal is eating.");
+						    }
+						}
+						
+						public class Dog extends Animal {
+						    public void bark() {
+						        System.out.println("Dog is barking.");
+						    }
+						}
+In this example, the Dog class extends the Animal class. It inherits the eat() method from the Animal class and adds its own method bark(). 
+The Dog class can now both eat and bark.
+
+
+Polymorphism:
+---------------
+1.It allows objects of different classes to be treated as objects of a common superclass.
+2.It allows methods to be defined in the superclass can be overridden in the subclasses, providing different implementations.
+3.This is achieved through method overriding and method overloading.
+
+					public class Shape {
+					    public void draw() {
+					        System.out.println("Drawing a shape.");
+					    }
+					}
+					
+					public class Circle extends Shape {
+					    @Override
+					    public void draw() {
+					        System.out.println("Drawing a circle.");
+					    }
+					}
+					
+					public class Rectangle extends Shape {
+					    @Override
+					    public void draw() {
+					        System.out.println("Drawing a rectangle.");
+					    }
+					}
+
+The Shape class defines a draw() method, which is overridden in the Circle and Rectangle subclasses with their specific implementations.
+Polymorphism allows us to treat instances of Circle and Rectangle as instances of Shape and call the draw() method on them.
+
+
+Abstraction:
+--------------
+1.Representing the essential features of an object while hiding the complex implementation details.
+2.It allows us to create abstract classes and interfaces that define a common interface for a group of related classes.
+3.Concrete classes that implement these interfaces or extend abstract classes provide the implementation details.
+
+					public interface Vehicle {
+					    void start();
+					    void stop();
+					}
+					
+					public class Car implements Vehicle {
+					    @Override
+					    public void start() {
+					        System.out.println("Car started.");
+					    }
+					
+					    @Override
+					    public void stop() {
+					        System.out.println("Car stopped.");
+					    }
+					}
+					
+					public class Bike implements Vehicle {
+					    @Override
+					    public void start() {
+					        System.out.println("Bike started.");
+					    }
+					
+					    @Override
+					    public void stop() {
+					        System.out.println("Bike stopped.");
+					    }
+					}
+The Vehicle interface defines the common methods start() and stop().
+The Car and Bike classes implement the Vehicle interface and provide their own implementations for these methods.
+
+
+Association: (Aggregation)
+--------------
+1.It is to define the relationship between objects. 
+2.It is a form of association where one class contains an instance of another class as a member, 
+		but the contained object can exist independently even if the container object is destroyed.
+3.It represents a "has-a" relationship, where one class has a reference to another class as a member variable or method parameter. 
+
+Eg : User has Address, Employee has Department
+
+Composition:
+---------------
+1.Composition is a strong form of aggregation/association.
+2.Here lifetime of the contained object is directly tied to the lifetime of the container object. 
+3.In composition, the contained object is often referred to as a "component" or "sub-object" of the container object.
+
+Eg: House has room.

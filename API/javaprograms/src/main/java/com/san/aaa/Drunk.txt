@@ -203,4 +203,63 @@ Deloite
 10.Different types of joins? A: INNER JOIN,LEFT JOIN,RIGHT JOIN, CROSS JOIN
 11.
 
+
+
+
+JPMC
+=================
+--Design patterns are proven solution for common problems.
+--That is Well tested
+1.What is GOF in DP and what are diff types of DP?
+    4 People by name 
+    
+2.Name some of DP used in java JDKs librabry?
+	Decorator pattern used by Wrapper class
+	Singleton used in Calendor and Runtime
+	Factory Pattern used in methods like Integer.valueOf methods in wrapper classes
+	Observer Pattern used in awt,swing
 	
+3.Expalin factory design pattern with real time examle?
+4.Explain Bridge Design pattern with real time example?
+5.Explain Chain of responsibilty pattern? In Which scenario this pattern used?
+6.Explain Adapter Design pattern with real time usage?
+7.Expalin Observer Design pattern with real time usage?
+8.Write a code for thread safe singleton pattern?
+
+
+Optum
+===========
+1.Write a code to find longest palindrome in string?
+2.Find the duplicate words in String?
+3.Code to Impelemt POST,GET,PUT api, like creating the employee,updating the employee and getting the employee?
+4.Use java 8 feature in GET call to filter out the employee?
+
+managerial Round:
+==============
+Agile Process.
+
+1.Explain Distributed Transaction? (Microservice architecure)
+	2 Phase commit
+	SAAGA
+	
+2.Explain Eurekha server in microservies?(Also known as Netfilx discovery server)
+3.Adv and DisAdv of microservies?
+4.Spring AOP related Question?
+5.Springboot annotation in depth?
+6.Exception?How to handle?
+7.What is ConcurrentHashMap and HashTable? Why cchp consider faster than hashtable?
+8.What is BlockingQueue?
+9.What is Runnable and Callable Interface? In which scenario we use them?
+10.Whay wait(),notify(),notfiyall() are in Object class?
+11.What is the diff b/w class lock and object lock?
+12.Internal Implementation of HashMap?
+13.Why is delete function faster in the linked list than in array?
+14.Efficient way to implement a singleton pattern in java?
+15.What is javabean exactly?
+16.What is Spring IOC container?
+17.Does Spring bean provide thread safety?
+18.Use case of default methis in my project?
+19.Benfits of Optional class?
+20.Is there anything like static class in java?
+21.Write a code to read/Convert an Inputstream into a String in java?
+22.Can == be used in enum? YES
