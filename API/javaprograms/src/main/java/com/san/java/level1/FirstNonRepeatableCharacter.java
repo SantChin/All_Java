@@ -4,7 +4,7 @@ public class FirstNonRepeatableCharacter {
 	
 	public static void main(String[] args) {
 		
-		String s= "zzzzzbbbccccddehhhhiii";
+		String s= "zzzzzbbbccccddehhhhiiik";
 		//String s = "aabcdeefggi";
 		char ch[] = s.toCharArray();
 		
@@ -28,7 +28,6 @@ public class FirstNonRepeatableCharacter {
 		}
 		
 		if(currentChCount == 1) {
-			
 			System.out.println("NonRepeatableCharacter = "+currentCh);
 		}
 	}

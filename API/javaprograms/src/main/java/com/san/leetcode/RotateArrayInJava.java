@@ -20,7 +20,7 @@ public class RotateArrayInJava {
 		
 		//Approch 3 - Reversal
 		//O(1) Space and O(n) time
-		rotateArrUsingReversal(arr,k);
+		//rotateArrUsingReversal(arr,k);
 		
 
 	}

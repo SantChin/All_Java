@@ -25,6 +25,19 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>5.8.9</version>
+		</dependency>
+		
+		<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.13.3</version>
+</dependency>
+
+		
 		<!-- 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-scratchpad</artifactId>
@@ -73,6 +86,14 @@ https://mvnrepository.com/artifact/org.apache.poi/poi
     <artifactId>opczip</artifactId>
     <version>1.2.0</version>
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
+</dependency>
+
 
 <dependency>
 		    <groupId>org.apache.poi</groupId>
